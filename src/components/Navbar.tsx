@@ -27,13 +27,13 @@ interface NavbarProps {
 
 const CATEGORIES = [
   'All',
-  'Trending',
-  'Synthwave',
+  'Bollywood',
+  'Trending Hindi',
+  'Punjabi',
+  'Romance',
   'Lofi',
   'EDM',
-  'Cyberpunk',
-  'Ambient',
-  'House',
+  'Party',
 ];
 
 export default function Navbar({

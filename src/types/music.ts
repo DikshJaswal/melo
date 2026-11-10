@@ -8,7 +8,7 @@ export interface Track {
   streamUrl: string;
   genre: string;
   playCount?: number;
-  source: 'audius' | 'curated' | 'stream';
+  source: 'audius' | 'curated' | 'stream' | 'itunes';
   releaseYear?: number;
 }
 

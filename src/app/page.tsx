@@ -128,8 +128,14 @@ export default function MeloApp() {
 
   const filteredCategoryTracks = tracks.filter((t) => {
     if (selectedCategory === 'All') return true;
-    if (selectedCategory === 'Trending') return true;
-    return t.genre.toLowerCase().includes(selectedCategory.toLowerCase());
+    if (selectedCategory === 'Trending Hindi') return true;
+    const cat = selectedCategory.toLowerCase();
+    return (
+      t.genre.toLowerCase().includes(cat) ||
+      t.title.toLowerCase().includes(cat) ||
+      t.artist.toLowerCase().includes(cat) ||
+      t.album.toLowerCase().includes(cat)
+    );
   });
 
   const likedTracks = tracks.filter((t) => likedTrackIds.includes(t.id));
