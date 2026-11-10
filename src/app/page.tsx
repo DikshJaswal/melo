@@ -12,8 +12,6 @@ import {
   Flame,
   Users,
   Compass,
-  ArrowLeft,
-  CheckCircle2,
 } from 'lucide-react';
 
 import Sidebar from '@/components/Sidebar';
@@ -36,13 +34,13 @@ import {
   fetchTrendingTracks,
   searchTracks,
 } from '@/services/musicService';
-import { Track, Artist } from '@/types/music';
+import { Track } from '@/types/music';
 
 export default function MeloApp() {
   const [currentTab, setCurrentTab] = useState<string>('home');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
+  const [isQueueOpen, setIsQueueOpen] = useState<boolean>(false);
   const [isCreatePlaylistOpen, setIsCreatePlaylistOpen] = useState<boolean>(false);
   const [tracks, setTracks] = useState<Track[]>(CURATED_TRACKS);
   const [searchResults, setSearchResults] = useState<Track[]>(CURATED_TRACKS);
@@ -81,36 +79,13 @@ export default function MeloApp() {
     togglePlay,
     likedTrackIds,
     playlists,
-    isQueueOpen,
-    setIsQueueOpen,
+    recentlyPlayed,
     updateTrendingPlaylists,
   } = usePlayer();
 
-  const getArtistTracks = (artistName: string): Track[] => {
-    const norm = artistName.toLowerCase();
-    return tracks.filter((t) => {
-      const art = t.artist.toLowerCase();
-      const title = t.title.toLowerCase();
-      if (norm.includes('arijit')) {
-        return art.includes('arijit') || title.includes('kesariya') || title.includes('tum hi ho') || title.includes('channa') || title.includes('samjhawan');
-      }
-      if (norm.includes('diljit')) {
-        return art.includes('diljit') || title.includes('lover') || title.includes('naina') || title.includes('g.o.a.t.') || title.includes('kinni kinni');
-      }
-      if (norm.includes('karan')) {
-        return art.includes('aujla') || title.includes('tauba') || title.includes('softly') || title.includes('wavy');
-      }
-      if (norm.includes('shreya')) {
-        return art.includes('shreya') || title.includes('param sundari') || title.includes('samjhawan') || title.includes('ve kamleya');
-      }
-      if (norm.includes('rahman')) {
-        return art.includes('rahman') || title.includes('kun faya') || title.includes('param sundari') || title.includes('agar tum');
-      }
-      if (norm.includes('weeknd')) {
-        return art.includes('weeknd') || title.includes('starboy') || title.includes('blinding') || title.includes('die for you');
-      }
-      return art.includes(norm);
-    });
+  const handlePlaySong = (track: Track, contextList?: Track[]) => {
+    playTrack(track, contextList);
+    setIsQueueOpen(true);
   };
 
   // Load trending live tracks on mount
@@ -192,8 +167,6 @@ export default function MeloApp() {
         <Navbar
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
-          selectedCategory={selectedCategory}
-          onSelectCategory={setSelectedCategory}
           currentTab={currentTab}
           onTabChange={setCurrentTab}
           onOpenAuth={(mode) => {
@@ -247,7 +220,7 @@ export default function MeloApp() {
                     return (
                       <div
                         key={track.id}
-                        onClick={() => playTrack(track, tracks)}
+                        onClick={() => handlePlaySong(track, tracks)}
                         className="group flex items-center gap-3.5 bg-[#18181b]/70 hover:bg-[#27272a] rounded-lg overflow-hidden cursor-pointer transition-all duration-200 border border-transparent hover:border-zinc-700/50 shadow-sm"
                       >
                         <div className="relative w-16 h-16 flex-shrink-0 bg-zinc-900">
@@ -261,7 +234,7 @@ export default function MeloApp() {
                             onClick={(e) => {
                               e.stopPropagation();
                               if (isCurrent) togglePlay();
-                              else playTrack(track, tracks);
+                              else handlePlaySong(track, tracks);
                             }}
                             className={`w-9 h-9 rounded-full bg-sky-400 hover:bg-sky-300 text-black flex items-center justify-center shadow-md shadow-sky-500/20 transition-all ${
                               isCurrent && isPlaying
@@ -282,6 +255,21 @@ export default function MeloApp() {
                 </div>
               </div>
 
+              {/* Section: Recently Played */}
+              {recentlyPlayed.length > 0 && (
+                <div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <Clock className="w-5 h-5 text-sky-400" />
+                    <h2 className="text-xl font-bold text-white">Recently Played</h2>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+                    {recentlyPlayed.slice(0, 6).map((track) => (
+                      <TrackCard key={`recent-${track.id}`} track={track} playlistContext={recentlyPlayed} />
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* Section: Trending Now */}
               <div>
                 <div className="flex items-center justify-between mb-4">
@@ -290,13 +278,13 @@ export default function MeloApp() {
                     <h2 className="text-xl font-bold text-white">Trending Now</h2>
                   </div>
                   <span className="text-xs font-semibold text-zinc-400 hover:text-white cursor-pointer">
-                    Show all ({filteredCategoryTracks.length})
+                    Show all ({tracks.length})
                   </span>
                 </div>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-                  {filteredCategoryTracks.slice(0, 12).map((track) => (
-                    <TrackCard key={track.id} track={track} playlistContext={filteredCategoryTracks} />
+                  {tracks.slice(0, 18).map((track) => (
+                    <TrackCard key={track.id} track={track} playlistContext={tracks} />
                   ))}
                 </div>
               </div>
@@ -328,7 +316,7 @@ export default function MeloApp() {
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
-                              if (playlist.tracks[0]) playTrack(playlist.tracks[0], playlist.tracks);
+                              if (playlist.tracks[0]) handlePlaySong(playlist.tracks[0], playlist.tracks);
                             }}
                             className="w-9 h-9 rounded-full bg-sky-400 hover:bg-sky-300 text-black flex items-center justify-center shadow-md shadow-sky-500/20"
                           >
@@ -345,132 +333,47 @@ export default function MeloApp() {
                 </div>
               </div>
 
-              {/* Section: Popular Artists / Artist Spotlight */}
+              {/* Section: Top Trending Artists */}
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <Users className="w-5 h-5 text-sky-400" />
-                    <h2 className="text-xl font-bold text-white">
-                      {selectedArtist ? selectedArtist.name : 'Popular Artists'}
-                    </h2>
-                  </div>
-                  {selectedArtist && (
-                    <button
-                      onClick={() => setSelectedArtist(null)}
-                      className="flex items-center gap-1.5 text-xs font-semibold text-sky-400 hover:text-sky-300 transition-colors"
-                    >
-                      <ArrowLeft className="w-3.5 h-3.5" />
-                      <span>Back to All Artists</span>
-                    </button>
-                  )}
+                <div className="flex items-center gap-2 mb-4">
+                  <Users className="w-5 h-5 text-indigo-400" />
+                  <h2 className="text-xl font-bold text-white">Popular Artists</h2>
                 </div>
 
-                {selectedArtist ? (
-                  <div className="space-y-6">
-                    {/* Artist Header Spotlight Banner */}
-                    <div className="p-6 rounded-2xl bg-gradient-to-r from-[#101b2b] via-[#0d121c] to-[#0a0c12] border border-sky-400/20 shadow-xl flex flex-col sm:flex-row items-center sm:items-end gap-6">
-                      <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden flex-shrink-0 shadow-2xl border-2 border-sky-400/40">
-                        <Image
-                          src={selectedArtist.image}
-                          alt={selectedArtist.name}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <div className="text-center sm:text-left space-y-2 flex-1">
-                        <div className="flex items-center justify-center sm:justify-start gap-1.5 text-sky-400 text-xs font-bold uppercase tracking-wider">
-                          <CheckCircle2 className="w-4 h-4" />
-                          <span>Verified Artist</span>
-                        </div>
-                        <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                          {selectedArtist.name}
-                        </h1>
-                        <p className="text-xs text-zinc-300 max-w-xl leading-relaxed">
-                          {selectedArtist.bio}
-                        </p>
-                        <div className="flex items-center justify-center sm:justify-start gap-2 text-xs text-zinc-400 font-medium pt-1">
-                          <span className="text-sky-300">{selectedArtist.genre}</span>
-                          <span>•</span>
-                          <span className="text-white font-semibold">
-                            {selectedArtist.monthlyListeners} monthly listeners
-                          </span>
-                        </div>
-                        <div className="pt-2">
-                          {(() => {
-                            const artistTracks = getArtistTracks(selectedArtist.name);
-                            return (
-                              <button
-                                onClick={() => {
-                                  if (artistTracks.length > 0) playTrack(artistTracks[0], artistTracks);
-                                }}
-                                className="px-6 py-2 rounded-full bg-sky-400 hover:bg-sky-300 text-black font-extrabold text-xs flex items-center gap-2 shadow-lg shadow-sky-500/20 transition-all hover:scale-105 active:scale-95"
-                              >
-                                <Play className="w-3.5 h-3.5 fill-black" />
-                                <span>Play All Songs ({artistTracks.length})</span>
-                              </button>
-                            );
-                          })()}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Artist Discography Tracklist */}
-                    <div>
-                      <h3 className="text-base font-bold text-white mb-3">Popular Songs</h3>
-                      <div className="bg-[#121214]/60 rounded-xl border border-[#1f1f23] overflow-hidden divide-y divide-zinc-800/30">
-                        {getArtistTracks(selectedArtist.name).map((track, i) => (
-                          <TrackRow
-                            key={track.id}
-                            track={track}
-                            index={i}
-                            playlistContext={getArtistTracks(selectedArtist.name)}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
-                    {FEATURED_ARTISTS.map((artist) => {
-                      const artistTracks = getArtistTracks(artist.name);
-                      return (
-                        <div
-                          key={artist.id}
-                          onClick={() => setSelectedArtist(artist)}
-                          className="p-3.5 rounded-xl bg-[#121214] hover:bg-[#18181b] border border-transparent hover:border-zinc-800 transition-all flex flex-col items-center text-center group cursor-pointer relative"
-                        >
-                          <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden mb-3 shadow-lg shadow-black/60 group-hover:scale-105 transition-transform duration-300 border border-white/5">
-                            <Image
-                              src={artist.image}
-                              alt={artist.name}
-                              fill
-                              className="object-cover"
-                            />
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                if (artistTracks.length > 0) playTrack(artistTracks[0], artistTracks);
-                              }}
-                              className="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-sky-400 hover:bg-sky-300 text-black flex items-center justify-center shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
-                              title={`Play ${artist.name}`}
-                            >
-                              <Play className="w-3.5 h-3.5 fill-black ml-0.5" />
-                            </button>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                  {FEATURED_ARTISTS.map((artist) => (
+                    <div
+                      key={artist.id}
+                      onClick={() => {
+                        const artistFirstName = artist.name.split(' ')[0].toLowerCase();
+                        const artistTracks = tracks.filter((t) =>
+                          t.artist.toLowerCase().includes(artistFirstName)
+                        );
+                        if (artistTracks.length > 0) {
+                          handlePlaySong(artistTracks[0], artistTracks);
+                        } else {
+                          setSearchQuery(artist.name);
+                          setCurrentTab('search');
+                        }
+                      }}
+                      className="p-4 rounded-xl bg-[#121214] hover:bg-[#18181b] border border-transparent hover:border-zinc-800 transition-all flex flex-col items-center text-center group cursor-pointer"
+                    >
+                      <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden mb-3.5 shadow-lg shadow-black/60 group-hover:scale-105 transition-transform duration-300">
+                        <Image src={artist.image} alt={artist.name} fill className="object-cover" />
+                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                          <div className="w-10 h-10 rounded-full bg-sky-400 text-black flex items-center justify-center shadow-lg shadow-sky-500/30">
+                            <Play className="w-4 h-4 fill-black ml-0.5" />
                           </div>
-                          <h4 className="font-bold text-xs sm:text-sm text-white truncate w-full group-hover:text-sky-400 transition-colors">
-                            {artist.name}
-                          </h4>
-                          <p className="text-[11px] text-zinc-400 mt-0.5 truncate w-full">
-                            {artist.genre}
-                          </p>
-                          <span className="text-[10px] text-sky-400 font-semibold mt-1">
-                            {artist.monthlyListeners} monthly
-                          </span>
                         </div>
-                      );
-                    })}
-                  </div>
-                )}
+                      </div>
+                      <h4 className="font-bold text-sm text-white truncate w-full">{artist.name}</h4>
+                      <p className="text-xs text-zinc-400 mt-0.5">{artist.genre}</p>
+                      <span className="text-[11px] text-sky-400 font-semibold mt-1">
+                        {artist.monthlyListeners} monthly
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           )}

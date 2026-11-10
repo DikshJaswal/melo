@@ -20,7 +20,7 @@ interface PlayerContextType {
   queueIndex: number;
   likedTrackIds: string[];
   playlists: Playlist[];
-  isQueueOpen: boolean;
+  recentlyPlayed: Track[];
   isVisualizerOpen: boolean;
   isFullscreenOpen: boolean;
   audioBufferPercent: number;
@@ -45,7 +45,6 @@ interface PlayerContextType {
   removeTrackFromPlaylist: (playlistId: string, trackId: string) => void;
   deletePlaylist: (playlistId: string) => void;
   updateTrendingPlaylists: (liveTracks: Track[]) => void;
-  setIsQueueOpen: (open: boolean) => void;
   setIsVisualizerOpen: (open: boolean) => void;
   setIsFullscreenOpen: (open: boolean) => void;
   audioRef: React.RefObject<HTMLAudioElement | null>;
@@ -67,9 +66,9 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
   const [queueIndex, setQueueIndex] = useState<number>(0);
   const [likedTrackIds, setLikedTrackIds] = useState<string[]>([]);
   const [playlists, setPlaylists] = useState<Playlist[]>(CURATED_PLAYLISTS);
+  const [recentlyPlayed, setRecentlyPlayed] = useState<Track[]>([]);
   const [isVisualizerOpen, setIsVisualizerOpen] = useState<boolean>(false);
   const [isFullscreenOpen, setIsFullscreenOpen] = useState<boolean>(false);
-  const [isQueueOpen, setIsQueueOpen] = useState<boolean>(false);
   const [audioBufferPercent, setAudioBufferPercent] = useState<number>(0);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -95,7 +94,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
       if (savedPlaylists) {
         const parsed = JSON.parse(savedPlaylists);
         if (Array.isArray(parsed)) {
-          // Only preserve custom user-created playlists; curated playlists always use latest 25-song catalog
+          // Only preserve custom user-created playlists; curated playlists always use latest catalog
           const userCustomPlaylists = parsed.filter(
             (p: any) => p && p.isCustom
           );
@@ -103,6 +102,27 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
         }
       } else {
         setPlaylists(CURATED_PLAYLISTS);
+      }
+
+      // Restore recently played
+      const savedRecent = localStorage.getItem('melo_recently_played');
+      if (savedRecent) {
+        const parsed = JSON.parse(savedRecent);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setRecentlyPlayed(parsed);
+        }
+      }
+
+      // Restore last played track
+      const savedLastTrack = localStorage.getItem('melo_last_track');
+      if (savedLastTrack) {
+        const parsed = JSON.parse(savedLastTrack);
+        if (parsed && parsed.id) {
+          setCurrentTrack(parsed);
+          if (audioRef.current) {
+            audioRef.current.src = parsed.streamUrl;
+          }
+        }
       }
 
       const savedVol = localStorage.getItem('melo_volume');
@@ -272,8 +292,8 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
 
   const playTrack = (track: Track, newQueue?: Track[]) => {
     setCurrentTrack(track);
-    setIsQueueOpen(true);
-    if (newQueue) {
+    const activeQueue = newQueue && newQueue.length > 0 ? newQueue : queue;
+    if (newQueue && newQueue.length > 0) {
       setQueue(newQueue);
       const idx = newQueue.findIndex((t) => t.id === track.id);
       setQueueIndex(idx !== -1 ? idx : 0);
@@ -288,51 +308,60 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
       }
     }
 
-    const audio = audioRef.current;
-    if (audio) {
+    // Update Recently Played history and Last Played Track
+    setRecentlyPlayed((prev) => {
+      const filtered = prev.filter((t) => t.id !== track.id);
+      const updated = [track, ...filtered].slice(0, 15);
       try {
-        audio.pause();
-        audio.src = track.streamUrl;
-        audio.currentTime = 0;
-        audio.load();
-        const playPromise = audio.play();
+        localStorage.setItem('melo_recently_played', JSON.stringify(updated));
+        localStorage.setItem('melo_last_track', JSON.stringify(track));
+      } catch {}
+      return updated;
+    });
+
+    if (audioRef.current) {
+      try {
+        audioRef.current.pause();
+        audioRef.current.src = track.streamUrl;
+        audioRef.current.currentTime = 0;
+        audioRef.current.load();
+        const playPromise = audioRef.current.play();
         if (playPromise !== undefined) {
           playPromise
-            .then(() => {
-              setIsPlaying(true);
-            })
+            .then(() => setIsPlaying(true))
             .catch((err) => {
-              console.warn('Autoplay error / user interaction required:', err);
-              setIsPlaying(false);
+              if (err.name !== 'AbortError') {
+                console.warn('Autoplay error:', err);
+                setIsPlaying(false);
+              }
             });
         }
-      } catch (e) {
-        console.warn('Audio play exception:', e);
-        setIsPlaying(false);
+      } catch (err) {
+        console.warn('Audio play exception:', err);
       }
     }
   };
 
   const togglePlay = () => {
-    const audio = audioRef.current;
-    if (!audio || !currentTrack) return;
+    if (!audioRef.current || !currentTrack) return;
     if (isPlaying) {
-      audio.pause();
+      audioRef.current.pause();
       setIsPlaying(false);
     } else {
-      if (!audio.src || !audio.src.includes(currentTrack.streamUrl)) {
-        audio.src = currentTrack.streamUrl;
-        audio.load();
+      if (
+        !audioRef.current.src ||
+        audioRef.current.src === '' ||
+        !audioRef.current.src.includes(currentTrack.streamUrl)
+      ) {
+        audioRef.current.src = currentTrack.streamUrl;
       }
-      const playPromise = audio.play();
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => setIsPlaying(true))
-          .catch((err) => {
-            console.warn('Playback error / user interaction required:', err);
-            setIsPlaying(false);
-          });
-      }
+      audioRef.current
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch((err) => {
+          console.warn('Playback error / user interaction required:', err);
+          setIsPlaying(false);
+        });
     }
   };
 
@@ -380,7 +409,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     setQueueIndex(nextIndex);
     const nextTrack = queue[nextIndex];
     if (nextTrack) {
-      playTrack(nextTrack);
+      playTrack(nextTrack, queue);
     }
   };
 
@@ -398,7 +427,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     setQueueIndex(prevIndex);
     const prevTrack = queue[prevIndex];
     if (prevTrack) {
-      playTrack(prevTrack);
+      playTrack(prevTrack, queue);
     }
   };
 
@@ -469,34 +498,25 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
         } else if (cp.id === 'playlist-hindi-romance') {
           matching = liveTracks.filter(
             (t) =>
-              t.genre.toLowerCase() === 'romance' ||
-              (t.genre.toLowerCase() === 'bollywood' && !t.title.toLowerCase().includes('tauba') && !t.title.toLowerCase().includes('arjan'))
-          );
+              t.genre.toLowerCase().includes('romance') ||
+              t.genre.toLowerCase().includes('bollywood')
+          ).slice(0, 25);
         } else if (cp.id === 'playlist-punjabi') {
           matching = liveTracks.filter(
             (t) =>
-              t.genre.toLowerCase() === 'punjabi' ||
+              t.genre.toLowerCase().includes('punjabi') ||
+              t.genre.toLowerCase().includes('pop') ||
               t.artist.toLowerCase().includes('diljit') ||
               t.artist.toLowerCase().includes('dhillon') ||
-              t.artist.toLowerCase().includes('karan aujla') ||
-              t.artist.toLowerCase().includes('ikky') ||
-              t.artist.toLowerCase().includes('babbal')
-          );
-        } else if (cp.id === 'playlist-lofi-chill') {
+              t.artist.toLowerCase().includes('karan')
+          ).slice(0, 25);
+        } else {
           matching = liveTracks.filter(
             (t) =>
-              t.genre.toLowerCase() === 'lofi' ||
-              t.genre.toLowerCase() === 'ambient'
-          );
-        } else if (cp.id === 'playlist-global-pop') {
-          matching = liveTracks.filter(
-            (t) =>
-              t.genre.toLowerCase() === 'pop' ||
-              t.genre.toLowerCase().includes('r&b') ||
-              t.artist.toLowerCase().includes('weeknd') ||
-              t.artist.toLowerCase().includes('eilish') ||
-              t.artist.toLowerCase().includes('carpenter')
-          );
+              t.genre.toLowerCase().includes('lofi') ||
+              t.genre.toLowerCase().includes('ambient') ||
+              t.genre.toLowerCase().includes('synth')
+          ).slice(0, 25);
         }
 
         const merged = [...cp.tracks];
@@ -533,7 +553,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
         queueIndex,
         likedTrackIds,
         playlists,
-        isQueueOpen,
+        recentlyPlayed,
         isVisualizerOpen,
         isFullscreenOpen,
         audioBufferPercent,
@@ -553,7 +573,6 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
         removeTrackFromPlaylist,
         deletePlaylist,
         updateTrendingPlaylists,
-        setIsQueueOpen,
         setIsVisualizerOpen,
         setIsFullscreenOpen,
         audioRef,

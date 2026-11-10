@@ -368,17 +368,134 @@ export const CURATED_TRACKS: Track[] = [
     releaseYear: 2020,
   },
   {
-    id: 'global-4',
-    title: 'Die For You',
-    artist: 'The Weeknd',
-    album: 'Starboy',
-    duration: 260,
-    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e2/61/f8/e261f8c1-73db-9a7a-c89e-1068f19970e0/16UMGIM67863.rgb.jpg/600x600bb.jpg',
-    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/50/50/1a/50501a86-bd74-e90d-8a56-68c9b5e6e7d6/mzaf_4588197682084244913.plus.aac.p.m4a',
-    genre: 'R&B/Soul',
-    playCount: 3950000,
+    id: 'hindi-26',
+    title: 'Winning Speech',
+    artist: 'Karan Aujla & MXRCI',
+    album: 'Winning Speech - Single',
+    duration: 227,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/48/7c/36/487c3668-f7a4-4b1a-e09e-c74dae124dd9/5063483578089_cover.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e3/ae/b6/e3aeb64f-cadd-5830-c39f-6af51cd91670/mzaf_6001527501800958065.plus.aac.p.m4a',
+    genre: 'Punjabi',
+    playCount: 3100000,
     source: 'itunes',
-    releaseYear: 2016,
+    releaseYear: 2024,
+  },
+  {
+    id: 'hindi-27',
+    title: '52 Bars',
+    artist: 'Karan Aujla & Ikky',
+    album: 'Four You - EP',
+    duration: 214,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/fc/bc/64/fcbc6417-8a88-7b5e-4490-8f53e537ffb0/859770181552_cover.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/52/c9/1c/52c91c69-352d-cb4e-3706-265dc01067d0/mzaf_17387125942915601585.plus.aac.p.m4a',
+    genre: 'Punjabi',
+    playCount: 2850000,
+    source: 'itunes',
+    releaseYear: 2023,
+  },
+  {
+    id: 'hindi-28',
+    title: 'Cheques',
+    artist: 'Shubh',
+    album: 'Still Rollin',
+    duration: 184,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/dc/46/a9/dc46a9c9-794e-2d7a-1afb-97eb4ae0fff6/197188915704.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/5f/e9/8a/5fe98aa5-660a-2f91-b53d-558fdb9ef50b/mzaf_5845186979219129320.plus.aac.p.m4a',
+    genre: 'Punjabi',
+    playCount: 3400000,
+    source: 'itunes',
+    releaseYear: 2023,
+  },
+  {
+    id: 'hindi-29',
+    title: 'Born to Shine',
+    artist: 'Diljit Dosanjh',
+    album: 'G.O.A.T.',
+    duration: 213,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d2/89/ac/d289ac98-749e-3822-6b6e-b06aa4815715/859740651597_cover.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/38/12/41/38124195-4bd9-1fc7-fe40-f793ee38d163/mzaf_14837378210736189248.plus.aac.p.m4a',
+    genre: 'Punjabi',
+    playCount: 4100000,
+    source: 'itunes',
+    releaseYear: 2020,
+  },
+  {
+    id: 'hindi-30',
+    title: 'Proper Patola',
+    artist: 'Badshah, Diljit Dosanjh & Aastha Gill',
+    album: 'Namaste England',
+    duration: 179,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/a9/f7/b4/a9f7b4e7-6ec1-5d95-1d56-ec08e038ca5a/886447356036.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e5/c2/0a/e5c20a8d-f1b4-5d95-2ac1-e2e9efa502bb/mzaf_11124996926999296098.plus.aac.p.m4a',
+    genre: 'Bollywood',
+    playCount: 2600000,
+    source: 'itunes',
+    releaseYear: 2018,
+  },
+  {
+    id: 'hindi-31',
+    title: 'Shayad (From "Love Aaj Kal")',
+    artist: 'Pritam & Arijit Singh',
+    album: 'Love Aaj Kal',
+    duration: 248,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/4d/7c/9e/4d7c9e55-4ed7-ee60-83c8-49bc452227b3/886448257929.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/69/08/d6/6908d60e-563f-5d07-9bb5-737c9d90b59d/mzaf_9263362903198979589.plus.aac.p.m4a',
+    genre: 'Romance',
+    playCount: 3800000,
+    source: 'itunes',
+    releaseYear: 2020,
+  },
+  {
+    id: 'hindi-32',
+    title: 'Hawayein',
+    artist: 'Pritam & Arijit Singh',
+    album: 'Jab Harry Met Sejal',
+    duration: 290,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/41/aa/e3/41aae321-0a81-2762-e0eb-c60844109fe7/886446683584.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/15/d1/a8/15d1a862-edcd-6a92-624a-2bbf0f7eff26/mzaf_7165241817401822857.plus.aac.p.m4a',
+    genre: 'Romance',
+    playCount: 3200000,
+    source: 'itunes',
+    releaseYear: 2017,
+  },
+  {
+    id: 'hindi-33',
+    title: 'Kalank (Title Track)',
+    artist: 'Pritam & Arijit Singh',
+    album: 'Kalank',
+    duration: 311,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/4e/39/49/4e3949f3-d59d-4295-4bb2-036269f9a88f/8718857678083.png/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c8/a2/09/c8a20920-52a8-9728-a305-9f12a85ae305/mzaf_8477813248295499776.plus.aac.p.m4a',
+    genre: 'Bollywood',
+    playCount: 2900000,
+    source: 'itunes',
+    releaseYear: 2019,
+  },
+  {
+    id: 'hindi-34',
+    title: 'Tere Hawaale',
+    artist: 'Arijit Singh, Shilpa Rao & Pritam',
+    album: 'Laal Singh Chaddha',
+    duration: 346,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/1e/d0/a8/1ed0a8aa-a8dd-2730-2481-96438f96ddfc/8903431892119_cover.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/64/5f/22/645f22ed-321b-7ea4-67a3-562ed63a63cb/mzaf_3751742054108290105.plus.aac.p.m4a',
+    genre: 'Romance',
+    playCount: 2750000,
+    source: 'itunes',
+    releaseYear: 2022,
+  },
+  {
+    id: 'global-4',
+    title: 'Die With A Smile',
+    artist: 'Lady Gaga & Bruno Mars',
+    album: 'Die With A Smile - Single',
+    duration: 252,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/11/ae/f2/11aef294-f57c-bab9-c9fc-529162984e62/24UMGIM85348.rgb.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/07/6a/99/076a99ed-b946-431b-6f1f-54fa187ca5bd/mzaf_8102882277995122875.plus.aac.p.m4a',
+    genre: 'Pop',
+    playCount: 4800000,
+    source: 'itunes',
+    releaseYear: 2024,
   },
   {
     id: 'global-5',
@@ -388,127 +505,36 @@ export const CURATED_TRACKS: Track[] = [
     duration: 210,
     artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/92/9f/69/929f69f1-9977-3a44-d674-11f70c852d1b/24UMGIM36186.rgb.jpg/600x600bb.jpg',
     streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/34/31/d3/3431d34e-847f-5d66-df83-0bce688d997e/mzaf_18106743962423782018.plus.aac.p.m4a',
+    genre: 'Alternative',
+    playCount: 5200000,
+    source: 'itunes',
+    releaseYear: 2024,
+  },
+  {
+    id: 'global-6',
+    title: 'As It Was',
+    artist: 'Harry Styles',
+    album: 'Harry\'s House',
+    duration: 167,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/2a/19/fb/2a19fb85-2f70-9e44-f2a9-82abe679b88e/886449990061.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/67/10/16/67101606-3869-ca44-6c03-e13d6322cb51/mzaf_1135399237022217274.plus.aac.p.m4a',
     genre: 'Pop',
-    playCount: 4120000,
+    playCount: 6100000,
     source: 'itunes',
-    releaseYear: 2024,
+    releaseYear: 2022,
   },
   {
-    id: 'hindi-26',
-    title: 'G.O.A.T.',
-    artist: 'Diljit Dosanjh',
-    album: 'G.O.A.T.',
-    duration: 224,
-    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d2/89/ac/d289ac98-749e-3822-6b6e-b06aa4815715/859740651597_cover.jpg/600x600bb.jpg',
-    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ba/5c/57/ba5c5769-536b-1884-dfbf-5930cab13332/mzaf_7745269360294572986.plus.aac.p.m4a',
-    genre: 'Punjabi',
-    playCount: 3100000,
+    id: 'global-7',
+    title: 'Flowers',
+    artist: 'Miley Cyrus',
+    album: 'Endless Summer Vacation',
+    duration: 201,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/8c/67/ff/8c67ff91-31c3-3fef-1884-ce3ec89f3af4/196589946874.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/68/9e/f7/689ef7fe-14fe-a846-c87f-7d3b2d6344b1/mzaf_4167137058064023087.plus.aac.p.m4a',
+    genre: 'Pop',
+    playCount: 5900000,
     source: 'itunes',
-    releaseYear: 2020,
-  },
-  {
-    id: 'hindi-27',
-    title: 'Wavy',
-    artist: 'Karan Aujla & Jay Trak',
-    album: 'Wavy',
-    duration: 161,
-    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/cd/df/5a/cddf5a8c-464e-3958-cf4a-7fac9e490aa5/5063616597178_cover.jpg/600x600bb.jpg',
-    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/5f/5e/84/5f5e8495-bd71-97f1-bc2d-8e9bf4591868/mzaf_11556782856079892040.plus.aac.p.m4a',
-    genre: 'Punjabi',
-    playCount: 2280000,
-    source: 'itunes',
-    releaseYear: 2024,
-  },
-  {
-    id: 'hindi-28',
-    title: 'Samjhawan',
-    artist: 'Jawad Ahmed, Sharib Toshi, Arijit Singh & Shreya Ghoshal',
-    album: 'Humpty Sharma Ki Dulhania',
-    duration: 269,
-    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/24/a5/a4/24a5a4bf-5854-abf3-a834-845c0fef65c6/886444676540.jpg/600x600bb.jpg',
-    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/65/06/39/65063981-71d1-0ac9-27a8-3d5d4aaae812/mzaf_10463263695656246233.plus.aac.p.m4a',
-    genre: 'Romance',
-    playCount: 2650000,
-    source: 'itunes',
-    releaseYear: 2014,
-  },
-  {
-    id: 'curated-1',
-    title: 'Neon Horizon',
-    artist: 'Cyber Pulse',
-    album: 'Synthetic Dreams',
-    duration: 372,
-    artwork: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop&q=80',
-    streamUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-    genre: 'Synthwave',
-    playCount: 184500,
-    source: 'curated',
-    releaseYear: 2026,
-  },
-  {
-    id: 'curated-2',
-    title: 'Midnight Coffee & Rain',
-    artist: 'Aura Lofi',
-    album: 'Sunday Chill Sessions',
-    duration: 423,
-    artwork: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=600&auto=format&fit=crop&q=80',
-    streamUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-    genre: 'Lofi',
-    playCount: 312400,
-    source: 'curated',
-    releaseYear: 2026,
-  },
-  {
-    id: 'curated-3',
-    title: 'Tokyo Nightfall',
-    artist: 'Shinji Beats',
-    album: 'Shibuya Lofi',
-    duration: 354,
-    artwork: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600&auto=format&fit=crop&q=80',
-    streamUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3',
-    genre: 'Lofi',
-    playCount: 428000,
-    source: 'curated',
-    releaseYear: 2026,
-  },
-  {
-    id: 'curated-4',
-    title: 'Sunset Boulevard Drift',
-    artist: 'Kavinsky Vibes',
-    album: 'Retrograde Express',
-    duration: 302,
-    artwork: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=600&auto=format&fit=crop&q=80',
-    streamUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
-    genre: 'Synthwave',
-    playCount: 142000,
-    source: 'curated',
-    releaseYear: 2025,
-  },
-  {
-    id: 'curated-5',
-    title: 'Deep Ocean Waves',
-    artist: 'Solaris Echo',
-    album: 'Ambient Depths',
-    duration: 338,
-    artwork: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600&auto=format&fit=crop&q=80',
-    streamUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3',
-    genre: 'Ambient',
-    playCount: 198000,
-    source: 'curated',
-    releaseYear: 2025,
-  },
-  {
-    id: 'curated-6',
-    title: 'Ibiza Sunset Groove',
-    artist: 'Groove Collective',
-    album: 'Balearic House',
-    duration: 360,
-    artwork: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&auto=format&fit=crop&q=80',
-    streamUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3',
-    genre: 'House',
-    playCount: 740000,
-    source: 'curated',
-    releaseYear: 2026,
+    releaseYear: 2023,
   },
 ];
 
@@ -517,171 +543,158 @@ export const FEATURED_ARTISTS: Artist[] = [
     id: 'artist-arijit',
     name: 'Arijit Singh',
     image: 'https://upload.wikimedia.org/wikipedia/commons/b/b7/Arijit_Singh_performance_at_Chandigarh_2025.jpg',
-    followers: '42.8M',
-    monthlyListeners: '38,400,000',
-    bio: 'The undisputed voice of Bollywood romance, ruling global charts with timeless melodies.',
+    followers: '45.2M',
+    monthlyListeners: '39,800,000',
+    bio: 'The undisputed voice of Indian romance and the most listened-to artist in Bollywood history.',
     genre: 'Bollywood / Romance',
   },
   {
     id: 'artist-diljit',
     name: 'Diljit Dosanjh',
     image: 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Diljit_Dosanjh.jpg',
-    followers: '21.5M',
-    monthlyListeners: '19,800,000',
-    bio: 'Global Punjabi music superstar selling out stadiums with historic worldwide tours.',
+    followers: '23.8M',
+    monthlyListeners: '21,400,000',
+    bio: 'Global superstar selling out stadium tours worldwide and redefining modern Punjabi pop.',
     genre: 'Punjabi / Pop',
   },
   {
     id: 'artist-karan',
     name: 'Karan Aujla',
     image: 'https://upload.wikimedia.org/wikipedia/commons/7/76/Karan_Aujla_2020.jpg',
-    followers: '18.4M',
-    monthlyListeners: '16,200,000',
-    bio: 'Multi-platinum Punjabi hip-hop icon behind worldwide blockbusters Tauba Tauba & Softly.',
+    followers: '19.4M',
+    monthlyListeners: '18,900,000',
+    bio: 'Chart-topping Punjabi singer, lyricist and hitmaker behind "Tauba Tauba", "Winning Speech" & "Softly".',
     genre: 'Punjabi / Hip-Hop',
   },
   {
     id: 'artist-shreya',
     name: 'Shreya Ghoshal',
     image: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Shreya_Ghoshal_Behindwoods_Gold_Icons_Awards_2023_%28cropped%29.jpg',
-    followers: '28.2M',
-    monthlyListeners: '24,900,000',
-    bio: 'Multi-National Award-winning Indian melody queen with hundreds of iconic chartbusters.',
+    followers: '29.5M',
+    monthlyListeners: '25,600,000',
+    bio: 'Multiple National Film Award-winning melody queen with hundreds of timeless hit songs.',
     genre: 'Bollywood / Melodies',
+  },
+  {
+    id: 'artist-weeknd',
+    name: 'The Weeknd',
+    image: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/The_Weeknd_Portrait_by_Brian_Ziff.jpg/960px-The_Weeknd_Portrait_by_Brian_Ziff.jpg',
+    followers: '118M',
+    monthlyListeners: '112,000,000',
+    bio: 'Grammy-winning record breaker behind global anthems "Blinding Lights" and "Starboy".',
+    genre: 'R&B / Pop',
   },
   {
     id: 'artist-rahman',
     name: 'A.R. Rahman',
     image: 'https://upload.wikimedia.org/wikipedia/commons/1/10/AR_Rahman_at_Premier_Futsal_Press_Meet_%28cropped%29.jpg',
-    followers: '35.1M',
-    monthlyListeners: '29,100,000',
-    bio: 'Two-time Academy Award & Grammy winner celebrated as the Mozart of Madras.',
+    followers: '36.8M',
+    monthlyListeners: '30,200,000',
+    bio: 'Two-time Academy Award and Grammy winner revered worldwide as the Mozart of Madras.',
     genre: 'Soundtrack / World',
-  },
-  {
-    id: 'artist-weeknd',
-    name: 'The Weeknd',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/The_Weeknd_Portrait_by_Brian_Ziff.jpg/960px-The_Weeknd_Portrait_by_Brian_Ziff.jpg',
-    followers: '98.5M',
-    monthlyListeners: '108,000,000',
-    bio: 'Global streaming king and Diamond-certified artist redefining modern synthpop and R&B.',
-    genre: 'R&B / Pop / Synthwave',
   },
 ];
 
-// Helper to reliably construct genre-accurate playlists by exact track ID
-const getTracksByIds = (ids: string[]): Track[] =>
-  ids
-    .map((id) => CURATED_TRACKS.find((t) => t.id === id))
-    .filter((t): t is Track => t !== undefined);
-
-// Rich, accurate, world-trending playlists with 100% genre fidelity
+// Rich, expanded world-trending playlists with 100% accurate, real songs
 export const CURATED_PLAYLISTS: Playlist[] = [
   {
     id: 'playlist-hindi-top',
     name: '🔥 Top Global & India Hits 2026',
     description: 'The definitive 2026 chartbusters: Bollywood blockbusters, Punjabi anthems & international sensations.',
     coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&auto=format&fit=crop&q=80',
-    tracks: getTracksByIds([
-      'hindi-1',  // Kesariya
-      'hindi-3',  // Chaleya
-      'hindi-7',  // Tauba Tauba
-      'hindi-8',  // Pehle Bhi Main
-      'hindi-9',  // Satranga
-      'hindi-10', // Naina
-      'hindi-6',  // Lover
-      'hindi-26', // G.O.A.T.
-      'hindi-27', // Wavy
-      'hindi-14', // Kinni Kinni
-      'hindi-15', // Softly
-      'hindi-17', // Arjan Vailly
-      'hindi-21', // Excuses
-      'hindi-22', // Brown Munde
-      'hindi-23', // O Maahi
-      'hindi-24', // Pasoori
-      'hindi-2',  // Apna Bana Le
-      'hindi-4',  // Tum Hi Ho
-      'hindi-5',  // Raataan Lambiyan
-      'hindi-11', // Ve Kamleya
-      'hindi-28', // Samjhawan
-      'global-1', // Espresso
-      'global-2', // Starboy
-      'global-3', // Blinding Lights
-      'global-5', // BIRDS OF A FEATHER
-    ]),
+    tracks: [
+      CURATED_TRACKS[2],  // Chaleya
+      CURATED_TRACKS[0],  // Kesariya
+      CURATED_TRACKS[6],  // Tauba Tauba
+      CURATED_TRACKS[28], // Winning Speech
+      CURATED_TRACKS[30], // Cheques
+      CURATED_TRACKS[31], // Born to Shine
+      CURATED_TRACKS[7],  // Pehle Bhi Main
+      CURATED_TRACKS[8],  // Satranga
+      CURATED_TRACKS[9],  // Naina
+      CURATED_TRACKS[5],  // Lover
+      CURATED_TRACKS[20], // Excuses
+      CURATED_TRACKS[21], // Brown Munde
+      CURATED_TRACKS[22], // O Maahi
+      CURATED_TRACKS[23], // Pasoori
+      CURATED_TRACKS[1],  // Apna Bana Le
+      CURATED_TRACKS[3],  // Tum Hi Ho
+      CURATED_TRACKS[4],  // Raataan Lambiyan
+      CURATED_TRACKS[33], // Shayad
+      CURATED_TRACKS[34], // Hawayein
+      CURATED_TRACKS[35], // Kalank
+      CURATED_TRACKS[36], // Tere Hawaale
+      CURATED_TRACKS[37], // Die With A Smile
+      CURATED_TRACKS[38], // BIRDS OF A FEATHER
+      CURATED_TRACKS[25], // Espresso
+      CURATED_TRACKS[26], // Starboy
+      CURATED_TRACKS[27], // Blinding Lights
+    ],
   },
   {
     id: 'playlist-hindi-romance',
     name: '❤️ Bollywood Romance & Melodies',
     description: 'Heartfelt soulful Hindi love songs by Arijit Singh, Shreya Ghoshal, Pritam & A.R. Rahman.',
     coverImage: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&auto=format&fit=crop&q=80',
-    tracks: getTracksByIds([
-      'hindi-1',  // Kesariya
-      'hindi-2',  // Apna Bana Le
-      'hindi-4',  // Tum Hi Ho
-      'hindi-5',  // Raataan Lambiyan
-      'hindi-8',  // Pehle Bhi Main
-      'hindi-9',  // Satranga
-      'hindi-11', // Ve Kamleya
-      'hindi-12', // Channa Mereya
-      'hindi-13', // Agar Tum Saath Ho
-      'hindi-23', // O Maahi
-      'hindi-25', // Tujhe Kitna Chahne Lage
-      'hindi-20', // Pehli Nazar Mein
-      'hindi-18', // Ilahi
-      'hindi-16', // Kun Faya Kun
-      'hindi-19', // Param Sundari
-      'hindi-3',  // Chaleya
-      'hindi-6',  // Lover
-      'hindi-24', // Pasoori
-      'hindi-28', // Samjhawan
-    ]),
+    tracks: [
+      CURATED_TRACKS[0],  // Kesariya
+      CURATED_TRACKS[1],  // Apna Bana Le
+      CURATED_TRACKS[3],  // Tum Hi Ho
+      CURATED_TRACKS[4],  // Raataan Lambiyan
+      CURATED_TRACKS[33], // Shayad
+      CURATED_TRACKS[34], // Hawayein
+      CURATED_TRACKS[35], // Kalank
+      CURATED_TRACKS[36], // Tere Hawaale
+      CURATED_TRACKS[7],  // Pehle Bhi Main
+      CURATED_TRACKS[8],  // Satranga
+      CURATED_TRACKS[10], // Ve Kamleya
+      CURATED_TRACKS[11], // Channa Mereya
+      CURATED_TRACKS[12], // Agar Tum Saath Ho
+      CURATED_TRACKS[22], // O Maahi
+      CURATED_TRACKS[24], // Tujhe Kitna Chahne Lage
+      CURATED_TRACKS[19], // Pehli Nazar Mein
+      CURATED_TRACKS[17], // Ilahi
+      CURATED_TRACKS[15], // Kun Faya Kun
+      CURATED_TRACKS[18], // Param Sundari
+      CURATED_TRACKS[2],  // Chaleya
+    ],
   },
   {
     id: 'playlist-punjabi',
     name: '⚡ Punjabi & Urban Wave Bangers',
-    description: 'High-energy beats & anthems from Diljit Dosanjh, Karan Aujla, AP Dhillon, and hip-hop heavyweights.',
+    description: 'High-energy beats & anthems from Diljit Dosanjh, Karan Aujla, AP Dhillon, and Shubh.',
     coverImage: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&auto=format&fit=crop&q=80',
-    tracks: getTracksByIds([
-      'hindi-7',  // Tauba Tauba
-      'hindi-6',  // Lover
-      'hindi-10', // Naina
-      'hindi-26', // G.O.A.T.
-      'hindi-27', // Wavy
-      'hindi-14', // Kinni Kinni
-      'hindi-15', // Softly
-      'hindi-17', // Arjan Vailly
-      'hindi-21', // Excuses
-      'hindi-22', // Brown Munde
-      'hindi-24', // Pasoori
-    ]),
+    tracks: [
+      CURATED_TRACKS[6],  // Tauba Tauba
+      CURATED_TRACKS[28], // Winning Speech
+      CURATED_TRACKS[29], // 52 Bars
+      CURATED_TRACKS[14], // Softly
+      CURATED_TRACKS[30], // Cheques
+      CURATED_TRACKS[31], // Born to Shine
+      CURATED_TRACKS[32], // Proper Patola
+      CURATED_TRACKS[5],  // Lover
+      CURATED_TRACKS[9],  // Naina
+      CURATED_TRACKS[13], // Kinni Kinni
+      CURATED_TRACKS[16], // Arjan Vailly
+      CURATED_TRACKS[20], // Excuses
+      CURATED_TRACKS[21], // Brown Munde
+      CURATED_TRACKS[23], // Pasoori
+    ],
   },
   {
-    id: 'playlist-lofi-chill',
-    name: '☕ Midnight Lo-Fi & Deep Focus',
-    description: 'Relaxing ambient beats, acoustic melodies & warm textures for late-night coding, studying, and relaxation.',
-    coverImage: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=600&auto=format&fit=crop&q=80',
-    tracks: getTracksByIds([
-      'curated-2', // Midnight Coffee & Rain
-      'curated-3', // Tokyo Nightfall
-      'curated-1', // Neon Horizon
-      'curated-4', // Sunset Boulevard Drift
-      'curated-5', // Deep Ocean Waves
-      'curated-6', // Ibiza Sunset Groove
-    ]),
-  },
-  {
-    id: 'playlist-global-pop',
-    name: '🌍 Global Pop & International Chartbusters',
-    description: 'Chart-topping international hits from The Weeknd, Billie Eilish, Sabrina Carpenter & global icons.',
+    id: 'playlist-global',
+    name: '🌐 Global Billboard & Viral Hits',
+    description: 'Worldwide chart-dominating tracks from Lady Gaga, Bruno Mars, The Weeknd, Billie Eilish & Sabrina Carpenter.',
     coverImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop&q=80',
-    tracks: getTracksByIds([
-      'global-1', // Espresso
-      'global-2', // Starboy
-      'global-3', // Blinding Lights
-      'global-4', // Die For You
-      'global-5', // BIRDS OF A FEATHER
-    ]),
+    tracks: [
+      CURATED_TRACKS[37], // Die With A Smile
+      CURATED_TRACKS[38], // BIRDS OF A FEATHER
+      CURATED_TRACKS[25], // Espresso
+      CURATED_TRACKS[26], // Starboy
+      CURATED_TRACKS[27], // Blinding Lights
+      CURATED_TRACKS[39], // As It Was
+      CURATED_TRACKS[40], // Flowers
+    ],
   },
 ];
 

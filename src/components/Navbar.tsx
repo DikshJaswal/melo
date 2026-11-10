@@ -15,30 +15,17 @@ import { Track } from '@/types/music';
 interface NavbarProps {
   searchQuery: string;
   onSearchChange: (query: string) => void;
-  selectedCategory: string;
-  onSelectCategory: (cat: string) => void;
+  selectedCategory?: string;
+  onSelectCategory?: (cat: string) => void;
   currentTab: string;
   onTabChange: (tab: string) => void;
   onOpenAuth: (mode: 'login' | 'signup') => void;
   allTracks?: Track[];
 }
 
-const CATEGORIES = [
-  'All',
-  'Bollywood',
-  'Trending Hindi',
-  'Punjabi',
-  'Romance',
-  'Lofi',
-  'EDM',
-  'Party',
-];
-
 export default function Navbar({
   searchQuery,
   onSearchChange,
-  selectedCategory,
-  onSelectCategory,
   currentTab,
   onTabChange,
   onOpenAuth,
@@ -271,31 +258,6 @@ export default function Navbar({
             </div>
           )}
         </div>
-      </div>
-
-      {/* Category Pills Bar */}
-      <div className="flex items-center gap-2 overflow-x-auto scrollbar-none pb-0.5">
-        {CATEGORIES.map((cat) => {
-          const isSelected = selectedCategory.toLowerCase() === cat.toLowerCase();
-          return (
-            <button
-              key={cat}
-              onClick={() => {
-                onSelectCategory(cat);
-                if (currentTab !== 'home' && currentTab !== 'search') {
-                  onTabChange('home');
-                }
-              }}
-              className={`px-3.5 py-1 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
-                isSelected
-                  ? 'bg-sky-400 text-black font-extrabold shadow-md shadow-sky-500/20'
-                  : 'bg-[#18181b] text-zinc-400 hover:text-white hover:bg-[#27272a]'
-              }`}
-            >
-              {cat}
-            </button>
-          );
-        })}
       </div>
     </header>
   );

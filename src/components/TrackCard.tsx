@@ -31,6 +31,8 @@ export default function TrackCard({ track, playlistContext }: TrackCardProps) {
       onClick={() => {
         if (!isCurrentTrack) {
           playTrack(track, playlistContext);
+        } else {
+          togglePlay();
         }
       }}
       className={`group relative p-3.5 rounded-xl bg-[#121214] hover:bg-[#18181b] border border-transparent hover:border-[#27272a] transition-all duration-300 cursor-pointer flex flex-col justify-between ${
