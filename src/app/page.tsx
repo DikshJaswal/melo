@@ -307,8 +307,8 @@ export default function MeloApp() {
                       onClick={() => setCurrentTab(`playlist-${playlist.id}`)}
                       className="group p-4 rounded-xl bg-[#121214] hover:bg-[#18181b] border border-transparent hover:border-zinc-800 transition-all cursor-pointer"
                     >
-                      <div className="relative aspect-video w-full rounded-lg overflow-hidden mb-3 bg-zinc-900 shadow">
-                        <Image
+                      <div className="relative aspect-square w-full rounded-lg overflow-hidden mb-3 bg-zinc-900 shadow">
+                        <SafeImage
                           src={playlist.coverImage}
                           alt={playlist.name}
                           fill
@@ -545,7 +545,7 @@ export default function MeloApp() {
             <div className="space-y-8 max-w-7xl mx-auto">
               <div className="flex flex-col sm:flex-row items-center sm:items-end gap-6 bg-gradient-to-b from-sky-950/40 to-transparent p-6 rounded-2xl border border-sky-500/20">
                 <div className="relative w-40 h-40 rounded-2xl overflow-hidden shadow-2xl flex-shrink-0 bg-zinc-900">
-                  <Image
+                  <SafeImage
                     src={selectedPlaylist.coverImage}
                     alt={selectedPlaylist.name}
                     fill
@@ -636,7 +636,7 @@ export default function MeloApp() {
                     className="p-3.5 rounded-xl bg-[#121214] hover:bg-[#18181b] border border-transparent hover:border-zinc-800 transition-all cursor-pointer flex flex-col justify-between aspect-square group"
                   >
                     <div className="relative aspect-square w-full rounded-lg overflow-hidden bg-zinc-900 mb-2">
-                      <Image src={p.coverImage} alt={p.name} fill className="object-cover" />
+                      <SafeImage src={p.coverImage} alt={p.name} fill className="object-cover" />
                     </div>
                     <div className="truncate">
                       <h4 className="font-semibold text-sm text-white truncate">{p.name}</h4>
