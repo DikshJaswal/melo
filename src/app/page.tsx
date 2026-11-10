@@ -182,8 +182,14 @@ export default function MeloApp() {
                 {isInstallable && (
                   <div className="mb-4 p-3 rounded-xl bg-gradient-to-r from-sky-500/20 via-zinc-900 to-zinc-900 border border-sky-500/30 flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-lg bg-sky-400 text-black flex items-center justify-center font-bold shadow-md shadow-sky-500/20">
-                        🎵
+                      <div className="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0 border border-sky-400/30 bg-[#121620] p-1 shadow-md shadow-sky-500/20 flex items-center justify-center">
+                        <Image
+                          src="/icon.svg"
+                          alt="Melo App Icon"
+                          width={36}
+                          height={36}
+                          className="w-full h-full object-contain rounded-lg"
+                        />
                       </div>
                       <div>
                         <p className="text-xs font-bold text-white">Install Melo App</p>

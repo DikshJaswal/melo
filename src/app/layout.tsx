@@ -8,8 +8,14 @@ export const metadata: Metadata = {
     'High-fidelity Spotify-style music streaming player with real-time spectrum analysis, unlimited playlists, and lossless audio buffering built with Next.js and Tailwind CSS.',
   manifest: '/manifest.json',
   icons: {
-    icon: '/icon.svg',
-    apple: '/icon.svg',
+    icon: [
+      { url: '/favicon.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
   },
   appleWebApp: {
     capable: true,
@@ -34,7 +40,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark h-full antialiased">
       <head>
-        <link rel="apple-touch-icon" href="/icon.svg" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
       </head>
       <body className="min-h-full bg-[#09090b] text-[#fafafa] flex flex-col overflow-hidden">
         <PlayerProvider>{children}</PlayerProvider>

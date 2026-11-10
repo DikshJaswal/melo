@@ -26,6 +26,7 @@ interface PlayerContextType {
 
   // Actions
   login: (name: string, email: string) => void;
+  updateProfile: (name: string, email?: string) => void;
   logout: () => void;
   playTrack: (track: Track, newQueue?: Track[]) => void;
   togglePlay: () => void;
@@ -105,22 +106,47 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
       if (savedVol) setVolumeState(parseFloat(savedVol));
 
       const savedUser = localStorage.getItem('melo_user');
-      if (savedUser) setUser(JSON.parse(savedUser));
+      if (savedUser) {
+        const parsed = JSON.parse(savedUser);
+        if (parsed && (parsed.name === 'Google User' || !parsed.name)) {
+          parsed.name = 'Dikshit Jaswal';
+          try {
+            localStorage.setItem('melo_user', JSON.stringify(parsed));
+          } catch {}
+        }
+        setUser(parsed);
+      }
     } catch (e) {
       console.warn('LocalStorage hydration error:', e);
     }
   }, []);
 
   const login = (name: string, email: string) => {
+    const cleanName = name.trim() && name.trim() !== 'Google User' ? name.trim() : 'Dikshit Jaswal';
     const newUser: User = {
-      name: name.trim() || 'Music Lover',
-      email: email.trim() || 'user@melo.app',
-      avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(name || 'melo')}`,
+      name: cleanName,
+      email: email.trim() || 'dikshitjaswal1922@gmail.com',
+      avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(cleanName)}`,
     };
     setUser(newUser);
     try {
       localStorage.setItem('melo_user', JSON.stringify(newUser));
     } catch {}
+  };
+
+  const updateProfile = (name: string, email?: string) => {
+    setUser((prev) => {
+      const cleanName = name.trim() || 'Dikshit Jaswal';
+      const updated: User = {
+        name: cleanName,
+        email: email !== undefined ? email.trim() : (prev?.email || 'dikshitjaswal1922@gmail.com'),
+        avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(cleanName)}`,
+      };
+      try {
+        localStorage.setItem('melo_user', JSON.stringify(updated));
+      } catch {}
+      return updated;
+    });
   };
 
   const logout = () => {
@@ -468,6 +494,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
       value={{
         user,
         login,
+        updateProfile,
         logout,
         currentTrack,
         isPlaying,

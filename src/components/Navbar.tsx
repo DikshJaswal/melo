@@ -44,8 +44,10 @@ export default function Navbar({
   onOpenAuth,
   allTracks = [],
 }: NavbarProps) {
-  const { user, logout, playTrack } = usePlayer();
+  const { user, logout, updateProfile, playTrack } = usePlayer();
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [editNameValue, setEditNameValue] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -198,15 +200,66 @@ export default function Navbar({
               </button>
 
               {isProfileMenuOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-[#18181b] border border-zinc-800 rounded-xl p-1.5 shadow-2xl z-50 select-none">
-                  <div className="px-3 py-2 border-b border-zinc-800">
-                    <p className="text-xs font-bold text-white truncate">{user.name}</p>
-                    <p className="text-[10px] text-zinc-400 truncate">{user.email}</p>
-                  </div>
+                <div className="absolute right-0 mt-2 w-56 bg-[#18181b] border border-zinc-800 rounded-xl p-1.5 shadow-2xl z-50 select-none">
+                  {isEditingName ? (
+                    <div className="p-2 space-y-2">
+                      <label className="text-[10px] uppercase font-bold text-zinc-400 block">
+                        Edit Display Name
+                      </label>
+                      <input
+                        type="text"
+                        value={editNameValue}
+                        onChange={(e) => setEditNameValue(e.target.value)}
+                        className="w-full bg-[#121216] border border-sky-400/50 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none"
+                        autoFocus
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            if (editNameValue.trim()) updateProfile(editNameValue.trim());
+                            setIsEditingName(false);
+                          }
+                        }}
+                      />
+                      <div className="flex items-center gap-1.5 pt-1">
+                        <button
+                          onClick={() => {
+                            if (editNameValue.trim()) updateProfile(editNameValue.trim());
+                            setIsEditingName(false);
+                          }}
+                          className="flex-1 py-1 rounded-md bg-sky-400 text-black text-[11px] font-bold hover:bg-sky-300 transition-colors"
+                        >
+                          Save
+                        </button>
+                        <button
+                          onClick={() => setIsEditingName(false)}
+                          className="flex-1 py-1 rounded-md bg-zinc-800 text-zinc-300 text-[11px] hover:text-white transition-colors"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="px-3 py-2 border-b border-zinc-800">
+                      <div className="flex items-center justify-between">
+                        <p className="text-xs font-bold text-white truncate max-w-[120px]">{user.name}</p>
+                        <button
+                          onClick={() => {
+                            setEditNameValue(user.name);
+                            setIsEditingName(true);
+                          }}
+                          className="text-[10px] text-sky-400 hover:text-sky-300 font-semibold hover:underline"
+                        >
+                          Edit
+                        </button>
+                      </div>
+                      <p className="text-[10px] text-zinc-400 truncate">{user.email}</p>
+                    </div>
+                  )}
+
                   <button
                     onClick={() => {
                       logout();
                       setIsProfileMenuOpen(false);
+                      setIsEditingName(false);
                     }}
                     className="w-full flex items-center gap-2 px-3 py-2 text-xs font-semibold text-red-400 hover:bg-zinc-800/80 rounded-lg transition-colors mt-1"
                   >
