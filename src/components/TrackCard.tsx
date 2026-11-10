@@ -34,7 +34,7 @@ export default function TrackCard({ track, playlistContext }: TrackCardProps) {
         }
       }}
       className={`group relative p-3.5 rounded-xl bg-[#121214] hover:bg-[#18181b] border border-transparent hover:border-[#27272a] transition-all duration-300 cursor-pointer flex flex-col justify-between ${
-        isCurrentTrack ? 'bg-[#18181b] border-cyan-500/40 shadow-lg shadow-cyan-500/10' : ''
+        isCurrentTrack ? 'bg-[#18181b] border-sky-500/40 shadow-lg shadow-sky-500/10' : ''
       }`}
     >
       <div className="relative aspect-square w-full rounded-lg overflow-hidden mb-3 bg-zinc-900 shadow-md">
@@ -55,7 +55,7 @@ export default function TrackCard({ track, playlistContext }: TrackCardProps) {
         >
           <button
             onClick={handlePlayClick}
-            className="w-10 h-10 rounded-full bg-cyan-400 hover:bg-cyan-300 text-black flex items-center justify-center shadow-xl shadow-black/50 hover:scale-105 active:scale-95 transition-all"
+            className="w-10 h-10 rounded-full bg-sky-400 hover:bg-sky-300 text-black flex items-center justify-center shadow-xl shadow-black/50 hover:scale-105 active:scale-95 transition-all"
           >
             {isCurrentTrack && isPlaying ? (
               <Pause className="w-5 h-5 fill-black" />
@@ -74,7 +74,7 @@ export default function TrackCard({ track, playlistContext }: TrackCardProps) {
         <div className="truncate flex-1">
           <p
             className={`font-semibold text-sm truncate ${
-              isCurrentTrack ? 'text-cyan-400 font-bold' : 'text-white'
+              isCurrentTrack ? 'text-sky-400 font-bold' : 'text-white'
             }`}
           >
             {track.title}
@@ -88,10 +88,10 @@ export default function TrackCard({ track, playlistContext }: TrackCardProps) {
             toggleLike(track.id);
           }}
           className={`p-1 transition-transform active:scale-125 ${
-            liked ? 'text-cyan-400' : 'text-zinc-600 hover:text-zinc-300'
+            liked ? 'text-sky-400' : 'text-zinc-600 hover:text-zinc-300'
           }`}
         >
-          <Heart className={`w-4 h-4 ${liked ? 'fill-cyan-400' : ''}`} />
+          <Heart className={`w-4 h-4 ${liked ? 'fill-sky-400' : ''}`} />
         </button>
       </div>
     </div>

@@ -178,9 +178,9 @@ export default function MeloApp() {
               <div>
                 {/* Mobile Install App Banner */}
                 {isInstallable && (
-                  <div className="mb-4 p-3 rounded-xl bg-gradient-to-r from-cyan-500/20 via-zinc-900 to-zinc-900 border border-cyan-500/30 flex items-center justify-between gap-3">
+                  <div className="mb-4 p-3 rounded-xl bg-gradient-to-r from-sky-500/20 via-zinc-900 to-zinc-900 border border-sky-500/30 flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-lg bg-cyan-400 text-black flex items-center justify-center font-bold shadow-md shadow-cyan-500/30">
+                      <div className="w-8 h-8 rounded-lg bg-sky-400 text-black flex items-center justify-center font-bold shadow-md shadow-sky-500/20">
                         🎵
                       </div>
                       <div>
@@ -190,7 +190,7 @@ export default function MeloApp() {
                     </div>
                     <button
                       onClick={handleInstallClick}
-                      className="px-3.5 py-1.5 rounded-full bg-cyan-400 hover:bg-cyan-300 text-black font-bold text-xs shadow-md shadow-cyan-500/30 transition-all active:scale-95 whitespace-nowrap"
+                      className="px-3.5 py-1.5 rounded-full bg-sky-400 hover:bg-sky-300 text-black font-bold text-xs shadow-md shadow-sky-500/20 transition-all active:scale-95 whitespace-nowrap"
                     >
                       Install
                     </button>
@@ -224,7 +224,7 @@ export default function MeloApp() {
                               if (isCurrent) togglePlay();
                               else playTrack(track, tracks);
                             }}
-                            className={`w-9 h-9 rounded-full bg-cyan-400 hover:bg-cyan-300 text-black flex items-center justify-center shadow-lg shadow-cyan-500/30 transition-all ${
+                            className={`w-9 h-9 rounded-full bg-sky-400 hover:bg-sky-300 text-black flex items-center justify-center shadow-md shadow-sky-500/20 transition-all ${
                               isCurrent && isPlaying
                                 ? 'opacity-100'
                                 : 'opacity-0 group-hover:opacity-100 hover:scale-105'
@@ -266,7 +266,7 @@ export default function MeloApp() {
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
-                    <Compass className="w-5 h-5 text-cyan-400" />
+                    <Compass className="w-5 h-5 text-sky-400" />
                     <h2 className="text-xl font-bold text-white">Curated For You</h2>
                   </div>
                 </div>
@@ -291,7 +291,7 @@ export default function MeloApp() {
                               e.stopPropagation();
                               if (playlist.tracks[0]) playTrack(playlist.tracks[0], playlist.tracks);
                             }}
-                            className="w-9 h-9 rounded-full bg-cyan-400 hover:bg-cyan-300 text-black flex items-center justify-center shadow-lg shadow-cyan-500/30"
+                            className="w-9 h-9 rounded-full bg-sky-400 hover:bg-sky-300 text-black flex items-center justify-center shadow-md shadow-sky-500/20"
                           >
                             <Play className="w-4 h-4 fill-black ml-0.5" />
                           </button>
@@ -324,7 +324,7 @@ export default function MeloApp() {
                       </div>
                       <h4 className="font-bold text-sm text-white truncate w-full">{artist.name}</h4>
                       <p className="text-xs text-zinc-400 mt-0.5">{artist.genre}</p>
-                      <span className="text-[11px] text-cyan-400 font-semibold mt-1">
+                      <span className="text-[11px] text-sky-400 font-semibold mt-1">
                         {artist.monthlyListeners} monthly
                       </span>
                     </div>
@@ -397,7 +397,7 @@ export default function MeloApp() {
                 <div className="flex items-center gap-4">
                   <button
                     onClick={() => playTrack(likedTracks[0], likedTracks)}
-                    className="w-12 h-12 rounded-full bg-cyan-400 hover:bg-cyan-300 text-black flex items-center justify-center shadow-lg shadow-cyan-500/30 hover:scale-105 active:scale-95 transition-all"
+                    className="w-12 h-12 rounded-full bg-sky-400 hover:bg-sky-300 text-black flex items-center justify-center shadow-md shadow-sky-500/20 hover:scale-105 active:scale-95 transition-all"
                   >
                     <Play className="w-6 h-6 fill-black ml-0.5" />
                   </button>
@@ -434,7 +434,7 @@ export default function MeloApp() {
           {/* ==================== SELECTED PLAYLIST VIEW ==================== */}
           {selectedPlaylist && (
             <div className="space-y-8 max-w-7xl mx-auto">
-              <div className="flex flex-col sm:flex-row items-center sm:items-end gap-6 bg-gradient-to-b from-cyan-950/40 to-transparent p-6 rounded-2xl border border-cyan-500/20">
+              <div className="flex flex-col sm:flex-row items-center sm:items-end gap-6 bg-gradient-to-b from-sky-950/40 to-transparent p-6 rounded-2xl border border-sky-500/20">
                 <div className="relative w-40 h-40 rounded-2xl overflow-hidden shadow-2xl flex-shrink-0 bg-zinc-900">
                   <Image
                     src={selectedPlaylist.coverImage}
@@ -444,7 +444,7 @@ export default function MeloApp() {
                   />
                 </div>
                 <div className="text-center sm:text-left space-y-2 flex-1">
-                  <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">
+                  <span className="text-xs font-bold uppercase tracking-wider text-sky-400">
                     Playlist
                   </span>
                   <h1 className="text-2xl md:text-4xl font-black text-white tracking-tight">
@@ -463,7 +463,7 @@ export default function MeloApp() {
                     onClick={() =>
                       playTrack(selectedPlaylist.tracks[0], selectedPlaylist.tracks)
                     }
-                    className="w-12 h-12 rounded-full bg-cyan-400 hover:bg-cyan-300 text-black flex items-center justify-center shadow-lg shadow-cyan-500/30 hover:scale-105 active:scale-95 transition-all"
+                    className="w-12 h-12 rounded-full bg-sky-400 hover:bg-sky-300 text-black flex items-center justify-center shadow-md shadow-sky-500/20 hover:scale-105 active:scale-95 transition-all"
                   >
                     <Play className="w-6 h-6 fill-black ml-0.5" />
                   </button>
@@ -501,7 +501,7 @@ export default function MeloApp() {
                 </div>
                 <button
                   onClick={() => setIsCreatePlaylistOpen(true)}
-                  className="px-4 py-2 rounded-full bg-cyan-400 hover:bg-cyan-300 text-black text-xs font-bold flex items-center gap-2 transition-all shadow-md shadow-cyan-500/30"
+                  className="px-4 py-2 rounded-full bg-sky-400 hover:bg-sky-300 text-black text-xs font-bold flex items-center gap-2 transition-all shadow-md shadow-sky-500/20"
                 >
                   <Plus className="w-4 h-4" />
                   <span>New Playlist</span>

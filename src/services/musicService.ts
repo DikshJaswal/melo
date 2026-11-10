@@ -13,7 +13,7 @@ export const CURATED_TRACKS: Track[] = [
     streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/38/4c/5c/384c5c8f-3ff8-e457-b2f7-3158ce108649/mzaf_12389299033886433185.plus.aac.p.m4a',
     genre: 'Bollywood',
     playCount: 1420000,
-    source: 'curated',
+    source: 'itunes',
     releaseYear: 2022,
   },
   {
@@ -26,7 +26,7 @@ export const CURATED_TRACKS: Track[] = [
     streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/eb/27/61/eb2761c7-d606-0912-dff0-2dc6b69974bd/mzaf_2023722930851223219.plus.aac.p.m4a',
     genre: 'Bollywood',
     playCount: 1190000,
-    source: 'curated',
+    source: 'itunes',
     releaseYear: 2022,
   },
   {
@@ -39,7 +39,7 @@ export const CURATED_TRACKS: Track[] = [
     streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/76/05/d9/7605d905-f631-517d-df7f-e162affcd414/mzaf_9976541859961700749.plus.aac.p.m4a',
     genre: 'Bollywood',
     playCount: 980000,
-    source: 'curated',
+    source: 'itunes',
     releaseYear: 2023,
   },
   {
@@ -52,7 +52,7 @@ export const CURATED_TRACKS: Track[] = [
     streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/3a/8c/9b/3a8c9b0b-2def-750a-f615-1555bf941edf/mzaf_17229496441442805917.plus.aac.p.m4a',
     genre: 'Romance',
     playCount: 2340000,
-    source: 'curated',
+    source: 'itunes',
     releaseYear: 2013,
   },
   {
@@ -65,7 +65,7 @@ export const CURATED_TRACKS: Track[] = [
     streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/99/0c/38/990c381b-0530-8c0d-87a9-18b050b97f0a/mzaf_10418866714500530894.plus.aac.p.m4a',
     genre: 'Bollywood',
     playCount: 1750000,
-    source: 'curated',
+    source: 'itunes',
     releaseYear: 2021,
   },
   {
@@ -78,7 +78,7 @@ export const CURATED_TRACKS: Track[] = [
     streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/38/d5/7a/38d57a99-39fc-e901-7c45-fa6260ec83c1/mzaf_8083696285926392389.plus.aac.p.m4a',
     genre: 'Punjabi',
     playCount: 1620000,
-    source: 'curated',
+    source: 'itunes',
     releaseYear: 2021,
   },
   {
@@ -91,7 +91,7 @@ export const CURATED_TRACKS: Track[] = [
     streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/75/27/64/75276455-6751-e9d7-1187-b863a2ffefbc/mzaf_4313837125483855343.plus.aac.p.m4a',
     genre: 'Bollywood',
     playCount: 1480000,
-    source: 'curated',
+    source: 'itunes',
     releaseYear: 2013,
   },
   {
@@ -104,7 +104,7 @@ export const CURATED_TRACKS: Track[] = [
     streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/37/af/f0/37aff08b-cdfd-ae7e-7f0a-251d07f342d0/mzaf_4304999715906555670.plus.aac.p.m4a',
     genre: 'Bollywood',
     playCount: 1320000,
-    source: 'curated',
+    source: 'itunes',
     releaseYear: 2021,
   },
   {
@@ -117,7 +117,7 @@ export const CURATED_TRACKS: Track[] = [
     streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0d/db/cf/0ddbcf31-22d7-088e-c71f-1dd88a3dd8a2/mzaf_16563349538675654632.plus.aac.p.m4a',
     genre: 'Romance',
     playCount: 1890000,
-    source: 'curated',
+    source: 'itunes',
     releaseYear: 2008,
   },
   {
@@ -130,11 +130,37 @@ export const CURATED_TRACKS: Track[] = [
     streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e8/84/c8/e884c82f-7136-54d8-6754-6b45c6968f29/mzaf_11726474689882106813.plus.aac.p.m4a',
     genre: 'Punjabi',
     playCount: 2150000,
-    source: 'curated',
+    source: 'itunes',
     releaseYear: 2020,
   },
   {
     id: 'hindi-11',
+    title: 'Brown Munde',
+    artist: 'AP Dhillon, Gurinder Gill & Shinda Kahlon',
+    album: 'Brown Munde',
+    duration: 254,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/26/a3/ac/26a3ac64-69e4-95ec-80ab-1f5a477537d2/859742042973_cover.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/97/74/69/977469be-a9d5-35a7-80ad-ebe12a799ccc/mzaf_804867738726203367.plus.aac.p.m4a',
+    genre: 'Punjabi',
+    playCount: 2890000,
+    source: 'itunes',
+    releaseYear: 2020,
+  },
+  {
+    id: 'hindi-12',
+    title: 'O Maahi (From "Dunki")',
+    artist: 'Pritam, Arijit Singh & Irshad Kamil',
+    album: 'Dunki',
+    duration: 233,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/cf/cf/af/cfcfaf49-f337-eeab-2351-dd0a137dc740/8902894362139_cover.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/a9/82/78/a9827837-5ca7-1fe3-fc24-3dedeffb86e4/mzaf_4678729972431007397.plus.aac.p.m4a',
+    genre: 'Romance',
+    playCount: 1650000,
+    source: 'itunes',
+    releaseYear: 2023,
+  },
+  {
+    id: 'hindi-13',
     title: 'Pasoori',
     artist: 'Shae Gill & Ali Sethi',
     album: 'Pasoori',
@@ -143,11 +169,11 @@ export const CURATED_TRACKS: Track[] = [
     streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/62/33/1e/62331ea8-d1df-027d-fe75-ac16a519323d/mzaf_14381883946572745360.plus.aac.p.m4a',
     genre: 'Hindi Hits',
     playCount: 1980000,
-    source: 'curated',
+    source: 'itunes',
     releaseYear: 2022,
   },
   {
-    id: 'hindi-12',
+    id: 'hindi-14',
     title: 'Tujhe Kitna Chahne Lage',
     artist: 'Arijit Singh & Mithoon',
     album: 'Kabir Singh',
@@ -156,8 +182,47 @@ export const CURATED_TRACKS: Track[] = [
     streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/7e/f3/43/7ef34316-c0d1-4c3c-afc9-53716b8f3473/mzaf_13869194700915977502.plus.aac.p.m4a',
     genre: 'Romance',
     playCount: 1820000,
-    source: 'curated',
+    source: 'itunes',
     releaseYear: 2019,
+  },
+  {
+    id: 'global-1',
+    title: 'Espresso',
+    artist: 'Sabrina Carpenter',
+    album: 'Short n\' Sweet',
+    duration: 175,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/a1/1c/ca/a11ccab6-7d4c-e041-d028-998bcebeb709/24UMGIM61704.rgb.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/99/da/ff/99daffce-cdde-59c6-5ae0-7f922ce411a8/mzaf_5621292401829922816.plus.aac.p.m4a',
+    genre: 'Pop',
+    playCount: 3200000,
+    source: 'itunes',
+    releaseYear: 2024,
+  },
+  {
+    id: 'global-2',
+    title: 'Starboy (feat. Daft Punk)',
+    artist: 'The Weeknd',
+    album: 'Starboy',
+    duration: 230,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/b5/92/bb/b592bb72-52e3-e756-9b26-9f56d08f47ab/16UMGIM67864.rgb.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/11/71/d6/1171d6ad-3c96-e027-2af6-58028426588c/mzaf_15137631797407745471.plus.aac.p.m4a',
+    genre: 'R&B/Soul',
+    playCount: 4500000,
+    source: 'itunes',
+    releaseYear: 2016,
+  },
+  {
+    id: 'global-3',
+    title: 'Blinding Lights',
+    artist: 'The Weeknd',
+    album: 'After Hours',
+    duration: 216,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/61/e7/3f/61e73f94-018d-5f50-50ec-8521952bc72e/20UM1IM11629.rgb.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/12/73/ca/1273ca46-233a-5331-189b-25ac1d656533/mzaf_976341070785891411.plus.aac.p.m4a',
+    genre: 'R&B/Soul',
+    playCount: 5100000,
+    source: 'itunes',
+    releaseYear: 2020,
   },
   {
     id: 'curated-1',
@@ -182,6 +247,58 @@ export const CURATED_TRACKS: Track[] = [
     streamUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
     genre: 'Lofi',
     playCount: 312400,
+    source: 'curated',
+    releaseYear: 2026,
+  },
+  {
+    id: 'curated-3',
+    title: 'Tokyo Nightfall',
+    artist: 'Shinji Beats',
+    album: 'Shibuya Lofi',
+    duration: 354,
+    artwork: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600&auto=format&fit=crop&q=80',
+    streamUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3',
+    genre: 'Lofi',
+    playCount: 428000,
+    source: 'curated',
+    releaseYear: 2026,
+  },
+  {
+    id: 'curated-4',
+    title: 'Sunset Boulevard Drift',
+    artist: 'Kavinsky Vibes',
+    album: 'Retrograde Express',
+    duration: 302,
+    artwork: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=600&auto=format&fit=crop&q=80',
+    streamUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
+    genre: 'Synthwave',
+    playCount: 142000,
+    source: 'curated',
+    releaseYear: 2025,
+  },
+  {
+    id: 'curated-5',
+    title: 'Deep Ocean Waves',
+    artist: 'Solaris Echo',
+    album: 'Ambient Depths',
+    duration: 338,
+    artwork: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600&auto=format&fit=crop&q=80',
+    streamUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3',
+    genre: 'Ambient',
+    playCount: 198000,
+    source: 'curated',
+    releaseYear: 2025,
+  },
+  {
+    id: 'curated-6',
+    title: 'Ibiza Sunset Groove',
+    artist: 'Groove Collective',
+    album: 'Balearic House',
+    duration: 360,
+    artwork: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&auto=format&fit=crop&q=80',
+    streamUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3',
+    genre: 'House',
+    playCount: 740000,
     source: 'curated',
     releaseYear: 2026,
   },
@@ -226,34 +343,75 @@ export const FEATURED_ARTISTS: Artist[] = [
   },
 ];
 
+// Rich, expanded world-trending playlists with 8-10+ actual songs per playlist
 export const CURATED_PLAYLISTS: Playlist[] = [
   {
     id: 'playlist-hindi-romance',
     name: '❤️ Bollywood Romance & Melodies',
     description: 'Heartfelt soulful Hindi love songs by Arijit Singh, Shreya Ghoshal & Pritam.',
     coverImage: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&auto=format&fit=crop&q=80',
-    tracks: [CURATED_TRACKS[0], CURATED_TRACKS[1], CURATED_TRACKS[3], CURATED_TRACKS[4]],
+    tracks: [
+      CURATED_TRACKS[0], // Kesariya
+      CURATED_TRACKS[1], // Apna Bana Le
+      CURATED_TRACKS[3], // Tum Hi Ho
+      CURATED_TRACKS[4], // Raataan Lambiyan
+      CURATED_TRACKS[8], // Pehli Nazar Mein
+      CURATED_TRACKS[11], // O Maahi
+      CURATED_TRACKS[13], // Tujhe Kitna Chahne Lage
+      CURATED_TRACKS[6], // Ilahi
+      CURATED_TRACKS[7], // Param Sundari
+      CURATED_TRACKS[2], // Chaleya
+    ],
   },
   {
     id: 'playlist-hindi-top',
-    name: '🔥 Top Hindi Chartbusters 2026',
-    description: 'The biggest Bollywood hits, trending melodies, and party anthems of the season.',
+    name: '🔥 Top Global & India Hits 2026',
+    description: 'The biggest Bollywood chartbusters, viral Punjabi anthems & global sensations.',
     coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&auto=format&fit=crop&q=80',
-    tracks: [CURATED_TRACKS[2], CURATED_TRACKS[6], CURATED_TRACKS[7], CURATED_TRACKS[8]],
+    tracks: [
+      CURATED_TRACKS[2], // Chaleya
+      CURATED_TRACKS[0], // Kesariya
+      CURATED_TRACKS[5], // Lover
+      CURATED_TRACKS[9], // Excuses
+      CURATED_TRACKS[10], // Brown Munde
+      CURATED_TRACKS[14], // Espresso
+      CURATED_TRACKS[15], // Starboy
+      CURATED_TRACKS[16], // Blinding Lights
+      CURATED_TRACKS[12], // Pasoori
+      CURATED_TRACKS[1], // Apna Bana Le
+    ],
   },
   {
     id: 'playlist-punjabi',
-    name: '⚡ Punjabi Party Bangers',
-    description: 'High-energy beats & anthems from Diljit Dosanjh, AP Dhillon, and intense grooves.',
+    name: '⚡ Punjabi & Urban Wave Bangers',
+    description: 'High-energy beats & anthems from Diljit Dosanjh, AP Dhillon, and hip-hop heavyweights.',
     coverImage: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&auto=format&fit=crop&q=80',
-    tracks: [CURATED_TRACKS[5], CURATED_TRACKS[9], CURATED_TRACKS[10]],
+    tracks: [
+      CURATED_TRACKS[5], // Lover
+      CURATED_TRACKS[9], // Excuses
+      CURATED_TRACKS[10], // Brown Munde
+      CURATED_TRACKS[12], // Pasoori
+      CURATED_TRACKS[2], // Chaleya
+      CURATED_TRACKS[15], // Starboy
+      CURATED_TRACKS[16], // Blinding Lights
+      CURATED_TRACKS[7], // Param Sundari
+    ],
   },
   {
     id: 'playlist-lofi-chill',
-    name: '☕ Midnight Lofi Coffee',
-    description: 'Relaxing ambient beats for late-night coding, studying, and deep focus.',
+    name: '☕ Midnight Lo-Fi & Deep Focus',
+    description: 'Relaxing ambient beats for late-night coding, studying, and deep relaxation.',
     coverImage: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=600&auto=format&fit=crop&q=80',
-    tracks: [CURATED_TRACKS[11], CURATED_TRACKS[12], CURATED_TRACKS[13]],
+    tracks: [
+      CURATED_TRACKS[18], // Midnight Coffee & Rain
+      CURATED_TRACKS[19], // Tokyo Nightfall
+      CURATED_TRACKS[17], // Neon Horizon
+      CURATED_TRACKS[20], // Sunset Boulevard Drift
+      CURATED_TRACKS[21], // Deep Ocean Waves
+      CURATED_TRACKS[22], // Ibiza Sunset Groove
+      CURATED_TRACKS[11], // O Maahi
+      CURATED_TRACKS[3], // Tum Hi Ho
+    ],
   },
 ];
 
@@ -309,7 +467,6 @@ export async function fetchTrendingTracks(): Promise<Track[]> {
       }
     }
   } catch (err) {
-    // Immediate silent fallback to rich curated list so page never stalls
     console.info('Using instant curated catalog:', err);
   }
 

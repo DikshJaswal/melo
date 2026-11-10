@@ -8,9 +8,8 @@ import {
   Heart,
   PlusSquare,
   Music2,
-  Radio,
   Trash2,
-  Headphones,
+  Sparkles,
 } from 'lucide-react';
 import { usePlayer } from '@/context/PlayerContext';
 
@@ -18,6 +17,37 @@ interface SidebarProps {
   currentTab: 'home' | 'search' | 'library' | 'liked' | string;
   onTabChange: (tab: string) => void;
   onOpenCreatePlaylist: () => void;
+}
+
+// Bespoke Futuristic Soundwave Melo Emblem
+function MeloLogo() {
+  return (
+    <div className="relative w-10 h-10 rounded-2xl bg-gradient-to-br from-[#161c28] via-[#0e1118] to-[#07080b] border border-sky-400/30 flex items-center justify-center flex-shrink-0 shadow-lg shadow-sky-950/40 group overflow-hidden">
+      {/* Subtle Sky Aurora Glow */}
+      <div className="absolute inset-0 bg-sky-500/10 blur-md pointer-events-none" />
+      
+      {/* Center Stylized Soundwave 'M' */}
+      <svg viewBox="0 0 40 40" className="w-6 h-6 relative z-10" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Left Bar */}
+        <rect x="8" y="14" width="3.5" height="14" rx="1.75" fill="#38bdf8" />
+        {/* Connecting V wave */}
+        <path
+          d="M 12 16 C 14 22, 17 24, 20 24 C 23 24, 26 22, 28 16"
+          stroke="#7dd3fc"
+          strokeWidth="3.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        {/* Right Bar */}
+        <rect x="28.5" y="14" width="3.5" height="14" rx="1.75" fill="#38bdf8" />
+        {/* Sonic Center Core Pulse */}
+        <circle cx="20" cy="13" r="2.2" fill="#ffffff" />
+        {/* Outer mini frequency dots */}
+        <circle cx="4" cy="21" r="1.5" fill="#0284c7" opacity="0.8" />
+        <circle cx="36" cy="21" r="1.5" fill="#0284c7" opacity="0.8" />
+      </svg>
+    </div>
+  );
 }
 
 export default function Sidebar({
@@ -32,9 +62,7 @@ export default function Sidebar({
       {/* App Branding */}
       <div className="p-6 pb-4">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => onTabChange('home')}>
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 via-teal-400 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/25">
-            <Radio className="w-6 h-6 text-black animate-pulse" />
-          </div>
+          <MeloLogo />
           <div>
             <div className="flex items-center gap-1.5">
               <span className="text-xl font-black tracking-tight text-white">Melo</span>
@@ -48,37 +76,37 @@ export default function Sidebar({
       <div className="px-3 py-2 space-y-1">
         <button
           onClick={() => onTabChange('home')}
-          className={`w-full flex items-center gap-4 px-4 py-3 rounded-lg text-sm font-semibold transition-all ${
+          className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
             currentTab === 'home'
-              ? 'bg-[#18181b] text-cyan-400 font-bold shadow-sm'
+              ? 'bg-[#18181b] text-sky-400 font-bold border border-sky-500/10'
               : 'text-zinc-400 hover:text-white hover:bg-[#121214]'
           }`}
         >
-          <Home className={`w-5 h-5 ${currentTab === 'home' ? 'text-cyan-400' : ''}`} />
+          <Home className={`w-5 h-5 ${currentTab === 'home' ? 'text-sky-400' : ''}`} />
           <span>Home</span>
         </button>
 
         <button
           onClick={() => onTabChange('search')}
-          className={`w-full flex items-center gap-4 px-4 py-3 rounded-lg text-sm font-semibold transition-all ${
+          className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
             currentTab === 'search'
-              ? 'bg-[#18181b] text-cyan-400 font-bold shadow-sm'
+              ? 'bg-[#18181b] text-sky-400 font-bold border border-sky-500/10'
               : 'text-zinc-400 hover:text-white hover:bg-[#121214]'
           }`}
         >
-          <Search className={`w-5 h-5 ${currentTab === 'search' ? 'text-cyan-400' : ''}`} />
+          <Search className={`w-5 h-5 ${currentTab === 'search' ? 'text-sky-400' : ''}`} />
           <span>Search & Explore</span>
         </button>
 
         <button
           onClick={() => onTabChange('library')}
-          className={`w-full flex items-center gap-4 px-4 py-3 rounded-lg text-sm font-semibold transition-all ${
+          className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
             currentTab === 'library'
-              ? 'bg-[#18181b] text-cyan-400 font-bold shadow-sm'
+              ? 'bg-[#18181b] text-sky-400 font-bold border border-sky-500/10'
               : 'text-zinc-400 hover:text-white hover:bg-[#121214]'
           }`}
         >
-          <Library className={`w-5 h-5 ${currentTab === 'library' ? 'text-cyan-400' : ''}`} />
+          <Library className={`w-5 h-5 ${currentTab === 'library' ? 'text-sky-400' : ''}`} />
           <span>Your Library</span>
         </button>
       </div>
@@ -89,13 +117,13 @@ export default function Sidebar({
       <div className="px-3 space-y-1">
         <button
           onClick={() => onTabChange('liked')}
-          className={`w-full flex items-center gap-3.5 px-4 py-2.5 rounded-lg text-sm font-medium transition-all group ${
+          className={`w-full flex items-center gap-3.5 px-4 py-2.5 rounded-xl text-sm font-medium transition-all group ${
             currentTab === 'liked'
               ? 'bg-[#18181b] text-white font-semibold'
               : 'text-zinc-400 hover:text-white hover:bg-[#121214]'
           }`}
         >
-          <div className="w-8 h-8 rounded-md bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center flex-shrink-0 shadow-sm shadow-cyan-500/20">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-sky-400 via-blue-600 to-indigo-600 flex items-center justify-center flex-shrink-0 shadow-sm shadow-sky-500/20">
             <Heart className="w-4 h-4 text-white fill-white" />
           </div>
           <div className="text-left truncate flex-1">
@@ -106,10 +134,10 @@ export default function Sidebar({
 
         <button
           onClick={onOpenCreatePlaylist}
-          className="w-full flex items-center gap-3.5 px-4 py-2.5 rounded-lg text-sm font-medium text-zinc-400 hover:text-white hover:bg-[#121214] transition-all group"
+          className="w-full flex items-center gap-3.5 px-4 py-2.5 rounded-xl text-sm font-medium text-zinc-400 hover:text-white hover:bg-[#121214] transition-all group"
         >
-          <div className="w-8 h-8 rounded-md bg-[#27272a] group-hover:bg-[#3f3f46] flex items-center justify-center flex-shrink-0 transition-colors">
-            <PlusSquare className="w-4 h-4 text-zinc-300 group-hover:text-cyan-400" />
+          <div className="w-8 h-8 rounded-lg bg-[#27272a] group-hover:bg-[#3f3f46] flex items-center justify-center flex-shrink-0 transition-colors">
+            <PlusSquare className="w-4 h-4 text-zinc-300 group-hover:text-sky-400" />
           </div>
           <span className="text-sm font-medium">Create Playlist</span>
         </button>
@@ -129,13 +157,13 @@ export default function Sidebar({
               key={playlist.id}
               className={`group flex items-center justify-between px-2.5 py-2 rounded-lg text-sm cursor-pointer transition-all ${
                 isSelected
-                  ? 'bg-[#18181b] text-cyan-400 font-semibold'
+                  ? 'bg-[#18181b] text-sky-400 font-semibold'
                   : 'text-zinc-400 hover:text-white hover:bg-[#121214]'
               }`}
               onClick={() => onTabChange(`playlist-${playlist.id}`)}
             >
               <div className="flex items-center gap-2.5 truncate">
-                <Music2 className={`w-4 h-4 flex-shrink-0 ${isSelected ? 'text-cyan-400' : 'text-zinc-600'}`} />
+                <Music2 className={`w-4 h-4 flex-shrink-0 ${isSelected ? 'text-sky-400' : 'text-zinc-600'}`} />
                 <span className="truncate text-xs font-medium">{playlist.name}</span>
               </div>
               {playlist.isCustom && (
@@ -155,16 +183,14 @@ export default function Sidebar({
         })}
       </div>
 
-      {/* Audio Engine Spec Badge at bottom */}
+      {/* Clean Status Pill at bottom */}
       <div className="p-4 border-t border-[#18181b] bg-[#0c0c0e]">
-        <div className="p-3 rounded-xl bg-gradient-to-r from-cyan-950/40 to-zinc-900 border border-cyan-500/20">
-          <div className="flex items-center gap-2 text-cyan-400 mb-1">
-            <Headphones className="w-4 h-4" />
-            <span className="text-xs font-bold uppercase tracking-wider">Web Audio Engine</span>
+        <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-[#141418] border border-zinc-800">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
+            <span className="text-[11px] font-semibold text-zinc-300">Lossless Stream</span>
           </div>
-          <p className="text-[11px] text-zinc-400 leading-snug">
-            320kbps Stream • HTML5 AnalyserNode • Zero-latency Buffer
-          </p>
+          <span className="text-[10px] font-bold text-sky-400 uppercase tracking-wider">320kbps</span>
         </div>
       </div>
     </aside>

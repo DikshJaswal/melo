@@ -52,15 +52,15 @@ export default function VisualizerModal() {
         const x = i * (barWidth + 4);
         const y = height - barHeight;
 
-        // Gradient from Electric Cyan to Neon Sky Blue
+        // Gradient from Sky Blue to Arctic White
         const gradient = ctx.createLinearGradient(0, height, 0, 0);
-        gradient.addColorStop(0, '#00f2fe');
+        gradient.addColorStop(0, '#0284c7');
         gradient.addColorStop(0.5, '#38bdf8');
-        gradient.addColorStop(1, '#818cf8');
+        gradient.addColorStop(1, '#ffffff');
 
         ctx.fillStyle = gradient;
-        ctx.shadowColor = '#00f2fe';
-        ctx.shadowBlur = isPlaying ? 12 : 0;
+        ctx.shadowColor = '#38bdf8';
+        ctx.shadowBlur = isPlaying ? 8 : 0;
 
         ctx.beginPath();
         ctx.roundRect(x, y, barWidth, barHeight, [4, 4, 0, 0]);
@@ -84,8 +84,8 @@ export default function VisualizerModal() {
     <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-2xl flex flex-col items-center justify-between p-6 md:p-12 select-none">
       <div className="w-full max-w-4xl flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Radio className="w-5 h-5 text-cyan-400 animate-pulse" />
-          <span className="text-xs font-bold uppercase tracking-widest text-cyan-400">
+          <Radio className="w-5 h-5 text-sky-400 animate-pulse" />
+          <span className="text-xs font-bold uppercase tracking-widest text-sky-400">
             Real-Time Spectrum Analyser
           </span>
         </div>
@@ -109,7 +109,7 @@ export default function VisualizerModal() {
             }`}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-6">
-            <span className="text-[11px] font-bold text-cyan-400 uppercase tracking-widest mb-1">
+            <span className="text-[11px] font-bold text-sky-400 uppercase tracking-widest mb-1">
               {currentTrack.genre} • Lossless 320kbps
             </span>
             <h2 className="text-xl md:text-2xl font-black text-white truncate">
@@ -134,7 +134,7 @@ export default function VisualizerModal() {
 
         <button
           onClick={togglePlay}
-          className="w-16 h-16 rounded-full bg-cyan-400 hover:bg-cyan-300 text-black flex items-center justify-center shadow-xl shadow-cyan-500/30 hover:scale-105 active:scale-95 transition-all"
+          className="w-16 h-16 rounded-full bg-sky-400 hover:bg-sky-300 text-black flex items-center justify-center shadow-lg shadow-sky-500/20 hover:scale-105 active:scale-95 transition-all"
         >
           {isPlaying ? (
             <Pause className="w-7 h-7 fill-black" />

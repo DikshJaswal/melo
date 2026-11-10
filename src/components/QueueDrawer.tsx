@@ -21,7 +21,7 @@ export default function QueueDrawer({ isOpen, onClose }: QueueDrawerProps) {
     <aside className="fixed right-0 top-0 bottom-24 w-80 md:w-96 bg-[#0e0e11]/95 backdrop-blur-xl border-l border-[#1f1f23] p-5 z-40 flex flex-col shadow-2xl select-none">
       <div className="flex items-center justify-between pb-4 border-b border-[#1f1f23]">
         <h3 className="font-bold text-white text-base flex items-center gap-2">
-          <Music className="w-4 h-4 text-cyan-400" />
+          <Music className="w-4 h-4 text-sky-400" />
           <span>Play Queue</span>
         </h3>
         <button
@@ -34,10 +34,10 @@ export default function QueueDrawer({ isOpen, onClose }: QueueDrawerProps) {
 
       {currentTrack && (
         <div className="py-4 border-b border-[#1f1f23]">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-cyan-400 mb-2.5 block">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-sky-400 mb-2.5 block">
             Now Playing
           </span>
-          <div className="flex items-center gap-3 p-2.5 rounded-lg bg-cyan-500/10 border border-cyan-500/20">
+          <div className="flex items-center gap-3 p-2.5 rounded-lg bg-sky-500/10 border border-sky-500/20">
             <div className="relative w-12 h-12 rounded-md overflow-hidden bg-zinc-900 flex-shrink-0">
               <Image src={currentTrack.artwork} alt={currentTrack.title} fill className="object-cover" />
             </div>
@@ -73,7 +73,7 @@ export default function QueueDrawer({ isOpen, onClose }: QueueDrawerProps) {
                   </div>
                 </div>
                 <div className="truncate">
-                  <p className="text-xs font-semibold text-zinc-200 group-hover:text-cyan-400 truncate">
+                  <p className="text-xs font-semibold text-zinc-200 group-hover:text-sky-400 truncate">
                     {track.title}
                   </p>
                   <p className="text-[11px] text-zinc-400 truncate">{track.artist}</p>

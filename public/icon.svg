@@ -1,63 +1,58 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
   <defs>
-    <!-- Background Aura Gradient -->
-    <radialGradient id="bgAura" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#1e1b4b" stop-opacity="0.8" />
-      <stop offset="60%" stop-color="#0f0e17" stop-opacity="0.9" />
-      <stop offset="100%" stop-color="#07070a" />
+    <!-- Background Gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#141824" />
+      <stop offset="70%" stop-color="#090a0f" />
+      <stop offset="100%" stop-color="#050608" />
     </radialGradient>
 
-    <!-- Holographic Wave Gradient -->
-    <linearGradient id="meloWave" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#a855f7" />
-      <stop offset="40%" stop-color="#3b82f6" />
-      <stop offset="70%" stop-color="#06b6d4" />
-      <stop offset="100%" stop-color="#10b981" />
+    <!-- Sky Blue to Ice White Aurora Gradient -->
+    <linearGradient id="meloSky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7dd3fc" />
+      <stop offset="50%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#0284c7" />
     </linearGradient>
 
-    <!-- Neon Glow Filter -->
-    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+    <!-- Glowing Accent Gradient -->
+    <linearGradient id="glowAccent" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0ea5e9" />
+      <stop offset="70%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#ffffff" />
+    </linearGradient>
+
+    <!-- Soft Ambient Glow Filter -->
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
       <feGaussianBlur stdDeviation="16" result="blur" />
-      <feMerge>
-        <feMergeNode in="blur" />
-        <feMergeNode in="blur" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
-
-    <linearGradient id="ringGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#10b981" stop-opacity="0.6" />
-      <stop offset="100%" stop-color="#a855f7" stop-opacity="0.6" />
-    </linearGradient>
   </defs>
 
-  <!-- Base App Tile with Smooth Rounded Corners -->
-  <rect width="512" height="512" rx="120" fill="url(#bgAura)" />
-  <rect width="508" height="508" x="2" y="2" rx="118" fill="none" stroke="url(#ringGrad)" stroke-width="3" opacity="0.4" />
+  <!-- Squircle Base with Metallic Border -->
+  <rect x="24" y="24" width="464" height="464" rx="112" fill="url(#bgGrad)" stroke="#38bdf8" stroke-opacity="0.3" stroke-width="4" />
 
-  <!-- Ambient Sound Rings -->
-  <circle cx="256" cy="256" r="190" fill="none" stroke="#a855f7" stroke-width="2" stroke-opacity="0.2" stroke-dasharray="15 30" />
-  <circle cx="256" cy="256" r="150" fill="none" stroke="#06b6d4" stroke-width="2.5" stroke-opacity="0.3" stroke-dasharray="40 20" />
-  <circle cx="256" cy="256" r="110" fill="none" stroke="#10b981" stroke-width="3" stroke-opacity="0.4" />
+  <!-- Ambient Sky Blue Glow behind the icon -->
+  <circle cx="256" cy="256" r="140" fill="#0284c7" opacity="0.25" filter="url(#softGlow)" />
 
-  <!-- Center Floating Soundwave 'M' Emblem with Neon Glow -->
-  <g filter="url(#neonGlow)">
-    <!-- Harmonic Equalizer Pillars forming 'M' -->
-    <path d="M 145 350 L 145 190 Q 145 165 170 180 L 256 250 L 342 180 Q 367 165 367 190 L 367 350" 
-          fill="none" 
-          stroke="url(#meloWave)" 
-          stroke-width="32" 
-          stroke-linecap="round" 
-          stroke-linejoin="round" />
-          
-    <!-- Sonic Core Frequency Bars -->
-    <rect x="200" y="280" width="14" height="65" rx="7" fill="#3b82f6" opacity="0.9" />
-    <rect x="249" y="295" width="14" height="50" rx="7" fill="#06b6d4" />
-    <rect x="298" y="280" width="14" height="65" rx="7" fill="#10b981" opacity="0.9" />
+  <!-- Outer Vinyl Soundwave Ring (Subtle) -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="#38bdf8" stroke-opacity="0.12" stroke-width="3" stroke-dasharray="8 12" />
+  <circle cx="256" cy="256" r="150" fill="none" stroke="#7dd3fc" stroke-opacity="0.15" stroke-width="2" />
 
-    <!-- Pulse Beads on Peaks -->
-    <circle cx="145" cy="178" r="12" fill="#d8b4fe" />
-    <circle cx="256" cy="250" r="10" fill="#67e8f9" />
-    <circle cx="367" cy="178" r="12" fill="#6ee7b7" />
-  </g>
+  <!-- Dynamic Centerpiece: Stylized Modern Soundwave 'M' Emblem -->
+  <!-- Left Pillar -->
+  <rect x="136" y="196" width="36" height="120" rx="18" fill="url(#meloSky)" />
+  
+  <!-- Left-to-Center Diagonal Curve -->
+  <path d="M 172 214 C 172 214, 214 286, 256 286 C 298 286, 340 214, 340 214" fill="none" stroke="url(#glowAccent)" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Right Pillar -->
+  <rect x="340" y="196" width="36" height="120" rx="18" fill="url(#meloSky)" />
+
+  <!-- Center Floating Sonic Frequency Core (White/Sky Star) -->
+  <circle cx="256" cy="180" r="18" fill="#ffffff" filter="url(#softGlow)" />
+  <circle cx="256" cy="180" r="9" fill="#38bdf8" />
+
+  <!-- Pulse Soundwave Bars flanking the M -->
+  <rect x="92" y="226" width="20" height="60" rx="10" fill="#38bdf8" opacity="0.6" />
+  <rect x="400" y="226" width="20" height="60" rx="10" fill="#38bdf8" opacity="0.6" />
 </svg>

@@ -94,7 +94,7 @@ export default function PlayerBar({ onToggleQueue, isQueueOpen }: PlayerBarProps
           />
           {isPlaying && (
             <div className="absolute inset-0 bg-black/20 flex items-center justify-center pointer-events-none">
-              <Disc3 className="w-5 h-5 md:w-6 md:h-6 text-cyan-400 animate-spin-slow opacity-80" />
+              <Disc3 className="w-5 h-5 md:w-6 md:h-6 text-sky-400 animate-spin-slow opacity-80" />
             </div>
           )}
         </div>
@@ -118,7 +118,7 @@ export default function PlayerBar({ onToggleQueue, isQueueOpen }: PlayerBarProps
         >
           <Heart
             className={`w-4 h-4 md:w-5 md:h-5 transition-colors ${
-              liked ? 'text-cyan-400 fill-cyan-400' : 'hover:text-white'
+              liked ? 'text-sky-400 fill-sky-400' : 'hover:text-white'
             }`}
           />
         </button>
@@ -128,7 +128,7 @@ export default function PlayerBar({ onToggleQueue, isQueueOpen }: PlayerBarProps
       <div className="flex md:hidden items-center gap-2">
         <button
           onClick={togglePlay}
-          className="w-10 h-10 rounded-full bg-cyan-400 text-black flex items-center justify-center active:scale-95 transition-all shadow-lg shadow-cyan-500/25"
+          className="w-10 h-10 rounded-full bg-sky-400 text-black flex items-center justify-center active:scale-95 transition-all shadow-md shadow-sky-500/20"
         >
           {isPlaying ? (
             <Pause className="w-5 h-5 fill-black" />
@@ -146,12 +146,12 @@ export default function PlayerBar({ onToggleQueue, isQueueOpen }: PlayerBarProps
             onClick={toggleShuffle}
             title={isShuffle ? 'Disable Shuffle' : 'Enable Shuffle'}
             className={`relative p-1 text-xs transition-colors ${
-              isShuffle ? 'text-cyan-400' : 'text-zinc-400 hover:text-white'
+              isShuffle ? 'text-sky-400' : 'text-zinc-400 hover:text-white'
             }`}
           >
             <Shuffle className="w-4 h-4" />
             {isShuffle && (
-              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-cyan-400 rounded-full shadow-sm shadow-cyan-400" />
+              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-sky-400 rounded-full" />
             )}
           </button>
 
@@ -166,7 +166,7 @@ export default function PlayerBar({ onToggleQueue, isQueueOpen }: PlayerBarProps
           <button
             onClick={togglePlay}
             title={isPlaying ? 'Pause' : 'Play'}
-            className="w-10 h-10 rounded-full bg-cyan-400 hover:bg-cyan-300 text-black flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-lg shadow-cyan-500/30"
+            className="w-10 h-10 rounded-full bg-sky-400 hover:bg-sky-300 text-black flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-md shadow-sky-500/20"
           >
             {isPlaying ? (
               <Pause className="w-5 h-5 fill-black" />
@@ -187,7 +187,7 @@ export default function PlayerBar({ onToggleQueue, isQueueOpen }: PlayerBarProps
             onClick={toggleRepeat}
             title={`Repeat: ${repeatMode.toUpperCase()}`}
             className={`relative p-1 transition-colors ${
-              repeatMode !== 'off' ? 'text-cyan-400' : 'text-zinc-400 hover:text-white'
+              repeatMode !== 'off' ? 'text-sky-400' : 'text-zinc-400 hover:text-white'
             }`}
           >
             {repeatMode === 'one' ? (
@@ -196,7 +196,7 @@ export default function PlayerBar({ onToggleQueue, isQueueOpen }: PlayerBarProps
               <Repeat className="w-4 h-4" />
             )}
             {repeatMode !== 'off' && (
-              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-cyan-400 rounded-full shadow-sm shadow-cyan-400" />
+              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-sky-400 rounded-full" />
             )}
           </button>
         </div>
@@ -220,7 +220,7 @@ export default function PlayerBar({ onToggleQueue, isQueueOpen }: PlayerBarProps
             <div
               className={`absolute left-0 h-1 rounded-full transition-all pointer-events-none ${
                 isHoveringScrubber
-                  ? 'bg-cyan-400 shadow-[0_0_8px_rgba(0,242,254,0.8)]'
+                  ? 'bg-sky-400'
                   : 'bg-white'
               }`}
               style={{ width: `${progressPercent}%` }}
@@ -248,7 +248,7 @@ export default function PlayerBar({ onToggleQueue, isQueueOpen }: PlayerBarProps
           title="Open Audio Spectrum Visualizer"
           className={`p-2 rounded-lg transition-all ${
             isVisualizerOpen
-              ? 'text-cyan-400 bg-cyan-500/10'
+              ? 'text-sky-400 bg-sky-500/10'
               : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'
           }`}
         >
@@ -260,7 +260,7 @@ export default function PlayerBar({ onToggleQueue, isQueueOpen }: PlayerBarProps
           title="Play Queue"
           className={`p-2 rounded-lg transition-all ${
             isQueueOpen
-              ? 'text-cyan-400 bg-cyan-500/10'
+              ? 'text-sky-400 bg-sky-500/10'
               : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'
           }`}
         >
@@ -289,7 +289,7 @@ export default function PlayerBar({ onToggleQueue, isQueueOpen }: PlayerBarProps
             step="0.01"
             value={isMuted ? 0 : volume}
             onChange={(e) => setVolume(parseFloat(e.target.value))}
-            className="w-full accent-cyan-400 h-1 rounded-full cursor-pointer bg-zinc-700"
+            className="w-full accent-sky-400 h-1 rounded-full cursor-pointer bg-zinc-700"
           />
         </div>
 

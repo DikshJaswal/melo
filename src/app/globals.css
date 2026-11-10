@@ -3,8 +3,8 @@
 :root {
   --background: #09090b;
   --foreground: #fafafa;
-  --neon-cyan: #00f2fe;
-  --neon-cyan-hover: #38bdf8;
+  --sky-accent: #38bdf8;
+  --sky-hover: #7dd3fc;
   --surface-1: #121214;
   --surface-2: #18181b;
   --surface-3: #27272a;
@@ -20,8 +20,8 @@ body {
 
 /* Custom sleek scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -37,7 +37,7 @@ body {
   background: #3f3f46;
 }
 
-/* Custom Range Input for Player Scrubber & Volume (Cyan Neon) */
+/* Custom Range Input for Player Scrubber & Volume (Sky Blue & White) */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
@@ -61,9 +61,9 @@ input[type="range"]::-webkit-slider-thumb {
   height: 12px;
   width: 12px;
   border-radius: 50%;
-  background-color: #00f2fe;
+  background-color: #38bdf8;
   margin-top: -4px;
-  box-shadow: 0 0 12px rgba(0, 242, 254, 0.8);
+  box-shadow: 0 1px 6px rgba(56, 189, 248, 0.5);
   transition: transform 0.1s ease, background-color 0.1s ease;
   opacity: 0;
 }
@@ -72,7 +72,7 @@ input[type="range"]::-webkit-slider-thumb {
 input[type="range"]:active::-webkit-slider-thumb,
 input[type="range"]:focus::-webkit-slider-thumb {
   opacity: 1;
-  transform: scale(1.2);
+  transform: scale(1.15);
 }
 
 input[type="range"]::-moz-range-track {
@@ -86,8 +86,8 @@ input[type="range"]::-moz-range-thumb {
   width: 12px;
   border: none;
   border-radius: 50%;
-  background-color: #00f2fe;
-  box-shadow: 0 0 12px rgba(0, 242, 254, 0.8);
+  background-color: #38bdf8;
+  box-shadow: 0 1px 6px rgba(56, 189, 248, 0.5);
   transition: transform 0.1s ease;
   opacity: 0;
 }
@@ -95,20 +95,20 @@ input[type="range"]::-moz-range-thumb {
 .group:hover input[type="range"]::-moz-range-thumb,
 input[type="range"]:active::-moz-range-thumb {
   opacity: 1;
-  transform: scale(1.2);
+  transform: scale(1.15);
 }
 
-@keyframes pulseGlow {
+@keyframes subtlePulse {
   0%, 100% {
-    box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.15);
   }
   50% {
-    box-shadow: 0 0 32px rgba(0, 242, 254, 0.55);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
   }
 }
 
 .pulse-glow {
-  animation: pulseGlow 3s infinite ease-in-out;
+  animation: subtlePulse 3s infinite ease-in-out;
 }
 
 @keyframes spinSlow {

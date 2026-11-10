@@ -38,7 +38,7 @@ export default function TrackRow({ track, index, playlistContext }: TrackRowProp
       onClick={handleRowClick}
       className={`group flex items-center justify-between px-4 py-2.5 rounded-lg cursor-pointer transition-all ${
         isCurrentTrack
-          ? 'bg-[#18181b] text-cyan-400 font-medium'
+          ? 'bg-[#18181b] text-sky-400 font-medium'
           : 'hover:bg-[#121214] text-zinc-400 hover:text-white'
       }`}
     >
@@ -46,14 +46,14 @@ export default function TrackRow({ track, index, playlistContext }: TrackRowProp
         <div className="w-5 text-center flex items-center justify-center flex-shrink-0">
           <span
             className={`text-xs font-semibold tabular-nums ${
-              isCurrentTrack ? 'text-cyan-400' : 'text-zinc-500'
+              isCurrentTrack ? 'text-sky-400' : 'text-zinc-500'
             } group-hover:hidden`}
           >
             {isCurrentTrack && isPlaying ? (
               <span className="flex items-end justify-center gap-0.5 h-3 w-3">
-                <span className="w-0.5 h-full bg-cyan-400 animate-pulse" />
-                <span className="w-0.5 h-2/3 bg-cyan-400 animate-pulse delay-75" />
-                <span className="w-0.5 h-4/5 bg-cyan-400 animate-pulse delay-150" />
+                <span className="w-0.5 h-full bg-sky-400 animate-pulse" />
+                <span className="w-0.5 h-2/3 bg-sky-400 animate-pulse delay-75" />
+                <span className="w-0.5 h-4/5 bg-sky-400 animate-pulse delay-150" />
               </span>
             ) : (
               index + 1
@@ -75,7 +75,7 @@ export default function TrackRow({ track, index, playlistContext }: TrackRowProp
         <div className="truncate flex-1">
           <p
             className={`text-sm font-semibold truncate ${
-              isCurrentTrack ? 'text-cyan-400 font-bold' : 'text-white'
+              isCurrentTrack ? 'text-sky-400 font-bold' : 'text-white'
             }`}
           >
             {track.title}
@@ -95,11 +95,11 @@ export default function TrackRow({ track, index, playlistContext }: TrackRowProp
             toggleLike(track.id);
           }}
           className={`p-1 transition-transform active:scale-125 ${
-            liked ? 'text-cyan-400' : 'opacity-0 group-hover:opacity-100 text-zinc-400 hover:text-white'
+            liked ? 'text-sky-400' : 'opacity-0 group-hover:opacity-100 text-zinc-400 hover:text-white'
           }`}
           title={liked ? 'Remove from Liked' : 'Save to Liked'}
         >
-          <Heart className={`w-4 h-4 ${liked ? 'fill-cyan-400' : ''}`} />
+          <Heart className={`w-4 h-4 ${liked ? 'fill-sky-400' : ''}`} />
         </button>
 
         <span>{formatDuration(track.duration)}</span>
