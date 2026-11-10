@@ -145,6 +145,39 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     }
   }, [volume, isMuted]);
 
+  // Mobile Lock Screen & Headphone Controls (Media Session API)
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'mediaSession' in navigator && currentTrack) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: currentTrack.title,
+        artist: currentTrack.artist,
+        album: currentTrack.album,
+        artwork: [
+          { src: currentTrack.artwork, sizes: '128x128', type: 'image/jpeg' },
+          { src: currentTrack.artwork, sizes: '256x256', type: 'image/jpeg' },
+          { src: currentTrack.artwork, sizes: '512x512', type: 'image/jpeg' },
+        ],
+      });
+
+      navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused';
+
+      navigator.mediaSession.setActionHandler('play', () => {
+        if (audioRef.current) audioRef.current.play().then(() => setIsPlaying(true));
+      });
+      navigator.mediaSession.setActionHandler('pause', () => {
+        if (audioRef.current) {
+          audioRef.current.pause();
+          setIsPlaying(false);
+        }
+      });
+      navigator.mediaSession.setActionHandler('previoustrack', () => skipPrevious());
+      navigator.mediaSession.setActionHandler('nexttrack', () => skipNext());
+      navigator.mediaSession.setActionHandler('seekto', (details) => {
+        if (details.seekTime !== undefined) seek(details.seekTime);
+      });
+    }
+  }, [currentTrack, isPlaying]);
+
   const playTrack = (track: Track, newQueue?: Track[]) => {
     setCurrentTrack(track);
     if (newQueue) {

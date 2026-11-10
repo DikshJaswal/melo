@@ -73,10 +73,17 @@ export default function PlayerBar({ onToggleQueue, isQueueOpen }: PlayerBarProps
   };
 
   return (
-    <footer className="fixed bottom-0 left-0 right-0 h-24 bg-[#0e0e11]/95 backdrop-blur-xl border-t border-[#1f1f23] px-4 md:px-6 z-50 flex items-center justify-between select-none shadow-2xl">
-      {/* LEFT: Current Track Details */}
-      <div className="flex items-center gap-3.5 w-1/4 min-w-[200px]">
-        <div className="relative w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 bg-zinc-900 shadow-md group">
+    <footer className="fixed bottom-16 md:bottom-0 left-0 right-0 h-16 md:h-24 bg-[#0e0e11]/95 backdrop-blur-xl border-t border-[#1f1f23] px-3 md:px-6 z-40 flex items-center justify-between select-none shadow-2xl">
+      {/* LEFT: Current Track Details (Tapping on mobile opens full-screen player) */}
+      <div
+        className="flex items-center gap-3 w-auto md:w-1/4 max-w-[70%] md:max-w-none md:min-w-[200px] cursor-pointer"
+        onClick={() => {
+          if (window.innerWidth < 768) {
+            setIsFullscreenOpen(true);
+          }
+        }}
+      >
+        <div className="relative w-11 h-11 md:w-14 md:h-14 rounded-lg overflow-hidden flex-shrink-0 bg-zinc-900 shadow-md group">
           <Image
             src={currentTrack.artwork}
             alt={currentTrack.title}
@@ -87,35 +94,52 @@ export default function PlayerBar({ onToggleQueue, isQueueOpen }: PlayerBarProps
           />
           {isPlaying && (
             <div className="absolute inset-0 bg-black/20 flex items-center justify-center pointer-events-none">
-              <Disc3 className="w-6 h-6 text-emerald-400 animate-spin-slow opacity-80" />
+              <Disc3 className="w-5 h-5 md:w-6 md:h-6 text-emerald-400 animate-spin-slow opacity-80" />
             </div>
           )}
         </div>
 
         <div className="flex flex-col truncate pr-1">
-          <span className="text-sm font-semibold text-white truncate hover:underline cursor-pointer">
+          <span className="text-xs md:text-sm font-semibold text-white truncate hover:underline">
             {currentTrack.title}
           </span>
-          <span className="text-xs text-zinc-400 truncate hover:text-white cursor-pointer transition-colors">
+          <span className="text-[11px] md:text-xs text-zinc-400 truncate hover:text-white transition-colors">
             {currentTrack.artist}
           </span>
         </div>
 
         <button
-          onClick={() => toggleLike(currentTrack.id)}
-          className="text-zinc-400 hover:text-white transition-transform active:scale-125 p-1 ml-1"
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleLike(currentTrack.id);
+          }}
+          className="text-zinc-400 hover:text-white transition-transform active:scale-125 p-1 ml-0.5"
           title={liked ? 'Remove from Liked Songs' : 'Save to Liked Songs'}
         >
           <Heart
-            className={`w-5 h-5 transition-colors ${
+            className={`w-4 h-4 md:w-5 md:h-5 transition-colors ${
               liked ? 'text-emerald-400 fill-emerald-400' : 'hover:text-white'
             }`}
           />
         </button>
       </div>
 
-      {/* CENTER: Main Controls + Time Scrubber */}
-      <div className="flex flex-col items-center gap-1.5 w-2/4 max-w-2xl px-4">
+      {/* MOBILE PLAY / PAUSE BUTTON */}
+      <div className="flex md:hidden items-center gap-2">
+        <button
+          onClick={togglePlay}
+          className="w-10 h-10 rounded-full bg-emerald-500 text-black flex items-center justify-center active:scale-95 transition-all shadow-md shadow-emerald-500/20"
+        >
+          {isPlaying ? (
+            <Pause className="w-5 h-5 fill-black" />
+          ) : (
+            <Play className="w-5 h-5 fill-black ml-0.5" />
+          )}
+        </button>
+      </div>
+
+      {/* DESKTOP CENTER: Main Controls + Time Scrubber */}
+      <div className="hidden md:flex flex-col items-center gap-1.5 w-2/4 max-w-2xl px-4">
         {/* Playback Buttons */}
         <div className="flex items-center gap-5">
           <button
@@ -215,8 +239,8 @@ export default function PlayerBar({ onToggleQueue, isQueueOpen }: PlayerBarProps
         </div>
       </div>
 
-      {/* RIGHT: Volume & Utilities */}
-      <div className="flex items-center justify-end gap-3 w-1/4 min-w-[200px]">
+      {/* DESKTOP RIGHT: Volume & Utilities */}
+      <div className="hidden md:flex items-center justify-end gap-3 w-1/4 min-w-[200px]">
         <button
           onClick={() => setIsVisualizerOpen(!isVisualizerOpen)}
           title="Open Audio Spectrum Visualizer"

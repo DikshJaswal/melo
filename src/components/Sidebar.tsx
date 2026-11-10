@@ -28,7 +28,7 @@ export default function Sidebar({
   const { likedTrackIds, playlists, deletePlaylist } = usePlayer();
 
   return (
-    <aside className="w-64 bg-[#09090b] border-r border-[#18181b] flex flex-col h-full flex-shrink-0 select-none">
+    <aside className="hidden md:flex w-64 bg-[#09090b] border-r border-[#18181b] flex-col h-full flex-shrink-0 select-none">
       {/* App Branding */}
       <div className="p-6 pb-4">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => onTabChange('home')}>

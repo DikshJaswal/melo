@@ -1,0 +1,18 @@
+{
+  "name": "Melo — Lossless Music Player",
+  "short_name": "Melo",
+  "description": "Stream high-definition lossless music with custom playlists and spectrum visualizer.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#09090b",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

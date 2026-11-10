@@ -23,6 +23,7 @@ import QueueDrawer from '@/components/QueueDrawer';
 import VisualizerModal from '@/components/VisualizerModal';
 import FullscreenPlayer from '@/components/FullscreenPlayer';
 import PlaylistModal from '@/components/PlaylistModal';
+import MobileNav from '@/components/MobileNav';
 
 import { usePlayer } from '@/context/PlayerContext';
 import {
@@ -43,6 +44,29 @@ export default function MeloApp() {
   const [tracks, setTracks] = useState<Track[]>(CURATED_TRACKS);
   const [searchResults, setSearchResults] = useState<Track[]>(CURATED_TRACKS);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [isInstallable, setIsInstallable] = useState<boolean>(false);
+
+  // PWA install prompt handler
+  useEffect(() => {
+    const handleBeforeInstall = (e: any) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setIsInstallable(true);
+    };
+    window.addEventListener('beforeinstallprompt', handleBeforeInstall);
+    return () => window.removeEventListener('beforeinstallprompt', handleBeforeInstall);
+  }, []);
+
+  const handleInstallClick = () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(() => {
+        setDeferredPrompt(null);
+        setIsInstallable(false);
+      });
+    }
+  };
 
   const {
     currentTrack,
@@ -132,11 +156,32 @@ export default function MeloApp() {
         />
 
         {/* SCROLLABLE MAIN CONTENT */}
-        <main className="flex-1 overflow-y-auto px-6 md:px-10 py-6 pb-32">
+        <main className="flex-1 overflow-y-auto px-4 md:px-10 py-5 pb-44 md:pb-32">
           {/* ==================== HOME TAB ==================== */}
           {currentTab === 'home' && (
             <div className="space-y-10 max-w-7xl mx-auto">
               <div>
+                {/* Mobile Install App Banner */}
+                {isInstallable && (
+                  <div className="mb-4 p-3 rounded-xl bg-gradient-to-r from-emerald-500/20 via-zinc-900 to-zinc-900 border border-emerald-500/30 flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-lg bg-emerald-500 text-black flex items-center justify-center font-bold">
+                        🎵
+                      </div>
+                      <div>
+                        <p className="text-xs font-bold text-white">Install Melo App</p>
+                        <p className="text-[11px] text-zinc-400">Add to home screen for native standalone playback</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={handleInstallClick}
+                      className="px-3.5 py-1.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs shadow-md transition-all active:scale-95 whitespace-nowrap"
+                    >
+                      Install
+                    </button>
+                  </div>
+                )}
+
                 <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white mb-5">
                   {getGreeting()}, Dikshit
                 </h1>
@@ -528,6 +573,7 @@ export default function MeloApp() {
         onToggleQueue={() => setIsQueueOpen(!isQueueOpen)}
         isQueueOpen={isQueueOpen}
       />
+      <MobileNav currentTab={currentTab} onTabChange={setCurrentTab} />
     </div>
   );
 }
