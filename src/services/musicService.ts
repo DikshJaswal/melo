@@ -83,6 +83,149 @@ export const CURATED_TRACKS: Track[] = [
   },
   {
     id: 'hindi-7',
+    title: 'Tauba Tauba (From "Bad Newz")',
+    artist: 'Karan Aujla',
+    album: 'Bad Newz',
+    duration: 207,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/79/d2/01/79d201d2-e54d-5604-81fb-313f30db7219/198588533581.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/34/8d/63/348d6342-2c35-bf31-8131-2c8b3cfe3c09/mzaf_15374551219149804677.plus.aac.p.m4a',
+    genre: 'Punjabi',
+    playCount: 2950000,
+    source: 'itunes',
+    releaseYear: 2024,
+  },
+  {
+    id: 'hindi-8',
+    title: 'Pehle Bhi Main',
+    artist: 'Vishal Mishra & Raj Shekhar',
+    album: 'ANIMAL',
+    duration: 250,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/db/ad/5e/dbad5e8b-0bee-d962-92d4-021c90e375ac/8902894362092_cover.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/3a/d8/43/3ad8432d-c2e6-052b-5679-cc01c6a599ea/mzaf_7941667053086496020.plus.aac.p.m4a',
+    genre: 'Romance',
+    playCount: 2420000,
+    source: 'itunes',
+    releaseYear: 2023,
+  },
+  {
+    id: 'hindi-9',
+    title: 'Satranga',
+    artist: 'Arijit Singh & Shreyas Puranik',
+    album: 'ANIMAL',
+    duration: 271,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/db/ad/5e/dbad5e8b-0bee-d962-92d4-021c90e375ac/8902894362092_cover.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/f9/c4/db/f9c4db6d-efa0-0b8b-c80a-046b06499f2b/mzaf_3150095649021462379.plus.aac.p.m4a',
+    genre: 'Bollywood',
+    playCount: 2180000,
+    source: 'itunes',
+    releaseYear: 2023,
+  },
+  {
+    id: 'hindi-10',
+    title: 'Naina (From "Crew")',
+    artist: 'Diljit Dosanjh & Badshah',
+    album: 'Crew',
+    duration: 180,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/bd/7b/bf/bd7bbfbd-8711-b6da-473a-7dd35b2d753b/8901854099214.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/09/32/19/0932191a-0b17-bc29-b8fd-185f1cd8da96/mzaf_4251788772887694086.plus.aac.p.m4a',
+    genre: 'Punjabi',
+    playCount: 2310000,
+    source: 'itunes',
+    releaseYear: 2024,
+  },
+  {
+    id: 'hindi-11',
+    title: 'Ve Kamleya (From "Rocky Aur Rani")',
+    artist: 'Pritam, Arijit Singh & Shreya Ghoshal',
+    album: 'Rocky Aur Rani Kii Prem Kahaani',
+    duration: 246,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/f0/75/ba/f075baf5-de5c-5c1b-8ad9-2eab666d1ea6/197189415388.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/30/af/79/30af790f-5576-5307-e436-29e949ae6388/mzaf_3370475763365409547.plus.aac.p.m4a',
+    genre: 'Romance',
+    playCount: 1980000,
+    source: 'itunes',
+    releaseYear: 2023,
+  },
+  {
+    id: 'hindi-12',
+    title: 'Channa Mereya',
+    artist: 'Pritam & Arijit Singh',
+    album: 'Ae Dil Hai Mushkil',
+    duration: 289,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/bc/6e/4d/bc6e4d0c-adec-b431-7b60-16f5689f9664/886446201597.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d5/f9/98/d5f998a7-0090-ee2d-03f8-557ad6c5bf65/mzaf_14251357991592637728.plus.aac.p.m4a',
+    genre: 'Bollywood',
+    playCount: 3100000,
+    source: 'itunes',
+    releaseYear: 2016,
+  },
+  {
+    id: 'hindi-13',
+    title: 'Agar Tum Saath Ho',
+    artist: 'Alka Yagnik & Arijit Singh',
+    album: 'Tamasha',
+    duration: 341,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/cb/ac/67/cbac673a-9213-7118-bb4e-2440273afb03/8902894357470_cover.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/75/a8/7d/75a87dcc-5b69-795d-7dcc-27d1c728f31f/mzaf_18055325784732588932.plus.aac.p.m4a',
+    genre: 'Romance',
+    playCount: 2980000,
+    source: 'itunes',
+    releaseYear: 2015,
+  },
+  {
+    id: 'hindi-14',
+    title: 'Kinni Kinni',
+    artist: 'Diljit Dosanjh',
+    album: 'Ghost',
+    duration: 213,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/94/80/be/9480bec1-6ca2-5bae-a7da-d0e7c45633ce/859779847831_cover.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e5/b0/0f/e5b00f64-fcbe-0fdf-9406-aa0d916b793b/mzaf_15281553318222567826.plus.aac.p.m4a',
+    genre: 'Punjabi',
+    playCount: 2120000,
+    source: 'itunes',
+    releaseYear: 2023,
+  },
+  {
+    id: 'hindi-15',
+    title: 'Softly',
+    artist: 'Karan Aujla & Ikky',
+    album: 'Making Memories',
+    duration: 155,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d3/08/bc/d308bc6a-20e1-6532-d933-35d1b429210e/5054197755538.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5f/6f/01/5f6f0130-6567-22d4-bc1a-5ccb359c3fac/mzaf_5497113703334703756.plus.aac.p.m4a',
+    genre: 'Punjabi',
+    playCount: 2450000,
+    source: 'itunes',
+    releaseYear: 2023,
+  },
+  {
+    id: 'hindi-16',
+    title: 'Kun Faya Kun',
+    artist: 'A.R. Rahman, Javed Ali & Mohit Chauhan',
+    album: 'Rockstar',
+    duration: 470,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/56/ac/41/56ac41f7-99f3-3eae-3b07-443167292c4e/8902894697408_cover.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ce/72/5e/ce725e63-6977-b281-3766-fff46d6e0c07/mzaf_7464998292185183397.plus.aac.p.m4a',
+    genre: 'Bollywood',
+    playCount: 3600000,
+    source: 'itunes',
+    releaseYear: 2011,
+  },
+  {
+    id: 'hindi-17',
+    title: 'Arjan Vailly',
+    artist: 'Manan Bhardwaj & Bhupinder Babbal',
+    album: 'ANIMAL',
+    duration: 182,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/db/ad/5e/dbad5e8b-0bee-d962-92d4-021c90e375ac/8902894362092_cover.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/52/4a/00/524a0053-71f4-a04f-fe2a-87a5b78bfeec/mzaf_1842370763618686453.plus.aac.p.m4a',
+    genre: 'Punjabi',
+    playCount: 2850000,
+    source: 'itunes',
+    releaseYear: 2023,
+  },
+  {
+    id: 'hindi-18',
     title: 'Ilahi (From "Yeh Jawaani Hai Deewani")',
     artist: 'Pritam & Arijit Singh',
     album: 'Yeh Jawaani Hai Deewani',
@@ -95,7 +238,7 @@ export const CURATED_TRACKS: Track[] = [
     releaseYear: 2013,
   },
   {
-    id: 'hindi-8',
+    id: 'hindi-19',
     title: 'Param Sundari (From "Mimi")',
     artist: 'A.R. Rahman & Shreya Ghoshal',
     album: 'Mimi',
@@ -108,7 +251,7 @@ export const CURATED_TRACKS: Track[] = [
     releaseYear: 2021,
   },
   {
-    id: 'hindi-9',
+    id: 'hindi-20',
     title: 'Pehli Nazar Mein (From "Race")',
     artist: 'Atif Aslam & Pritam',
     album: 'Race',
@@ -121,7 +264,7 @@ export const CURATED_TRACKS: Track[] = [
     releaseYear: 2008,
   },
   {
-    id: 'hindi-10',
+    id: 'hindi-21',
     title: 'Excuses',
     artist: 'AP Dhillon, Gurinder Gill & Intense',
     album: 'Excuses',
@@ -134,7 +277,7 @@ export const CURATED_TRACKS: Track[] = [
     releaseYear: 2020,
   },
   {
-    id: 'hindi-11',
+    id: 'hindi-22',
     title: 'Brown Munde',
     artist: 'AP Dhillon, Gurinder Gill & Shinda Kahlon',
     album: 'Brown Munde',
@@ -147,7 +290,7 @@ export const CURATED_TRACKS: Track[] = [
     releaseYear: 2020,
   },
   {
-    id: 'hindi-12',
+    id: 'hindi-23',
     title: 'O Maahi (From "Dunki")',
     artist: 'Pritam, Arijit Singh & Irshad Kamil',
     album: 'Dunki',
@@ -160,7 +303,7 @@ export const CURATED_TRACKS: Track[] = [
     releaseYear: 2023,
   },
   {
-    id: 'hindi-13',
+    id: 'hindi-24',
     title: 'Pasoori',
     artist: 'Shae Gill & Ali Sethi',
     album: 'Pasoori',
@@ -173,7 +316,7 @@ export const CURATED_TRACKS: Track[] = [
     releaseYear: 2022,
   },
   {
-    id: 'hindi-14',
+    id: 'hindi-25',
     title: 'Tujhe Kitna Chahne Lage',
     artist: 'Arijit Singh & Mithoon',
     album: 'Kabir Singh',
@@ -343,80 +486,131 @@ export const FEATURED_ARTISTS: Artist[] = [
   },
 ];
 
-// Rich, expanded world-trending playlists with 8-10+ actual songs per playlist
+// Rich, expanded world-trending playlists with 20 to 25 real songs each
 export const CURATED_PLAYLISTS: Playlist[] = [
-  {
-    id: 'playlist-hindi-romance',
-    name: '❤️ Bollywood Romance & Melodies',
-    description: 'Heartfelt soulful Hindi love songs by Arijit Singh, Shreya Ghoshal & Pritam.',
-    coverImage: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&auto=format&fit=crop&q=80',
-    tracks: [
-      CURATED_TRACKS[0], // Kesariya
-      CURATED_TRACKS[1], // Apna Bana Le
-      CURATED_TRACKS[3], // Tum Hi Ho
-      CURATED_TRACKS[4], // Raataan Lambiyan
-      CURATED_TRACKS[8], // Pehli Nazar Mein
-      CURATED_TRACKS[11], // O Maahi
-      CURATED_TRACKS[13], // Tujhe Kitna Chahne Lage
-      CURATED_TRACKS[6], // Ilahi
-      CURATED_TRACKS[7], // Param Sundari
-      CURATED_TRACKS[2], // Chaleya
-    ],
-  },
   {
     id: 'playlist-hindi-top',
     name: '🔥 Top Global & India Hits 2026',
-    description: 'The biggest Bollywood chartbusters, viral Punjabi anthems & global sensations.',
+    description: 'The definitive 2026 chartbusters: Bollywood blockbusters, Punjabi anthems & international sensations.',
     coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&auto=format&fit=crop&q=80',
     tracks: [
-      CURATED_TRACKS[2], // Chaleya
-      CURATED_TRACKS[0], // Kesariya
-      CURATED_TRACKS[5], // Lover
-      CURATED_TRACKS[9], // Excuses
-      CURATED_TRACKS[10], // Brown Munde
-      CURATED_TRACKS[14], // Espresso
-      CURATED_TRACKS[15], // Starboy
-      CURATED_TRACKS[16], // Blinding Lights
-      CURATED_TRACKS[12], // Pasoori
-      CURATED_TRACKS[1], // Apna Bana Le
+      CURATED_TRACKS[2],  // Chaleya
+      CURATED_TRACKS[0],  // Kesariya
+      CURATED_TRACKS[6],  // Tauba Tauba
+      CURATED_TRACKS[7],  // Pehle Bhi Main
+      CURATED_TRACKS[8],  // Satranga
+      CURATED_TRACKS[9],  // Naina
+      CURATED_TRACKS[5],  // Lover
+      CURATED_TRACKS[19], // Excuses
+      CURATED_TRACKS[20], // Brown Munde
+      CURATED_TRACKS[21], // O Maahi
+      CURATED_TRACKS[22], // Pasoori
+      CURATED_TRACKS[1],  // Apna Bana Le
+      CURATED_TRACKS[3],  // Tum Hi Ho
+      CURATED_TRACKS[4],  // Raataan Lambiyan
+      CURATED_TRACKS[10], // Ve Kamleya
+      CURATED_TRACKS[13], // Kinni Kinni
+      CURATED_TRACKS[14], // Softly
+      CURATED_TRACKS[16], // Arjan Vailly
+      CURATED_TRACKS[25], // Espresso
+      CURATED_TRACKS[26], // Starboy
+      CURATED_TRACKS[27], // Blinding Lights
+      CURATED_TRACKS[17], // Ilahi
+      CURATED_TRACKS[18], // Param Sundari
+      CURATED_TRACKS[11], // Channa Mereya
+      CURATED_TRACKS[12], // Agar Tum Saath Ho
+    ],
+  },
+  {
+    id: 'playlist-hindi-romance',
+    name: '❤️ Bollywood Romance & Melodies',
+    description: 'Heartfelt soulful Hindi love songs by Arijit Singh, Shreya Ghoshal, Pritam & A.R. Rahman.',
+    coverImage: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&auto=format&fit=crop&q=80',
+    tracks: [
+      CURATED_TRACKS[0],  // Kesariya
+      CURATED_TRACKS[1],  // Apna Bana Le
+      CURATED_TRACKS[3],  // Tum Hi Ho
+      CURATED_TRACKS[4],  // Raataan Lambiyan
+      CURATED_TRACKS[7],  // Pehle Bhi Main
+      CURATED_TRACKS[8],  // Satranga
+      CURATED_TRACKS[10], // Ve Kamleya
+      CURATED_TRACKS[11], // Channa Mereya
+      CURATED_TRACKS[12], // Agar Tum Saath Ho
+      CURATED_TRACKS[21], // O Maahi
+      CURATED_TRACKS[23], // Tujhe Kitna Chahne Lage
+      CURATED_TRACKS[19], // Pehli Nazar Mein
+      CURATED_TRACKS[17], // Ilahi
+      CURATED_TRACKS[15], // Kun Faya Kun
+      CURATED_TRACKS[18], // Param Sundari
+      CURATED_TRACKS[2],  // Chaleya
+      CURATED_TRACKS[5],  // Lover
+      CURATED_TRACKS[22], // Pasoori
+      CURATED_TRACKS[29], // Midnight Coffee & Rain
+      CURATED_TRACKS[30], // Tokyo Nightfall
+      CURATED_TRACKS[31], // Sunset Boulevard Drift
+      CURATED_TRACKS[32], // Deep Ocean Waves
     ],
   },
   {
     id: 'playlist-punjabi',
     name: '⚡ Punjabi & Urban Wave Bangers',
-    description: 'High-energy beats & anthems from Diljit Dosanjh, AP Dhillon, and hip-hop heavyweights.',
+    description: 'High-energy beats & anthems from Diljit Dosanjh, Karan Aujla, AP Dhillon, and hip-hop heavyweights.',
     coverImage: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&auto=format&fit=crop&q=80',
     tracks: [
-      CURATED_TRACKS[5], // Lover
-      CURATED_TRACKS[9], // Excuses
-      CURATED_TRACKS[10], // Brown Munde
-      CURATED_TRACKS[12], // Pasoori
-      CURATED_TRACKS[2], // Chaleya
-      CURATED_TRACKS[15], // Starboy
-      CURATED_TRACKS[16], // Blinding Lights
-      CURATED_TRACKS[7], // Param Sundari
+      CURATED_TRACKS[6],  // Tauba Tauba
+      CURATED_TRACKS[5],  // Lover
+      CURATED_TRACKS[9],  // Naina
+      CURATED_TRACKS[13], // Kinni Kinni
+      CURATED_TRACKS[14], // Softly
+      CURATED_TRACKS[16], // Arjan Vailly
+      CURATED_TRACKS[19], // Excuses
+      CURATED_TRACKS[20], // Brown Munde
+      CURATED_TRACKS[22], // Pasoori
+      CURATED_TRACKS[2],  // Chaleya
+      CURATED_TRACKS[25], // Espresso
+      CURATED_TRACKS[26], // Starboy
+      CURATED_TRACKS[27], // Blinding Lights
+      CURATED_TRACKS[18], // Param Sundari
+      CURATED_TRACKS[17], // Ilahi
+      CURATED_TRACKS[0],  // Kesariya
+      CURATED_TRACKS[7],  // Pehle Bhi Main
+      CURATED_TRACKS[28], // Neon Horizon
+      CURATED_TRACKS[33], // Ibiza Sunset Groove
+      CURATED_TRACKS[31], // Sunset Boulevard Drift
     ],
   },
   {
     id: 'playlist-lofi-chill',
     name: '☕ Midnight Lo-Fi & Deep Focus',
-    description: 'Relaxing ambient beats for late-night coding, studying, and deep relaxation.',
+    description: 'Relaxing ambient beats, acoustic melodies & warm textures for late-night coding, studying, and relaxation.',
     coverImage: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=600&auto=format&fit=crop&q=80',
     tracks: [
-      CURATED_TRACKS[18], // Midnight Coffee & Rain
-      CURATED_TRACKS[19], // Tokyo Nightfall
-      CURATED_TRACKS[17], // Neon Horizon
-      CURATED_TRACKS[20], // Sunset Boulevard Drift
-      CURATED_TRACKS[21], // Deep Ocean Waves
-      CURATED_TRACKS[22], // Ibiza Sunset Groove
-      CURATED_TRACKS[11], // O Maahi
-      CURATED_TRACKS[3], // Tum Hi Ho
+      CURATED_TRACKS[29], // Midnight Coffee & Rain
+      CURATED_TRACKS[30], // Tokyo Nightfall
+      CURATED_TRACKS[28], // Neon Horizon
+      CURATED_TRACKS[31], // Sunset Boulevard Drift
+      CURATED_TRACKS[32], // Deep Ocean Waves
+      CURATED_TRACKS[33], // Ibiza Sunset Groove
+      CURATED_TRACKS[15], // Kun Faya Kun
+      CURATED_TRACKS[21], // O Maahi
+      CURATED_TRACKS[3],  // Tum Hi Ho
+      CURATED_TRACKS[12], // Agar Tum Saath Ho
+      CURATED_TRACKS[7],  // Pehle Bhi Main
+      CURATED_TRACKS[10], // Ve Kamleya
+      CURATED_TRACKS[1],  // Apna Bana Le
+      CURATED_TRACKS[4],  // Raataan Lambiyan
+      CURATED_TRACKS[23], // Tujhe Kitna Chahne Lage
+      CURATED_TRACKS[19], // Pehli Nazar Mein
+      CURATED_TRACKS[22], // Pasoori
+      CURATED_TRACKS[8],  // Satranga
+      CURATED_TRACKS[2],  // Chaleya
+      CURATED_TRACKS[0],  // Kesariya
     ],
   },
 ];
 
 // Map Apple iTunes item to our Melo Track interface
-function mapItunesItem(item: any): Track | null {
+export function mapItunesItem(item: any): Track | null {
   if (!item || !item.trackId || !item.previewUrl) return null;
   const highResArtwork = (item.artworkUrl100 || item.artworkUrl60 || '')
     .replace('100x100bb', '600x600bb')
@@ -444,7 +638,7 @@ export async function fetchTrendingTracks(): Promise<Track[]> {
     const timeoutId = setTimeout(() => controller.abort(), 2500);
 
     const res = await fetch(
-      'https://itunes.apple.com/search?term=hindi+bollywood+hits&entity=song&limit=25',
+      'https://itunes.apple.com/search?term=hindi+bollywood+hits&entity=song&limit=30',
       { signal: controller.signal }
     );
     clearTimeout(timeoutId);

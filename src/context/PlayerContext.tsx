@@ -42,6 +42,7 @@ interface PlayerContextType {
   addTrackToPlaylist: (playlistId: string, track: Track) => void;
   removeTrackFromPlaylist: (playlistId: string, trackId: string) => void;
   deletePlaylist: (playlistId: string) => void;
+  updateTrendingPlaylists: (liveTracks: Track[]) => void;
   setIsVisualizerOpen: (open: boolean) => void;
   setIsFullscreenOpen: (open: boolean) => void;
   audioRef: React.RefObject<HTMLAudioElement | null>;
@@ -61,7 +62,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
   const [repeatMode, setRepeatMode] = useState<RepeatMode>('all');
   const [queue, setQueue] = useState<Track[]>(CURATED_TRACKS);
   const [queueIndex, setQueueIndex] = useState<number>(0);
-  const [likedTrackIds, setLikedTrackIds] = useState<string[]>(['curated-1', 'curated-2']);
+  const [likedTrackIds, setLikedTrackIds] = useState<string[]>([]);
   const [playlists, setPlaylists] = useState<Playlist[]>(CURATED_PLAYLISTS);
   const [isVisualizerOpen, setIsVisualizerOpen] = useState<boolean>(false);
   const [isFullscreenOpen, setIsFullscreenOpen] = useState<boolean>(false);
@@ -73,10 +74,32 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     try {
       const savedLikes = localStorage.getItem('melo_likes');
-      if (savedLikes) setLikedTrackIds(JSON.parse(savedLikes));
+      if (savedLikes) {
+        const parsed = JSON.parse(savedLikes);
+        if (Array.isArray(parsed)) {
+          // Clear any legacy demo mock IDs like 'curated-1' or 'curated-2'
+          const realLikes = parsed.filter(
+            (id: string) => id !== 'curated-1' && id !== 'curated-2'
+          );
+          setLikedTrackIds(realLikes);
+        }
+      } else {
+        setLikedTrackIds([]);
+      }
 
       const savedPlaylists = localStorage.getItem('melo_playlists');
-      if (savedPlaylists) setPlaylists(JSON.parse(savedPlaylists));
+      if (savedPlaylists) {
+        const parsed = JSON.parse(savedPlaylists);
+        if (Array.isArray(parsed)) {
+          // Only preserve custom user-created playlists; curated playlists always use latest 25-song catalog
+          const userCustomPlaylists = parsed.filter(
+            (p: any) => p && p.isCustom
+          );
+          setPlaylists([...CURATED_PLAYLISTS, ...userCustomPlaylists]);
+        }
+      } else {
+        setPlaylists(CURATED_PLAYLISTS);
+      }
 
       const savedVol = localStorage.getItem('melo_volume');
       if (savedVol) setVolumeState(parseFloat(savedVol));
@@ -393,6 +416,53 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     setPlaylists((prev) => prev.filter((p) => p.id !== playlistId));
   };
 
+  const updateTrendingPlaylists = (liveTracks: Track[]) => {
+    if (!liveTracks || liveTracks.length === 0) return;
+    setPlaylists((prev) => {
+      const userCustom = prev.filter((p) => p.isCustom);
+      const updatedCurated = CURATED_PLAYLISTS.map((cp) => {
+        let matching: Track[] = [];
+        if (cp.id === 'playlist-hindi-top') {
+          matching = liveTracks.slice(0, 25);
+        } else if (cp.id === 'playlist-hindi-romance') {
+          matching = liveTracks.filter(
+            (t) =>
+              t.genre.toLowerCase().includes('romance') ||
+              t.genre.toLowerCase().includes('bollywood')
+          ).slice(0, 25);
+        } else if (cp.id === 'playlist-punjabi') {
+          matching = liveTracks.filter(
+            (t) =>
+              t.genre.toLowerCase().includes('punjabi') ||
+              t.genre.toLowerCase().includes('pop') ||
+              t.artist.toLowerCase().includes('diljit') ||
+              t.artist.toLowerCase().includes('dhillon') ||
+              t.artist.toLowerCase().includes('karan')
+          ).slice(0, 25);
+        } else {
+          matching = liveTracks.filter(
+            (t) =>
+              t.genre.toLowerCase().includes('lofi') ||
+              t.genre.toLowerCase().includes('ambient') ||
+              t.genre.toLowerCase().includes('synth')
+          ).slice(0, 25);
+        }
+
+        const merged = [...cp.tracks];
+        for (const m of matching) {
+          if (!merged.some((t) => t.id === m.id || t.title.toLowerCase() === m.title.toLowerCase())) {
+            merged.push(m);
+          }
+        }
+        return {
+          ...cp,
+          tracks: merged.slice(0, 25),
+        };
+      });
+      return [...updatedCurated, ...userCustom];
+    });
+  };
+
   return (
     <PlayerContext.Provider
       value={{
@@ -429,6 +499,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
         addTrackToPlaylist,
         removeTrackFromPlaylist,
         deletePlaylist,
+        updateTrendingPlaylists,
         setIsVisualizerOpen,
         setIsFullscreenOpen,
         audioRef,

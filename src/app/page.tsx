@@ -79,6 +79,7 @@ export default function MeloApp() {
     togglePlay,
     likedTrackIds,
     playlists,
+    updateTrendingPlaylists,
   } = usePlayer();
 
   // Load trending live tracks on mount
@@ -89,6 +90,7 @@ export default function MeloApp() {
         const liveTracks = await fetchTrendingTracks();
         setTracks(liveTracks);
         setSearchResults(liveTracks);
+        updateTrendingPlaylists(liveTracks);
       } catch (err) {
         console.warn('Failed to fetch remote tracks, using curated catalog:', err);
       } finally {
@@ -96,7 +98,7 @@ export default function MeloApp() {
       }
     }
     loadTracks();
-  }, []);
+  }, [updateTrendingPlaylists]);
 
   // Handle live search
   useEffect(() => {
