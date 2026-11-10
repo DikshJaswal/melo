@@ -39,7 +39,6 @@ import { Track } from '@/types/music';
 export default function MeloApp() {
   const [currentTab, setCurrentTab] = useState<string>('home');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [isQueueOpen, setIsQueueOpen] = useState<boolean>(false);
   const [isCreatePlaylistOpen, setIsCreatePlaylistOpen] = useState<boolean>(false);
   const [tracks, setTracks] = useState<Track[]>(CURATED_TRACKS);
@@ -133,18 +132,6 @@ export default function MeloApp() {
     if (hours < 18) return 'Good afternoon';
     return 'Good evening';
   };
-
-  const filteredCategoryTracks = tracks.filter((t) => {
-    if (selectedCategory === 'All') return true;
-    if (selectedCategory === 'Trending Hindi') return true;
-    const cat = selectedCategory.toLowerCase();
-    return (
-      t.genre.toLowerCase().includes(cat) ||
-      t.title.toLowerCase().includes(cat) ||
-      t.artist.toLowerCase().includes(cat) ||
-      t.album.toLowerCase().includes(cat)
-    );
-  });
 
   const likedTracks = tracks.filter((t) => likedTrackIds.includes(t.id));
   const selectedPlaylist = playlists.find((p) => `playlist-${p.id}` === currentTab);

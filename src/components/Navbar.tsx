@@ -88,7 +88,13 @@ export default function Navbar({
                 onSearchChange(e.target.value);
                 setShowSuggestions(true);
               }}
-              placeholder="What do you want to play? (Search songs, artists...)"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  onTabChange('search');
+                  setShowSuggestions(false);
+                }
+              }}
+              placeholder="What do you want to play? (Search any song, artist...)"
               className="w-full bg-[#141418] text-white text-xs md:text-sm rounded-full pl-10 pr-9 py-2 border border-zinc-800 focus:border-sky-400 focus:bg-[#1a1a20] focus:outline-none transition-all placeholder:text-zinc-500 shadow-inner"
             />
             {searchQuery && (
