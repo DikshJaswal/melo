@@ -368,6 +368,71 @@ export const CURATED_TRACKS: Track[] = [
     releaseYear: 2020,
   },
   {
+    id: 'global-4',
+    title: 'Die For You',
+    artist: 'The Weeknd',
+    album: 'Starboy',
+    duration: 260,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e2/61/f8/e261f8c1-73db-9a7a-c89e-1068f19970e0/16UMGIM67863.rgb.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/50/50/1a/50501a86-bd74-e90d-8a56-68c9b5e6e7d6/mzaf_4588197682084244913.plus.aac.p.m4a',
+    genre: 'R&B/Soul',
+    playCount: 3950000,
+    source: 'itunes',
+    releaseYear: 2016,
+  },
+  {
+    id: 'global-5',
+    title: 'BIRDS OF A FEATHER',
+    artist: 'Billie Eilish',
+    album: 'HIT ME HARD AND SOFT',
+    duration: 210,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/92/9f/69/929f69f1-9977-3a44-d674-11f70c852d1b/24UMGIM36186.rgb.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/34/31/d3/3431d34e-847f-5d66-df83-0bce688d997e/mzaf_18106743962423782018.plus.aac.p.m4a',
+    genre: 'Pop',
+    playCount: 4120000,
+    source: 'itunes',
+    releaseYear: 2024,
+  },
+  {
+    id: 'hindi-26',
+    title: 'G.O.A.T.',
+    artist: 'Diljit Dosanjh',
+    album: 'G.O.A.T.',
+    duration: 224,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d2/89/ac/d289ac98-749e-3822-6b6e-b06aa4815715/859740651597_cover.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ba/5c/57/ba5c5769-536b-1884-dfbf-5930cab13332/mzaf_7745269360294572986.plus.aac.p.m4a',
+    genre: 'Punjabi',
+    playCount: 3100000,
+    source: 'itunes',
+    releaseYear: 2020,
+  },
+  {
+    id: 'hindi-27',
+    title: 'Wavy',
+    artist: 'Karan Aujla & Jay Trak',
+    album: 'Wavy',
+    duration: 161,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/cd/df/5a/cddf5a8c-464e-3958-cf4a-7fac9e490aa5/5063616597178_cover.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/5f/5e/84/5f5e8495-bd71-97f1-bc2d-8e9bf4591868/mzaf_11556782856079892040.plus.aac.p.m4a',
+    genre: 'Punjabi',
+    playCount: 2280000,
+    source: 'itunes',
+    releaseYear: 2024,
+  },
+  {
+    id: 'hindi-28',
+    title: 'Samjhawan',
+    artist: 'Jawad Ahmed, Sharib Toshi, Arijit Singh & Shreya Ghoshal',
+    album: 'Humpty Sharma Ki Dulhania',
+    duration: 269,
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/24/a5/a4/24a5a4bf-5854-abf3-a834-845c0fef65c6/886444676540.jpg/600x600bb.jpg',
+    streamUrl: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/65/06/39/65063981-71d1-0ac9-27a8-3d5d4aaae812/mzaf_10463263695656246233.plus.aac.p.m4a',
+    genre: 'Romance',
+    playCount: 2650000,
+    source: 'itunes',
+    releaseYear: 2014,
+  },
+  {
     id: 'curated-1',
     title: 'Neon Horizon',
     artist: 'Cyber Pulse',
@@ -451,161 +516,172 @@ export const FEATURED_ARTISTS: Artist[] = [
   {
     id: 'artist-arijit',
     name: 'Arijit Singh',
-    image: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500&auto=format&fit=crop&q=80',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/b/b7/Arijit_Singh_performance_at_Chandigarh_2025.jpg',
     followers: '42.8M',
     monthlyListeners: '38,400,000',
     bio: 'The undisputed voice of Bollywood romance, ruling global charts with timeless melodies.',
     genre: 'Bollywood / Romance',
   },
   {
-    id: 'artist-shreya',
-    name: 'Shreya Ghoshal',
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80',
-    followers: '28.2M',
-    monthlyListeners: '24,900,000',
-    bio: 'Multi-National Award-winning Indian melody queen with hundreds of iconic chartbusters.',
-    genre: 'Bollywood / Melodies',
-  },
-  {
     id: 'artist-diljit',
     name: 'Diljit Dosanjh',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=80',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Diljit_Dosanjh.jpg',
     followers: '21.5M',
     monthlyListeners: '19,800,000',
     bio: 'Global Punjabi music superstar selling out stadiums with historic worldwide tours.',
     genre: 'Punjabi / Pop',
   },
   {
+    id: 'artist-karan',
+    name: 'Karan Aujla',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/7/76/Karan_Aujla_2020.jpg',
+    followers: '18.4M',
+    monthlyListeners: '16,200,000',
+    bio: 'Multi-platinum Punjabi hip-hop icon behind worldwide blockbusters Tauba Tauba & Softly.',
+    genre: 'Punjabi / Hip-Hop',
+  },
+  {
+    id: 'artist-shreya',
+    name: 'Shreya Ghoshal',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Shreya_Ghoshal_Behindwoods_Gold_Icons_Awards_2023_%28cropped%29.jpg',
+    followers: '28.2M',
+    monthlyListeners: '24,900,000',
+    bio: 'Multi-National Award-winning Indian melody queen with hundreds of iconic chartbusters.',
+    genre: 'Bollywood / Melodies',
+  },
+  {
     id: 'artist-rahman',
     name: 'A.R. Rahman',
-    image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500&auto=format&fit=crop&q=80',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/1/10/AR_Rahman_at_Premier_Futsal_Press_Meet_%28cropped%29.jpg',
     followers: '35.1M',
     monthlyListeners: '29,100,000',
     bio: 'Two-time Academy Award & Grammy winner celebrated as the Mozart of Madras.',
     genre: 'Soundtrack / World',
   },
+  {
+    id: 'artist-weeknd',
+    name: 'The Weeknd',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/The_Weeknd_Portrait_by_Brian_Ziff.jpg/960px-The_Weeknd_Portrait_by_Brian_Ziff.jpg',
+    followers: '98.5M',
+    monthlyListeners: '108,000,000',
+    bio: 'Global streaming king and Diamond-certified artist redefining modern synthpop and R&B.',
+    genre: 'R&B / Pop / Synthwave',
+  },
 ];
 
-// Rich, expanded world-trending playlists with 20 to 25 real songs each
+// Helper to reliably construct genre-accurate playlists by exact track ID
+const getTracksByIds = (ids: string[]): Track[] =>
+  ids
+    .map((id) => CURATED_TRACKS.find((t) => t.id === id))
+    .filter((t): t is Track => t !== undefined);
+
+// Rich, accurate, world-trending playlists with 100% genre fidelity
 export const CURATED_PLAYLISTS: Playlist[] = [
   {
     id: 'playlist-hindi-top',
     name: '🔥 Top Global & India Hits 2026',
     description: 'The definitive 2026 chartbusters: Bollywood blockbusters, Punjabi anthems & international sensations.',
     coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&auto=format&fit=crop&q=80',
-    tracks: [
-      CURATED_TRACKS[2],  // Chaleya
-      CURATED_TRACKS[0],  // Kesariya
-      CURATED_TRACKS[6],  // Tauba Tauba
-      CURATED_TRACKS[7],  // Pehle Bhi Main
-      CURATED_TRACKS[8],  // Satranga
-      CURATED_TRACKS[9],  // Naina
-      CURATED_TRACKS[5],  // Lover
-      CURATED_TRACKS[19], // Excuses
-      CURATED_TRACKS[20], // Brown Munde
-      CURATED_TRACKS[21], // O Maahi
-      CURATED_TRACKS[22], // Pasoori
-      CURATED_TRACKS[1],  // Apna Bana Le
-      CURATED_TRACKS[3],  // Tum Hi Ho
-      CURATED_TRACKS[4],  // Raataan Lambiyan
-      CURATED_TRACKS[10], // Ve Kamleya
-      CURATED_TRACKS[13], // Kinni Kinni
-      CURATED_TRACKS[14], // Softly
-      CURATED_TRACKS[16], // Arjan Vailly
-      CURATED_TRACKS[25], // Espresso
-      CURATED_TRACKS[26], // Starboy
-      CURATED_TRACKS[27], // Blinding Lights
-      CURATED_TRACKS[17], // Ilahi
-      CURATED_TRACKS[18], // Param Sundari
-      CURATED_TRACKS[11], // Channa Mereya
-      CURATED_TRACKS[12], // Agar Tum Saath Ho
-    ],
+    tracks: getTracksByIds([
+      'hindi-1',  // Kesariya
+      'hindi-3',  // Chaleya
+      'hindi-7',  // Tauba Tauba
+      'hindi-8',  // Pehle Bhi Main
+      'hindi-9',  // Satranga
+      'hindi-10', // Naina
+      'hindi-6',  // Lover
+      'hindi-26', // G.O.A.T.
+      'hindi-27', // Wavy
+      'hindi-14', // Kinni Kinni
+      'hindi-15', // Softly
+      'hindi-17', // Arjan Vailly
+      'hindi-21', // Excuses
+      'hindi-22', // Brown Munde
+      'hindi-23', // O Maahi
+      'hindi-24', // Pasoori
+      'hindi-2',  // Apna Bana Le
+      'hindi-4',  // Tum Hi Ho
+      'hindi-5',  // Raataan Lambiyan
+      'hindi-11', // Ve Kamleya
+      'hindi-28', // Samjhawan
+      'global-1', // Espresso
+      'global-2', // Starboy
+      'global-3', // Blinding Lights
+      'global-5', // BIRDS OF A FEATHER
+    ]),
   },
   {
     id: 'playlist-hindi-romance',
     name: '❤️ Bollywood Romance & Melodies',
     description: 'Heartfelt soulful Hindi love songs by Arijit Singh, Shreya Ghoshal, Pritam & A.R. Rahman.',
     coverImage: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&auto=format&fit=crop&q=80',
-    tracks: [
-      CURATED_TRACKS[0],  // Kesariya
-      CURATED_TRACKS[1],  // Apna Bana Le
-      CURATED_TRACKS[3],  // Tum Hi Ho
-      CURATED_TRACKS[4],  // Raataan Lambiyan
-      CURATED_TRACKS[7],  // Pehle Bhi Main
-      CURATED_TRACKS[8],  // Satranga
-      CURATED_TRACKS[10], // Ve Kamleya
-      CURATED_TRACKS[11], // Channa Mereya
-      CURATED_TRACKS[12], // Agar Tum Saath Ho
-      CURATED_TRACKS[21], // O Maahi
-      CURATED_TRACKS[23], // Tujhe Kitna Chahne Lage
-      CURATED_TRACKS[19], // Pehli Nazar Mein
-      CURATED_TRACKS[17], // Ilahi
-      CURATED_TRACKS[15], // Kun Faya Kun
-      CURATED_TRACKS[18], // Param Sundari
-      CURATED_TRACKS[2],  // Chaleya
-      CURATED_TRACKS[5],  // Lover
-      CURATED_TRACKS[22], // Pasoori
-      CURATED_TRACKS[29], // Midnight Coffee & Rain
-      CURATED_TRACKS[30], // Tokyo Nightfall
-      CURATED_TRACKS[31], // Sunset Boulevard Drift
-      CURATED_TRACKS[32], // Deep Ocean Waves
-    ],
+    tracks: getTracksByIds([
+      'hindi-1',  // Kesariya
+      'hindi-2',  // Apna Bana Le
+      'hindi-4',  // Tum Hi Ho
+      'hindi-5',  // Raataan Lambiyan
+      'hindi-8',  // Pehle Bhi Main
+      'hindi-9',  // Satranga
+      'hindi-11', // Ve Kamleya
+      'hindi-12', // Channa Mereya
+      'hindi-13', // Agar Tum Saath Ho
+      'hindi-23', // O Maahi
+      'hindi-25', // Tujhe Kitna Chahne Lage
+      'hindi-20', // Pehli Nazar Mein
+      'hindi-18', // Ilahi
+      'hindi-16', // Kun Faya Kun
+      'hindi-19', // Param Sundari
+      'hindi-3',  // Chaleya
+      'hindi-6',  // Lover
+      'hindi-24', // Pasoori
+      'hindi-28', // Samjhawan
+    ]),
   },
   {
     id: 'playlist-punjabi',
     name: '⚡ Punjabi & Urban Wave Bangers',
     description: 'High-energy beats & anthems from Diljit Dosanjh, Karan Aujla, AP Dhillon, and hip-hop heavyweights.',
     coverImage: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&auto=format&fit=crop&q=80',
-    tracks: [
-      CURATED_TRACKS[6],  // Tauba Tauba
-      CURATED_TRACKS[5],  // Lover
-      CURATED_TRACKS[9],  // Naina
-      CURATED_TRACKS[13], // Kinni Kinni
-      CURATED_TRACKS[14], // Softly
-      CURATED_TRACKS[16], // Arjan Vailly
-      CURATED_TRACKS[19], // Excuses
-      CURATED_TRACKS[20], // Brown Munde
-      CURATED_TRACKS[22], // Pasoori
-      CURATED_TRACKS[2],  // Chaleya
-      CURATED_TRACKS[25], // Espresso
-      CURATED_TRACKS[26], // Starboy
-      CURATED_TRACKS[27], // Blinding Lights
-      CURATED_TRACKS[18], // Param Sundari
-      CURATED_TRACKS[17], // Ilahi
-      CURATED_TRACKS[0],  // Kesariya
-      CURATED_TRACKS[7],  // Pehle Bhi Main
-      CURATED_TRACKS[28], // Neon Horizon
-      CURATED_TRACKS[33], // Ibiza Sunset Groove
-      CURATED_TRACKS[31], // Sunset Boulevard Drift
-    ],
+    tracks: getTracksByIds([
+      'hindi-7',  // Tauba Tauba
+      'hindi-6',  // Lover
+      'hindi-10', // Naina
+      'hindi-26', // G.O.A.T.
+      'hindi-27', // Wavy
+      'hindi-14', // Kinni Kinni
+      'hindi-15', // Softly
+      'hindi-17', // Arjan Vailly
+      'hindi-21', // Excuses
+      'hindi-22', // Brown Munde
+      'hindi-24', // Pasoori
+    ]),
   },
   {
     id: 'playlist-lofi-chill',
     name: '☕ Midnight Lo-Fi & Deep Focus',
     description: 'Relaxing ambient beats, acoustic melodies & warm textures for late-night coding, studying, and relaxation.',
     coverImage: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=600&auto=format&fit=crop&q=80',
-    tracks: [
-      CURATED_TRACKS[29], // Midnight Coffee & Rain
-      CURATED_TRACKS[30], // Tokyo Nightfall
-      CURATED_TRACKS[28], // Neon Horizon
-      CURATED_TRACKS[31], // Sunset Boulevard Drift
-      CURATED_TRACKS[32], // Deep Ocean Waves
-      CURATED_TRACKS[33], // Ibiza Sunset Groove
-      CURATED_TRACKS[15], // Kun Faya Kun
-      CURATED_TRACKS[21], // O Maahi
-      CURATED_TRACKS[3],  // Tum Hi Ho
-      CURATED_TRACKS[12], // Agar Tum Saath Ho
-      CURATED_TRACKS[7],  // Pehle Bhi Main
-      CURATED_TRACKS[10], // Ve Kamleya
-      CURATED_TRACKS[1],  // Apna Bana Le
-      CURATED_TRACKS[4],  // Raataan Lambiyan
-      CURATED_TRACKS[23], // Tujhe Kitna Chahne Lage
-      CURATED_TRACKS[19], // Pehli Nazar Mein
-      CURATED_TRACKS[22], // Pasoori
-      CURATED_TRACKS[8],  // Satranga
-      CURATED_TRACKS[2],  // Chaleya
-      CURATED_TRACKS[0],  // Kesariya
-    ],
+    tracks: getTracksByIds([
+      'curated-2', // Midnight Coffee & Rain
+      'curated-3', // Tokyo Nightfall
+      'curated-1', // Neon Horizon
+      'curated-4', // Sunset Boulevard Drift
+      'curated-5', // Deep Ocean Waves
+      'curated-6', // Ibiza Sunset Groove
+    ]),
+  },
+  {
+    id: 'playlist-global-pop',
+    name: '🌍 Global Pop & International Chartbusters',
+    description: 'Chart-topping international hits from The Weeknd, Billie Eilish, Sabrina Carpenter & global icons.',
+    coverImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop&q=80',
+    tracks: getTracksByIds([
+      'global-1', // Espresso
+      'global-2', // Starboy
+      'global-3', // Blinding Lights
+      'global-4', // Die For You
+      'global-5', // BIRDS OF A FEATHER
+    ]),
   },
 ];
 

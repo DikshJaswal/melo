@@ -12,6 +12,8 @@ import {
   Flame,
   Users,
   Compass,
+  ArrowLeft,
+  CheckCircle2,
 } from 'lucide-react';
 
 import Sidebar from '@/components/Sidebar';
@@ -34,13 +36,13 @@ import {
   fetchTrendingTracks,
   searchTracks,
 } from '@/services/musicService';
-import { Track } from '@/types/music';
+import { Track, Artist } from '@/types/music';
 
 export default function MeloApp() {
   const [currentTab, setCurrentTab] = useState<string>('home');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [isQueueOpen, setIsQueueOpen] = useState<boolean>(false);
+  const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
   const [isCreatePlaylistOpen, setIsCreatePlaylistOpen] = useState<boolean>(false);
   const [tracks, setTracks] = useState<Track[]>(CURATED_TRACKS);
   const [searchResults, setSearchResults] = useState<Track[]>(CURATED_TRACKS);
@@ -79,8 +81,37 @@ export default function MeloApp() {
     togglePlay,
     likedTrackIds,
     playlists,
+    isQueueOpen,
+    setIsQueueOpen,
     updateTrendingPlaylists,
   } = usePlayer();
+
+  const getArtistTracks = (artistName: string): Track[] => {
+    const norm = artistName.toLowerCase();
+    return tracks.filter((t) => {
+      const art = t.artist.toLowerCase();
+      const title = t.title.toLowerCase();
+      if (norm.includes('arijit')) {
+        return art.includes('arijit') || title.includes('kesariya') || title.includes('tum hi ho') || title.includes('channa') || title.includes('samjhawan');
+      }
+      if (norm.includes('diljit')) {
+        return art.includes('diljit') || title.includes('lover') || title.includes('naina') || title.includes('g.o.a.t.') || title.includes('kinni kinni');
+      }
+      if (norm.includes('karan')) {
+        return art.includes('aujla') || title.includes('tauba') || title.includes('softly') || title.includes('wavy');
+      }
+      if (norm.includes('shreya')) {
+        return art.includes('shreya') || title.includes('param sundari') || title.includes('samjhawan') || title.includes('ve kamleya');
+      }
+      if (norm.includes('rahman')) {
+        return art.includes('rahman') || title.includes('kun faya') || title.includes('param sundari') || title.includes('agar tum');
+      }
+      if (norm.includes('weeknd')) {
+        return art.includes('weeknd') || title.includes('starboy') || title.includes('blinding') || title.includes('die for you');
+      }
+      return art.includes(norm);
+    });
+  };
 
   // Load trending live tracks on mount
   useEffect(() => {
@@ -314,30 +345,132 @@ export default function MeloApp() {
                 </div>
               </div>
 
-              {/* Section: Top Trending Artists */}
+              {/* Section: Popular Artists / Artist Spotlight */}
               <div>
-                <div className="flex items-center gap-2 mb-4">
-                  <Users className="w-5 h-5 text-indigo-400" />
-                  <h2 className="text-xl font-bold text-white">Popular Artists</h2>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <Users className="w-5 h-5 text-sky-400" />
+                    <h2 className="text-xl font-bold text-white">
+                      {selectedArtist ? selectedArtist.name : 'Popular Artists'}
+                    </h2>
+                  </div>
+                  {selectedArtist && (
+                    <button
+                      onClick={() => setSelectedArtist(null)}
+                      className="flex items-center gap-1.5 text-xs font-semibold text-sky-400 hover:text-sky-300 transition-colors"
+                    >
+                      <ArrowLeft className="w-3.5 h-3.5" />
+                      <span>Back to All Artists</span>
+                    </button>
+                  )}
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  {FEATURED_ARTISTS.map((artist) => (
-                    <div
-                      key={artist.id}
-                      className="p-4 rounded-xl bg-[#121214] hover:bg-[#18181b] border border-transparent hover:border-zinc-800 transition-all flex flex-col items-center text-center group cursor-pointer"
-                    >
-                      <div className="relative w-28 h-28 rounded-full overflow-hidden mb-3.5 shadow-lg shadow-black/60 group-hover:scale-105 transition-transform duration-300">
-                        <Image src={artist.image} alt={artist.name} fill className="object-cover" />
+                {selectedArtist ? (
+                  <div className="space-y-6">
+                    {/* Artist Header Spotlight Banner */}
+                    <div className="p-6 rounded-2xl bg-gradient-to-r from-[#101b2b] via-[#0d121c] to-[#0a0c12] border border-sky-400/20 shadow-xl flex flex-col sm:flex-row items-center sm:items-end gap-6">
+                      <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden flex-shrink-0 shadow-2xl border-2 border-sky-400/40">
+                        <Image
+                          src={selectedArtist.image}
+                          alt={selectedArtist.name}
+                          fill
+                          className="object-cover"
+                        />
                       </div>
-                      <h4 className="font-bold text-sm text-white truncate w-full">{artist.name}</h4>
-                      <p className="text-xs text-zinc-400 mt-0.5">{artist.genre}</p>
-                      <span className="text-[11px] text-sky-400 font-semibold mt-1">
-                        {artist.monthlyListeners} monthly
-                      </span>
+                      <div className="text-center sm:text-left space-y-2 flex-1">
+                        <div className="flex items-center justify-center sm:justify-start gap-1.5 text-sky-400 text-xs font-bold uppercase tracking-wider">
+                          <CheckCircle2 className="w-4 h-4" />
+                          <span>Verified Artist</span>
+                        </div>
+                        <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                          {selectedArtist.name}
+                        </h1>
+                        <p className="text-xs text-zinc-300 max-w-xl leading-relaxed">
+                          {selectedArtist.bio}
+                        </p>
+                        <div className="flex items-center justify-center sm:justify-start gap-2 text-xs text-zinc-400 font-medium pt-1">
+                          <span className="text-sky-300">{selectedArtist.genre}</span>
+                          <span>•</span>
+                          <span className="text-white font-semibold">
+                            {selectedArtist.monthlyListeners} monthly listeners
+                          </span>
+                        </div>
+                        <div className="pt-2">
+                          {(() => {
+                            const artistTracks = getArtistTracks(selectedArtist.name);
+                            return (
+                              <button
+                                onClick={() => {
+                                  if (artistTracks.length > 0) playTrack(artistTracks[0], artistTracks);
+                                }}
+                                className="px-6 py-2 rounded-full bg-sky-400 hover:bg-sky-300 text-black font-extrabold text-xs flex items-center gap-2 shadow-lg shadow-sky-500/20 transition-all hover:scale-105 active:scale-95"
+                              >
+                                <Play className="w-3.5 h-3.5 fill-black" />
+                                <span>Play All Songs ({artistTracks.length})</span>
+                              </button>
+                            );
+                          })()}
+                        </div>
+                      </div>
                     </div>
-                  ))}
-                </div>
+
+                    {/* Artist Discography Tracklist */}
+                    <div>
+                      <h3 className="text-base font-bold text-white mb-3">Popular Songs</h3>
+                      <div className="bg-[#121214]/60 rounded-xl border border-[#1f1f23] overflow-hidden divide-y divide-zinc-800/30">
+                        {getArtistTracks(selectedArtist.name).map((track, i) => (
+                          <TrackRow
+                            key={track.id}
+                            track={track}
+                            index={i}
+                            playlistContext={getArtistTracks(selectedArtist.name)}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
+                    {FEATURED_ARTISTS.map((artist) => {
+                      const artistTracks = getArtistTracks(artist.name);
+                      return (
+                        <div
+                          key={artist.id}
+                          onClick={() => setSelectedArtist(artist)}
+                          className="p-3.5 rounded-xl bg-[#121214] hover:bg-[#18181b] border border-transparent hover:border-zinc-800 transition-all flex flex-col items-center text-center group cursor-pointer relative"
+                        >
+                          <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden mb-3 shadow-lg shadow-black/60 group-hover:scale-105 transition-transform duration-300 border border-white/5">
+                            <Image
+                              src={artist.image}
+                              alt={artist.name}
+                              fill
+                              className="object-cover"
+                            />
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (artistTracks.length > 0) playTrack(artistTracks[0], artistTracks);
+                              }}
+                              className="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-sky-400 hover:bg-sky-300 text-black flex items-center justify-center shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+                              title={`Play ${artist.name}`}
+                            >
+                              <Play className="w-3.5 h-3.5 fill-black ml-0.5" />
+                            </button>
+                          </div>
+                          <h4 className="font-bold text-xs sm:text-sm text-white truncate w-full group-hover:text-sky-400 transition-colors">
+                            {artist.name}
+                          </h4>
+                          <p className="text-[11px] text-zinc-400 mt-0.5 truncate w-full">
+                            {artist.genre}
+                          </p>
+                          <span className="text-[10px] text-sky-400 font-semibold mt-1">
+                            {artist.monthlyListeners} monthly
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             </div>
           )}

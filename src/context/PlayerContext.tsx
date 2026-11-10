@@ -20,6 +20,7 @@ interface PlayerContextType {
   queueIndex: number;
   likedTrackIds: string[];
   playlists: Playlist[];
+  isQueueOpen: boolean;
   isVisualizerOpen: boolean;
   isFullscreenOpen: boolean;
   audioBufferPercent: number;
@@ -44,6 +45,7 @@ interface PlayerContextType {
   removeTrackFromPlaylist: (playlistId: string, trackId: string) => void;
   deletePlaylist: (playlistId: string) => void;
   updateTrendingPlaylists: (liveTracks: Track[]) => void;
+  setIsQueueOpen: (open: boolean) => void;
   setIsVisualizerOpen: (open: boolean) => void;
   setIsFullscreenOpen: (open: boolean) => void;
   audioRef: React.RefObject<HTMLAudioElement | null>;
@@ -67,6 +69,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
   const [playlists, setPlaylists] = useState<Playlist[]>(CURATED_PLAYLISTS);
   const [isVisualizerOpen, setIsVisualizerOpen] = useState<boolean>(false);
   const [isFullscreenOpen, setIsFullscreenOpen] = useState<boolean>(false);
+  const [isQueueOpen, setIsQueueOpen] = useState<boolean>(false);
   const [audioBufferPercent, setAudioBufferPercent] = useState<number>(0);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -269,6 +272,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
 
   const playTrack = (track: Track, newQueue?: Track[]) => {
     setCurrentTrack(track);
+    setIsQueueOpen(true);
     if (newQueue) {
       setQueue(newQueue);
       const idx = newQueue.findIndex((t) => t.id === track.id);
@@ -284,39 +288,51 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
       }
     }
 
-    if (audioRef.current) {
-      audioRef.current.src = track.streamUrl;
-      audioRef.current.currentTime = 0;
-      audioRef.current
-        .play()
-        .then(() => setIsPlaying(true))
-        .catch((err) => {
-          console.warn('Autoplay blocked or stream issue:', err);
-          setIsPlaying(false);
-        });
+    const audio = audioRef.current;
+    if (audio) {
+      try {
+        audio.pause();
+        audio.src = track.streamUrl;
+        audio.currentTime = 0;
+        audio.load();
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setIsPlaying(true);
+            })
+            .catch((err) => {
+              console.warn('Autoplay error / user interaction required:', err);
+              setIsPlaying(false);
+            });
+        }
+      } catch (e) {
+        console.warn('Audio play exception:', e);
+        setIsPlaying(false);
+      }
     }
   };
 
   const togglePlay = () => {
-    if (!audioRef.current || !currentTrack) return;
+    const audio = audioRef.current;
+    if (!audio || !currentTrack) return;
     if (isPlaying) {
-      audioRef.current.pause();
+      audio.pause();
       setIsPlaying(false);
     } else {
-      if (
-        !audioRef.current.src ||
-        audioRef.current.src === '' ||
-        !audioRef.current.src.includes(currentTrack.streamUrl)
-      ) {
-        audioRef.current.src = currentTrack.streamUrl;
+      if (!audio.src || !audio.src.includes(currentTrack.streamUrl)) {
+        audio.src = currentTrack.streamUrl;
+        audio.load();
       }
-      audioRef.current
-        .play()
-        .then(() => setIsPlaying(true))
-        .catch((err) => {
-          console.warn('Playback error / user interaction required:', err);
-          setIsPlaying(false);
-        });
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => setIsPlaying(true))
+          .catch((err) => {
+            console.warn('Playback error / user interaction required:', err);
+            setIsPlaying(false);
+          });
+      }
     }
   };
 
@@ -453,25 +469,34 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
         } else if (cp.id === 'playlist-hindi-romance') {
           matching = liveTracks.filter(
             (t) =>
-              t.genre.toLowerCase().includes('romance') ||
-              t.genre.toLowerCase().includes('bollywood')
-          ).slice(0, 25);
+              t.genre.toLowerCase() === 'romance' ||
+              (t.genre.toLowerCase() === 'bollywood' && !t.title.toLowerCase().includes('tauba') && !t.title.toLowerCase().includes('arjan'))
+          );
         } else if (cp.id === 'playlist-punjabi') {
           matching = liveTracks.filter(
             (t) =>
-              t.genre.toLowerCase().includes('punjabi') ||
-              t.genre.toLowerCase().includes('pop') ||
+              t.genre.toLowerCase() === 'punjabi' ||
               t.artist.toLowerCase().includes('diljit') ||
               t.artist.toLowerCase().includes('dhillon') ||
-              t.artist.toLowerCase().includes('karan')
-          ).slice(0, 25);
-        } else {
+              t.artist.toLowerCase().includes('karan aujla') ||
+              t.artist.toLowerCase().includes('ikky') ||
+              t.artist.toLowerCase().includes('babbal')
+          );
+        } else if (cp.id === 'playlist-lofi-chill') {
           matching = liveTracks.filter(
             (t) =>
-              t.genre.toLowerCase().includes('lofi') ||
-              t.genre.toLowerCase().includes('ambient') ||
-              t.genre.toLowerCase().includes('synth')
-          ).slice(0, 25);
+              t.genre.toLowerCase() === 'lofi' ||
+              t.genre.toLowerCase() === 'ambient'
+          );
+        } else if (cp.id === 'playlist-global-pop') {
+          matching = liveTracks.filter(
+            (t) =>
+              t.genre.toLowerCase() === 'pop' ||
+              t.genre.toLowerCase().includes('r&b') ||
+              t.artist.toLowerCase().includes('weeknd') ||
+              t.artist.toLowerCase().includes('eilish') ||
+              t.artist.toLowerCase().includes('carpenter')
+          );
         }
 
         const merged = [...cp.tracks];
@@ -508,6 +533,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
         queueIndex,
         likedTrackIds,
         playlists,
+        isQueueOpen,
         isVisualizerOpen,
         isFullscreenOpen,
         audioBufferPercent,
@@ -527,6 +553,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
         removeTrackFromPlaylist,
         deletePlaylist,
         updateTrendingPlaylists,
+        setIsQueueOpen,
         setIsVisualizerOpen,
         setIsFullscreenOpen,
         audioRef,
@@ -534,9 +561,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     >
       <audio
         ref={audioRef}
-        src={currentTrack?.streamUrl}
         preload="auto"
-        crossOrigin="anonymous"
       />
       {children}
     </PlayerContext.Provider>
