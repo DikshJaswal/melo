@@ -151,7 +151,7 @@ export const CURATED_PLAYLISTS: Playlist[] = [
 export async function fetchTrendingTracks(): Promise<Track[]> {
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 4000);
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
 
     const res = await fetch('/api/music/trending', { signal: controller.signal });
     clearTimeout(timeoutId);
@@ -191,9 +191,9 @@ export async function searchTracks(query: string): Promise<Track[]> {
 
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 4000);
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
 
-    const res = await fetch(`/api/music/search?q=${encodeURIComponent(query)}`, {
+    const res = await fetch(`/api/music/search?q=${encodeURIComponent(query.trim())}`, {
       signal: controller.signal,
     });
     clearTimeout(timeoutId);
@@ -201,13 +201,7 @@ export async function searchTracks(query: string): Promise<Track[]> {
     if (res.ok) {
       const json = await res.json();
       if (json.results && Array.isArray(json.results) && json.results.length > 0) {
-        const combined = [...json.results];
-        for (const local of localMatches) {
-          if (!combined.some((c) => c.title.toLowerCase() === local.title.toLowerCase())) {
-            combined.push(local);
-          }
-        }
-        return combined;
+        return json.results;
       }
     }
   } catch (err) {

@@ -44,6 +44,7 @@ export default function MeloApp() {
   const [tracks, setTracks] = useState<Track[]>(CURATED_TRACKS);
   const [searchResults, setSearchResults] = useState<Track[]>(CURATED_TRACKS);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isSearching, setIsSearching] = useState<boolean>(false);
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isInstallable, setIsInstallable] = useState<boolean>(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
@@ -111,14 +112,24 @@ export default function MeloApp() {
     async function doSearch() {
       if (!searchQuery.trim()) {
         setSearchResults(tracks);
+        setIsSearching(false);
         return;
       }
-      const results = await searchTracks(searchQuery);
-      if (active) {
-        setSearchResults(results);
+      setIsSearching(true);
+      try {
+        const results = await searchTracks(searchQuery);
+        if (active) {
+          setSearchResults(results);
+        }
+      } catch (err) {
+        console.warn('Search error:', err);
+      } finally {
+        if (active) {
+          setIsSearching(false);
+        }
       }
     }
-    const debounce = setTimeout(doSearch, 250);
+    const debounce = setTimeout(doSearch, 200);
     return () => {
       active = false;
       clearTimeout(debounce);
@@ -161,6 +172,9 @@ export default function MeloApp() {
             setIsAuthModalOpen(true);
           }}
           allTracks={tracks}
+          searchResults={searchResults}
+          isSearching={isSearching}
+          onPlaySong={handlePlaySong}
         />
 
         {/* SCROLLABLE MAIN CONTENT */}
@@ -368,38 +382,90 @@ export default function MeloApp() {
           {/* ==================== SEARCH TAB ==================== */}
           {currentTab === 'search' && (
             <div className="space-y-6 max-w-7xl mx-auto">
-              <div>
-                <h1 className="text-2xl font-bold text-white mb-1">
-                  {searchQuery ? `Results for "${searchQuery}"` : 'Browse Everything'}
-                </h1>
-                <p className="text-xs text-zinc-400">
-                  {searchResults.length} audio tracks available to stream on Melo
-                </p>
-              </div>
-
-              <div className="bg-[#121214]/60 rounded-xl border border-[#1f1f23] overflow-hidden">
-                <div className="flex items-center justify-between px-4 py-2.5 border-b border-[#1f1f23] text-xs font-semibold text-zinc-400 uppercase tracking-wider">
-                  <div className="flex items-center gap-3.5 flex-1 pr-4">
-                    <span className="w-5 text-center">#</span>
-                    <span>Title</span>
-                  </div>
-                  <span className="hidden md:block w-1/4">Album</span>
-                  <div className="flex items-center gap-4">
-                    <Clock className="w-4 h-4" />
-                  </div>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <h1 className="text-2xl font-bold text-white mb-1">
+                    {searchQuery ? `Results for "${searchQuery}"` : 'Browse Everything'}
+                  </h1>
+                  <p className="text-xs text-zinc-400">
+                    {isSearching
+                      ? 'Searching songs across full-length catalog...'
+                      : `${searchResults.length} full-length audio tracks available to stream`}
+                  </p>
                 </div>
 
-                <div className="divide-y divide-zinc-800/20">
-                  {searchResults.map((track, i) => (
-                    <TrackRow
-                      key={track.id}
-                      track={track}
-                      index={i}
-                      playlistContext={searchResults}
-                    />
+                {/* Quick artist/song tags for instant search */}
+                <div className="flex items-center gap-1.5 overflow-x-auto py-1 scrollbar-none">
+                  {['Arijit Singh', 'Shreya Ghoshal', 'Diljit Dosanjh', 'Karan Aujla', 'Starboy', 'Tauba Tauba'].map((tag) => (
+                    <button
+                      key={tag}
+                      onClick={() => {
+                        setSearchQuery(tag);
+                        setCurrentTab('search');
+                      }}
+                      className={`text-xs px-3 py-1 rounded-full whitespace-nowrap transition-all ${
+                        searchQuery.toLowerCase() === tag.toLowerCase()
+                          ? 'bg-sky-400 text-black font-bold shadow-md shadow-sky-500/20'
+                          : 'bg-[#18181b] hover:bg-[#27272a] text-zinc-300 border border-zinc-800'
+                      }`}
+                    >
+                      {tag}
+                    </button>
                   ))}
                 </div>
               </div>
+
+              {isSearching ? (
+                <div className="bg-[#121214]/60 rounded-xl border border-[#1f1f23] p-12 text-center space-y-3">
+                  <div className="w-8 h-8 border-2 border-sky-400 border-t-transparent rounded-full animate-spin mx-auto" />
+                  <p className="text-sm font-semibold text-white">Searching full-length audio streams...</p>
+                  <p className="text-xs text-zinc-400">Fetching high quality 160kbps streams for &quot;{searchQuery}&quot;</p>
+                </div>
+              ) : searchResults.length > 0 ? (
+                <div className="bg-[#121214]/60 rounded-xl border border-[#1f1f23] overflow-hidden">
+                  <div className="flex items-center justify-between px-4 py-2.5 border-b border-[#1f1f23] text-xs font-semibold text-zinc-400 uppercase tracking-wider">
+                    <div className="flex items-center gap-3.5 flex-1 pr-4">
+                      <span className="w-5 text-center">#</span>
+                      <span>Title</span>
+                    </div>
+                    <span className="hidden md:block w-1/4">Album</span>
+                    <div className="flex items-center gap-4">
+                      <Clock className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  <div className="divide-y divide-zinc-800/20">
+                    {searchResults.map((track, i) => (
+                      <TrackRow
+                        key={track.id}
+                        track={track}
+                        index={i}
+                        playlistContext={searchResults}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div className="bg-[#121214]/60 rounded-xl border border-[#1f1f23] p-12 text-center space-y-4">
+                  <p className="text-base font-semibold text-white">No tracks found for &quot;{searchQuery}&quot;</p>
+                  <p className="text-xs text-zinc-400 max-w-md mx-auto">
+                    Try checking the spelling or search for popular artists like Arijit Singh, Diljit Dosanjh, Shreya Ghoshal, or song names.
+                  </p>
+                  <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
+                    {['Kesariya', 'Arjan Vailly', 'Tauba Tauba', 'Tum Hi Ho', 'Born to Shine'].map((sample) => (
+                      <button
+                        key={sample}
+                        onClick={() => {
+                          setSearchQuery(sample);
+                        }}
+                        className="px-3 py-1.5 rounded-full text-xs bg-zinc-800/80 hover:bg-sky-400 hover:text-black text-zinc-300 transition-colors"
+                      >
+                        Search &quot;{sample}&quot;
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           )}
 

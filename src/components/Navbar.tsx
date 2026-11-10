@@ -7,7 +7,7 @@ import {
   X,
   Play,
   LogOut,
-  Music,
+  Loader2,
 } from 'lucide-react';
 import { usePlayer } from '@/context/PlayerContext';
 import { Track } from '@/types/music';
@@ -21,6 +21,9 @@ interface NavbarProps {
   onTabChange: (tab: string) => void;
   onOpenAuth: (mode: 'login' | 'signup') => void;
   allTracks?: Track[];
+  searchResults?: Track[];
+  isSearching?: boolean;
+  onPlaySong?: (track: Track, context?: Track[]) => void;
 }
 
 export default function Navbar({
@@ -30,6 +33,9 @@ export default function Navbar({
   onTabChange,
   onOpenAuth,
   allTracks = [],
+  searchResults = [],
+  isSearching = false,
+  onPlaySong,
 }: NavbarProps) {
   const { user, logout, updateProfile, playTrack } = usePlayer();
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -52,21 +58,34 @@ export default function Navbar({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Use dynamic search results first if available, otherwise filter allTracks
   const suggestions = searchQuery.trim()
-    ? allTracks
-        .filter(
-          (t) =>
-            t.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            t.artist.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            t.genre.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-        .slice(0, 5)
+    ? (searchResults && searchResults.length > 0
+        ? searchResults
+        : allTracks.filter(
+            (t) =>
+              t.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              t.artist.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              t.genre.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+      ).slice(0, 6)
     : [];
 
   const formatDuration = (secs: number) => {
     const m = Math.floor(secs / 60);
     const s = Math.floor(secs % 60);
     return `${m}:${s < 10 ? '0' : ''}${s}`;
+  };
+
+  const handleSelectSong = (track: Track) => {
+    const context = searchResults.length > 0 ? searchResults : allTracks;
+    if (onPlaySong) {
+      onPlaySong(track, context);
+    } else {
+      playTrack(track, context);
+    }
+    setShowSuggestions(false);
+    onTabChange('search');
   };
 
   return (
@@ -85,8 +104,14 @@ export default function Navbar({
               value={searchQuery}
               onFocus={() => setShowSuggestions(true)}
               onChange={(e) => {
-                onSearchChange(e.target.value);
+                const val = e.target.value;
+                onSearchChange(val);
                 setShowSuggestions(true);
+                if (val.trim().length > 0 && currentTab !== 'search') {
+                  onTabChange('search');
+                } else if (val.trim().length === 0 && currentTab === 'search') {
+                  onTabChange('home');
+                }
               }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
@@ -95,67 +120,82 @@ export default function Navbar({
                 }
               }}
               placeholder="What do you want to play? (Search any song, artist...)"
-              className="w-full bg-[#141418] text-white text-xs md:text-sm rounded-full pl-10 pr-9 py-2 border border-zinc-800 focus:border-sky-400 focus:bg-[#1a1a20] focus:outline-none transition-all placeholder:text-zinc-500 shadow-inner"
+              className="w-full bg-[#141418] text-white text-xs md:text-sm rounded-full pl-10 pr-10 py-2 border border-zinc-800 focus:border-sky-400 focus:bg-[#1a1a20] focus:outline-none transition-all placeholder:text-zinc-500 shadow-inner"
             />
-            {searchQuery && (
+            {isSearching ? (
+              <div className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none">
+                <Loader2 className="w-4 h-4 text-sky-400 animate-spin" />
+              </div>
+            ) : searchQuery ? (
               <button
                 onClick={() => {
                   onSearchChange('');
                   setShowSuggestions(false);
+                  if (currentTab === 'search') {
+                    onTabChange('home');
+                  }
                 }}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white"
               >
                 <X className="w-4 h-4" />
               </button>
-            )}
+            ) : null}
 
             {/* Live Autocomplete Suggestions Dropdown */}
-            {showSuggestions && suggestions.length > 0 && (
+            {showSuggestions && searchQuery.trim() && (
               <div className="absolute top-full left-0 right-0 mt-2 z-50 bg-[#121216]/98 backdrop-blur-2xl border border-zinc-800 rounded-2xl p-2 shadow-2xl shadow-black/80 overflow-hidden select-none">
                 <div className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-sky-400 flex items-center justify-between">
-                  <span>Song Suggestions</span>
-                  <span className="text-zinc-500 font-normal">Instant Play</span>
+                  <span>{isSearching ? 'Searching...' : 'Song Suggestions'}</span>
+                  <span className="text-zinc-500 font-normal">Click to Play</span>
                 </div>
-                <div className="space-y-1">
-                  {suggestions.map((track) => (
-                    <div
-                      key={track.id}
-                      onClick={() => {
-                        playTrack(track, allTracks);
-                        setShowSuggestions(false);
-                      }}
-                      className="group flex items-center justify-between p-2 rounded-xl hover:bg-[#1e1e24] cursor-pointer transition-all border border-transparent hover:border-zinc-700/50"
-                    >
-                      <div className="flex items-center gap-3 truncate">
-                        <div className="relative w-10 h-10 rounded-lg overflow-hidden bg-zinc-900 flex-shrink-0">
-                          <Image
-                            src={track.artwork}
-                            alt={track.title}
-                            fill
-                            className="object-cover"
-                          />
-                          <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                            <Play className="w-4 h-4 fill-sky-400 text-sky-400 ml-0.5" />
+                {isSearching && suggestions.length === 0 ? (
+                  <div className="p-4 text-center text-xs text-zinc-400 flex items-center justify-center gap-2">
+                    <Loader2 className="w-3.5 h-3.5 text-sky-400 animate-spin" />
+                    <span>Searching millions of full-length tracks...</span>
+                  </div>
+                ) : suggestions.length > 0 ? (
+                  <div className="space-y-1">
+                    {suggestions.map((track) => (
+                      <div
+                        key={track.id}
+                        onClick={() => handleSelectSong(track)}
+                        className="group flex items-center justify-between p-2 rounded-xl hover:bg-[#1e1e24] cursor-pointer transition-all border border-transparent hover:border-zinc-700/50"
+                      >
+                        <div className="flex items-center gap-3 truncate">
+                          <div className="relative w-10 h-10 rounded-lg overflow-hidden bg-zinc-900 flex-shrink-0">
+                            <Image
+                              src={track.artwork}
+                              alt={track.title}
+                              fill
+                              className="object-cover"
+                            />
+                            <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                              <Play className="w-4 h-4 fill-sky-400 text-sky-400 ml-0.5" />
+                            </div>
+                          </div>
+                          <div className="truncate">
+                            <p className="text-xs font-bold text-white group-hover:text-sky-400 truncate transition-colors">
+                              {track.title}
+                            </p>
+                            <p className="text-[11px] text-zinc-400 truncate">
+                              {track.artist}
+                            </p>
                           </div>
                         </div>
-                        <div className="truncate">
-                          <p className="text-xs font-bold text-white group-hover:text-sky-400 truncate transition-colors">
-                            {track.title}
-                          </p>
-                          <p className="text-[11px] text-zinc-400 truncate">
-                            {track.artist}
-                          </p>
+                        <div className="flex items-center gap-2 pr-2 text-zinc-500 text-[11px]">
+                          <span className="text-[10px] uppercase font-semibold text-zinc-400 bg-zinc-800/80 px-2 py-0.5 rounded-full">
+                            {track.genre}
+                          </span>
+                          <span>{formatDuration(track.duration)}</span>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2 pr-2 text-zinc-500 text-[11px]">
-                        <span className="text-[10px] uppercase font-semibold text-zinc-400 bg-zinc-800/80 px-2 py-0.5 rounded-full">
-                          {track.genre}
-                        </span>
-                        <span>{formatDuration(track.duration)}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="p-3 text-center text-xs text-zinc-500">
+                    Press Enter to search for &quot;{searchQuery}&quot;
+                  </div>
+                )}
               </div>
             )}
           </div>
