@@ -1,0 +1,371 @@
+'use client';
+
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
+import { Track, Playlist } from '@/types/music';
+import { CURATED_TRACKS, CURATED_PLAYLISTS } from '@/services/musicService';
+
+type RepeatMode = 'off' | 'all' | 'one';
+
+interface PlayerContextType {
+  currentTrack: Track | null;
+  isPlaying: boolean;
+  currentTime: number;
+  duration: number;
+  volume: number;
+  isMuted: boolean;
+  isShuffle: boolean;
+  repeatMode: RepeatMode;
+  queue: Track[];
+  queueIndex: number;
+  likedTrackIds: string[];
+  playlists: Playlist[];
+  isVisualizerOpen: boolean;
+  isFullscreenOpen: boolean;
+  audioBufferPercent: number;
+
+  // Actions
+  playTrack: (track: Track, newQueue?: Track[]) => void;
+  togglePlay: () => void;
+  seek: (seconds: number) => void;
+  setVolume: (volume: number) => void;
+  toggleMute: () => void;
+  skipNext: () => void;
+  skipPrevious: () => void;
+  toggleShuffle: () => void;
+  toggleRepeat: () => void;
+  toggleLike: (trackId: string) => void;
+  isLiked: (trackId: string) => boolean;
+  createPlaylist: (name: string, description?: string) => void;
+  addTrackToPlaylist: (playlistId: string, track: Track) => void;
+  removeTrackFromPlaylist: (playlistId: string, trackId: string) => void;
+  deletePlaylist: (playlistId: string) => void;
+  setIsVisualizerOpen: (open: boolean) => void;
+  setIsFullscreenOpen: (open: boolean) => void;
+  audioRef: React.RefObject<HTMLAudioElement | null>;
+}
+
+const PlayerContext = createContext<PlayerContextType | undefined>(undefined);
+
+export function PlayerProvider({ children }: { children: React.ReactNode }) {
+  const [currentTrack, setCurrentTrack] = useState<Track | null>(CURATED_TRACKS[0]);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [currentTime, setCurrentTime] = useState<number>(0);
+  const [duration, setDuration] = useState<number>(CURATED_TRACKS[0].duration);
+  const [volume, setVolumeState] = useState<number>(0.85);
+  const [isMuted, setIsMuted] = useState<boolean>(false);
+  const [isShuffle, setIsShuffle] = useState<boolean>(false);
+  const [repeatMode, setRepeatMode] = useState<RepeatMode>('all');
+  const [queue, setQueue] = useState<Track[]>(CURATED_TRACKS);
+  const [queueIndex, setQueueIndex] = useState<number>(0);
+  const [likedTrackIds, setLikedTrackIds] = useState<string[]>(['curated-1', 'curated-2']);
+  const [playlists, setPlaylists] = useState<Playlist[]>(CURATED_PLAYLISTS);
+  const [isVisualizerOpen, setIsVisualizerOpen] = useState<boolean>(false);
+  const [isFullscreenOpen, setIsFullscreenOpen] = useState<boolean>(false);
+  const [audioBufferPercent, setAudioBufferPercent] = useState<number>(0);
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Initialize from LocalStorage on mount
+  useEffect(() => {
+    try {
+      const savedLikes = localStorage.getItem('melo_likes');
+      if (savedLikes) setLikedTrackIds(JSON.parse(savedLikes));
+
+      const savedPlaylists = localStorage.getItem('melo_playlists');
+      if (savedPlaylists) setPlaylists(JSON.parse(savedPlaylists));
+
+      const savedVol = localStorage.getItem('melo_volume');
+      if (savedVol) setVolumeState(parseFloat(savedVol));
+    } catch (e) {
+      console.warn('LocalStorage hydration error:', e);
+    }
+  }, []);
+
+  // Save changes to LocalStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem('melo_likes', JSON.stringify(likedTrackIds));
+    } catch {}
+  }, [likedTrackIds]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('melo_playlists', JSON.stringify(playlists));
+    } catch {}
+  }, [playlists]);
+
+  // Audio element listeners
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleTimeUpdate = () => {
+      setCurrentTime(audio.currentTime);
+      if (audio.buffered.length > 0 && audio.duration) {
+        const bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
+        setAudioBufferPercent((bufferedEnd / audio.duration) * 100);
+      }
+    };
+
+    const handleLoadedMetadata = () => {
+      setDuration(audio.duration || currentTrack?.duration || 0);
+    };
+
+    const handleEnded = () => {
+      if (repeatMode === 'one') {
+        audio.currentTime = 0;
+        audio.play().catch(console.error);
+      } else {
+        skipNext();
+      }
+    };
+
+    const handleError = () => {
+      console.warn('Audio stream error on:', currentTrack?.title, 'Falling back to next track');
+      skipNext();
+    };
+
+    audio.addEventListener('timeupdate', handleTimeUpdate);
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
+    audio.addEventListener('ended', handleEnded);
+    audio.addEventListener('error', handleError);
+
+    return () => {
+      audio.removeEventListener('timeupdate', handleTimeUpdate);
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('error', handleError);
+    };
+  }, [currentTrack, repeatMode, queue, queueIndex, isShuffle]);
+
+  // Update volume and mute
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = isMuted ? 0 : volume;
+    }
+  }, [volume, isMuted]);
+
+  const playTrack = (track: Track, newQueue?: Track[]) => {
+    setCurrentTrack(track);
+    if (newQueue) {
+      setQueue(newQueue);
+      const idx = newQueue.findIndex((t) => t.id === track.id);
+      setQueueIndex(idx !== -1 ? idx : 0);
+    } else {
+      const idx = queue.findIndex((t) => t.id === track.id);
+      if (idx !== -1) {
+        setQueueIndex(idx);
+      } else {
+        const updated = [track, ...queue];
+        setQueue(updated);
+        setQueueIndex(0);
+      }
+    }
+
+    if (audioRef.current) {
+      audioRef.current.src = track.streamUrl;
+      audioRef.current.currentTime = 0;
+      audioRef.current
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch((err) => {
+          console.warn('Autoplay blocked or stream issue:', err);
+          setIsPlaying(false);
+        });
+    }
+  };
+
+  const togglePlay = () => {
+    if (!audioRef.current || !currentTrack) return;
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch((err) => {
+          console.error('Play error:', err);
+          setIsPlaying(false);
+        });
+    }
+  };
+
+  const seek = (seconds: number) => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = seconds;
+      setCurrentTime(seconds);
+    }
+  };
+
+  const setVolume = (vol: number) => {
+    const clamped = Math.max(0, Math.min(1, vol));
+    setVolumeState(clamped);
+    setIsMuted(clamped === 0);
+    try {
+      localStorage.setItem('melo_volume', clamped.toString());
+    } catch {}
+  };
+
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
+  };
+
+  const skipNext = () => {
+    if (queue.length === 0) return;
+
+    let nextIndex: number;
+    if (isShuffle) {
+      nextIndex = Math.floor(Math.random() * queue.length);
+      if (nextIndex === queueIndex && queue.length > 1) {
+        nextIndex = (nextIndex + 1) % queue.length;
+      }
+    } else {
+      nextIndex = queueIndex + 1;
+      if (nextIndex >= queue.length) {
+        if (repeatMode === 'all') {
+          nextIndex = 0;
+        } else {
+          setIsPlaying(false);
+          return;
+        }
+      }
+    }
+
+    setQueueIndex(nextIndex);
+    const nextTrack = queue[nextIndex];
+    if (nextTrack) {
+      playTrack(nextTrack);
+    }
+  };
+
+  const skipPrevious = () => {
+    if (!audioRef.current || queue.length === 0) return;
+    if (audioRef.current.currentTime > 3) {
+      seek(0);
+      return;
+    }
+
+    let prevIndex = queueIndex - 1;
+    if (prevIndex < 0) {
+      prevIndex = queue.length - 1;
+    }
+    setQueueIndex(prevIndex);
+    const prevTrack = queue[prevIndex];
+    if (prevTrack) {
+      playTrack(prevTrack);
+    }
+  };
+
+  const toggleShuffle = () => {
+    setIsShuffle(!isShuffle);
+  };
+
+  const toggleRepeat = () => {
+    if (repeatMode === 'off') setRepeatMode('all');
+    else if (repeatMode === 'all') setRepeatMode('one');
+    else setRepeatMode('off');
+  };
+
+  const toggleLike = (trackId: string) => {
+    setLikedTrackIds((prev) =>
+      prev.includes(trackId) ? prev.filter((id) => id !== trackId) : [...prev, trackId]
+    );
+  };
+
+  const isLiked = (trackId: string) => likedTrackIds.includes(trackId);
+
+  const createPlaylist = (name: string, description: string = '') => {
+    const newPlaylist: Playlist = {
+      id: `custom-playlist-${Date.now()}`,
+      name: name.trim() || 'My Playlist',
+      description,
+      coverImage: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&auto=format&fit=crop&q=80',
+      tracks: [],
+      isCustom: true,
+    };
+    setPlaylists((prev) => [...prev, newPlaylist]);
+  };
+
+  const addTrackToPlaylist = (playlistId: string, track: Track) => {
+    setPlaylists((prev) =>
+      prev.map((p) => {
+        if (p.id === playlistId && !p.tracks.some((t) => t.id === track.id)) {
+          return { ...p, tracks: [...p.tracks, track] };
+        }
+        return p;
+      })
+    );
+  };
+
+  const removeTrackFromPlaylist = (playlistId: string, trackId: string) => {
+    setPlaylists((prev) =>
+      prev.map((p) => {
+        if (p.id === playlistId) {
+          return { ...p, tracks: p.tracks.filter((t) => t.id !== trackId) };
+        }
+        return p;
+      })
+    );
+  };
+
+  const deletePlaylist = (playlistId: string) => {
+    setPlaylists((prev) => prev.filter((p) => p.id !== playlistId));
+  };
+
+  return (
+    <PlayerContext.Provider
+      value={{
+        currentTrack,
+        isPlaying,
+        currentTime,
+        duration,
+        volume,
+        isMuted,
+        isShuffle,
+        repeatMode,
+        queue,
+        queueIndex,
+        likedTrackIds,
+        playlists,
+        isVisualizerOpen,
+        isFullscreenOpen,
+        audioBufferPercent,
+        playTrack,
+        togglePlay,
+        seek,
+        setVolume,
+        toggleMute,
+        skipNext,
+        skipPrevious,
+        toggleShuffle,
+        toggleRepeat,
+        toggleLike,
+        isLiked,
+        createPlaylist,
+        addTrackToPlaylist,
+        removeTrackFromPlaylist,
+        deletePlaylist,
+        setIsVisualizerOpen,
+        setIsFullscreenOpen,
+        audioRef,
+      }}
+    >
+      <audio
+        ref={audioRef}
+        src={currentTrack?.streamUrl}
+        preload="auto"
+        crossOrigin="anonymous"
+      />
+      {children}
+    </PlayerContext.Provider>
+  );
+}
+
+export function usePlayer() {
+  const context = useContext(PlayerContext);
+  if (!context) {
+    throw new Error('usePlayer must be used within a PlayerProvider');
+  }
+  return context;
+}
