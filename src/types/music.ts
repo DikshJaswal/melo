@@ -30,3 +30,9 @@ export interface Artist {
   bio: string;
   genre: string;
 }
+
+export interface User {
+  name: string;
+  email: string;
+  avatar?: string;
+}

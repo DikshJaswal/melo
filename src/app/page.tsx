@@ -24,6 +24,7 @@ import VisualizerModal from '@/components/VisualizerModal';
 import FullscreenPlayer from '@/components/FullscreenPlayer';
 import PlaylistModal from '@/components/PlaylistModal';
 import MobileNav from '@/components/MobileNav';
+import AuthModal from '@/components/AuthModal';
 
 import { usePlayer } from '@/context/PlayerContext';
 import {
@@ -46,6 +47,8 @@ export default function MeloApp() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isInstallable, setIsInstallable] = useState<boolean>(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
+  const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
 
   // PWA install prompt handler
   useEffect(() => {
@@ -69,6 +72,7 @@ export default function MeloApp() {
   };
 
   const {
+    user,
     currentTrack,
     isPlaying,
     playTrack,
@@ -153,6 +157,11 @@ export default function MeloApp() {
           onSelectCategory={setSelectedCategory}
           currentTab={currentTab}
           onTabChange={setCurrentTab}
+          onOpenAuth={(mode) => {
+            setAuthMode(mode);
+            setIsAuthModalOpen(true);
+          }}
+          allTracks={tracks}
         />
 
         {/* SCROLLABLE MAIN CONTENT */}
@@ -163,9 +172,9 @@ export default function MeloApp() {
               <div>
                 {/* Mobile Install App Banner */}
                 {isInstallable && (
-                  <div className="mb-4 p-3 rounded-xl bg-gradient-to-r from-emerald-500/20 via-zinc-900 to-zinc-900 border border-emerald-500/30 flex items-center justify-between gap-3">
+                  <div className="mb-4 p-3 rounded-xl bg-gradient-to-r from-cyan-500/20 via-zinc-900 to-zinc-900 border border-cyan-500/30 flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-lg bg-emerald-500 text-black flex items-center justify-center font-bold">
+                      <div className="w-8 h-8 rounded-lg bg-cyan-400 text-black flex items-center justify-center font-bold shadow-md shadow-cyan-500/30">
                         🎵
                       </div>
                       <div>
@@ -175,7 +184,7 @@ export default function MeloApp() {
                     </div>
                     <button
                       onClick={handleInstallClick}
-                      className="px-3.5 py-1.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs shadow-md transition-all active:scale-95 whitespace-nowrap"
+                      className="px-3.5 py-1.5 rounded-full bg-cyan-400 hover:bg-cyan-300 text-black font-bold text-xs shadow-md shadow-cyan-500/30 transition-all active:scale-95 whitespace-nowrap"
                     >
                       Install
                     </button>
@@ -183,7 +192,7 @@ export default function MeloApp() {
                 )}
 
                 <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white mb-5">
-                  {getGreeting()}, Dikshit
+                  {getGreeting()}{user ? `, ${user.name}` : ''}
                 </h1>
 
                 {/* 6 Quick Play Tiles */}
@@ -209,7 +218,7 @@ export default function MeloApp() {
                               if (isCurrent) togglePlay();
                               else playTrack(track, tracks);
                             }}
-                            className={`w-9 h-9 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black flex items-center justify-center shadow-lg transition-all ${
+                            className={`w-9 h-9 rounded-full bg-cyan-400 hover:bg-cyan-300 text-black flex items-center justify-center shadow-lg shadow-cyan-500/30 transition-all ${
                               isCurrent && isPlaying
                                 ? 'opacity-100'
                                 : 'opacity-0 group-hover:opacity-100 hover:scale-105'
@@ -227,42 +236,6 @@ export default function MeloApp() {
                   })}
                 </div>
               </div>
-
-              {/* Featured Hero Banner */}
-              {tracks.length > 0 && (
-                <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-emerald-950/80 via-zinc-900 to-zinc-950 border border-emerald-500/20 p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
-                  <div className="flex-1 space-y-3">
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold border border-emerald-500/30">
-                      <Sparkles className="w-3.5 h-3.5" />
-                      <span>SPOTLIGHT OF THE DAY</span>
-                    </div>
-                    <h2 className="text-2xl md:text-4xl font-black text-white tracking-tight">
-                      {tracks[0].title}
-                    </h2>
-                    <p className="text-sm text-zinc-300 font-medium">
-                      By <span className="text-white font-semibold">{tracks[0].artist}</span> •{' '}
-                      {tracks[0].album} • {tracks[0].genre}
-                    </p>
-                    <p className="text-xs text-zinc-400 max-w-xl leading-relaxed">
-                      Immerse yourself in lossless 320kbps audio with zero buffering. Streamed dynamically
-                      via Melo's Web Audio API engine.
-                    </p>
-                    <div className="pt-2 flex items-center gap-4">
-                      <button
-                        onClick={() => playTrack(tracks[0], tracks)}
-                        className="px-6 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-sm flex items-center gap-2 transition-all hover:scale-105 active:scale-95 shadow-lg shadow-emerald-500/20"
-                      >
-                        <Play className="w-4 h-4 fill-black" />
-                        <span>Play Spotlight</span>
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="relative w-44 h-44 md:w-56 md:h-56 rounded-xl overflow-hidden shadow-2xl border border-white/10 flex-shrink-0 pulse-glow">
-                    <Image src={tracks[0].artwork} alt={tracks[0].title} fill className="object-cover" />
-                  </div>
-                </div>
-              )}
 
               {/* Section: Trending Now */}
               <div>
@@ -287,7 +260,7 @@ export default function MeloApp() {
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
-                    <Compass className="w-5 h-5 text-emerald-400" />
+                    <Compass className="w-5 h-5 text-cyan-400" />
                     <h2 className="text-xl font-bold text-white">Curated For You</h2>
                   </div>
                 </div>
@@ -312,7 +285,7 @@ export default function MeloApp() {
                               e.stopPropagation();
                               if (playlist.tracks[0]) playTrack(playlist.tracks[0], playlist.tracks);
                             }}
-                            className="w-9 h-9 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black flex items-center justify-center shadow-lg"
+                            className="w-9 h-9 rounded-full bg-cyan-400 hover:bg-cyan-300 text-black flex items-center justify-center shadow-lg shadow-cyan-500/30"
                           >
                             <Play className="w-4 h-4 fill-black ml-0.5" />
                           </button>
@@ -345,7 +318,7 @@ export default function MeloApp() {
                       </div>
                       <h4 className="font-bold text-sm text-white truncate w-full">{artist.name}</h4>
                       <p className="text-xs text-zinc-400 mt-0.5">{artist.genre}</p>
-                      <span className="text-[11px] text-emerald-400 font-semibold mt-1">
+                      <span className="text-[11px] text-cyan-400 font-semibold mt-1">
                         {artist.monthlyListeners} monthly
                       </span>
                     </div>
@@ -408,7 +381,7 @@ export default function MeloApp() {
                     Liked Songs
                   </h1>
                   <p className="text-xs text-zinc-400">
-                    Curated by <span className="text-white font-semibold">Dikshit Jaswal</span> •{' '}
+                    Your collection •{' '}
                     {likedTracks.length} tracks
                   </p>
                 </div>
@@ -418,7 +391,7 @@ export default function MeloApp() {
                 <div className="flex items-center gap-4">
                   <button
                     onClick={() => playTrack(likedTracks[0], likedTracks)}
-                    className="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all"
+                    className="w-12 h-12 rounded-full bg-cyan-400 hover:bg-cyan-300 text-black flex items-center justify-center shadow-lg shadow-cyan-500/30 hover:scale-105 active:scale-95 transition-all"
                   >
                     <Play className="w-6 h-6 fill-black ml-0.5" />
                   </button>
@@ -455,7 +428,7 @@ export default function MeloApp() {
           {/* ==================== SELECTED PLAYLIST VIEW ==================== */}
           {selectedPlaylist && (
             <div className="space-y-8 max-w-7xl mx-auto">
-              <div className="flex flex-col sm:flex-row items-center sm:items-end gap-6 bg-gradient-to-b from-emerald-950/40 to-transparent p-6 rounded-2xl border border-emerald-500/20">
+              <div className="flex flex-col sm:flex-row items-center sm:items-end gap-6 bg-gradient-to-b from-cyan-950/40 to-transparent p-6 rounded-2xl border border-cyan-500/20">
                 <div className="relative w-40 h-40 rounded-2xl overflow-hidden shadow-2xl flex-shrink-0 bg-zinc-900">
                   <Image
                     src={selectedPlaylist.coverImage}
@@ -465,7 +438,7 @@ export default function MeloApp() {
                   />
                 </div>
                 <div className="text-center sm:text-left space-y-2 flex-1">
-                  <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">
+                  <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">
                     Playlist
                   </span>
                   <h1 className="text-2xl md:text-4xl font-black text-white tracking-tight">
@@ -484,7 +457,7 @@ export default function MeloApp() {
                     onClick={() =>
                       playTrack(selectedPlaylist.tracks[0], selectedPlaylist.tracks)
                     }
-                    className="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all"
+                    className="w-12 h-12 rounded-full bg-cyan-400 hover:bg-cyan-300 text-black flex items-center justify-center shadow-lg shadow-cyan-500/30 hover:scale-105 active:scale-95 transition-all"
                   >
                     <Play className="w-6 h-6 fill-black ml-0.5" />
                   </button>
@@ -522,7 +495,7 @@ export default function MeloApp() {
                 </div>
                 <button
                   onClick={() => setIsCreatePlaylistOpen(true)}
-                  className="px-4 py-2 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-bold flex items-center gap-2 transition-all shadow-md"
+                  className="px-4 py-2 rounded-full bg-cyan-400 hover:bg-cyan-300 text-black text-xs font-bold flex items-center gap-2 transition-all shadow-md shadow-cyan-500/30"
                 >
                   <Plus className="w-4 h-4" />
                   <span>New Playlist</span>
@@ -568,6 +541,11 @@ export default function MeloApp() {
       <PlaylistModal
         isOpen={isCreatePlaylistOpen}
         onClose={() => setIsCreatePlaylistOpen(false)}
+      />
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        initialMode={authMode}
       />
       <PlayerBar
         onToggleQueue={() => setIsQueueOpen(!isQueueOpen)}

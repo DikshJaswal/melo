@@ -70,7 +70,7 @@ export default function FullscreenPlayer() {
 
       <div className="relative z-10 w-full flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-bold uppercase tracking-widest text-emerald-400">
+          <span className="text-xs font-bold uppercase tracking-widest text-cyan-400">
             Now Playing • Melo Ambient Cinema
           </span>
         </div>
@@ -87,7 +87,7 @@ export default function FullscreenPlayer() {
       <div className="relative z-10 flex flex-col items-center justify-center gap-8">
         <div
           className={`relative w-72 h-72 md:w-96 md:h-96 rounded-3xl overflow-hidden shadow-2xl border border-white/10 transition-transform duration-700 ${
-            isPlaying ? 'scale-105 shadow-emerald-500/20' : 'scale-95'
+            isPlaying ? 'scale-105 shadow-cyan-500/20' : 'scale-95'
           }`}
         >
           <Image
@@ -109,13 +109,13 @@ export default function FullscreenPlayer() {
             >
               <Heart
                 className={`w-7 h-7 ${
-                  liked ? 'text-emerald-400 fill-emerald-400' : 'text-zinc-500 hover:text-white'
+                  liked ? 'text-cyan-400 fill-cyan-400' : 'text-zinc-500 hover:text-white'
                 }`}
               />
             </button>
           </div>
           <p className="text-lg text-zinc-300 font-medium mt-1">{currentTrack.artist}</p>
-          <p className="text-xs text-emerald-400 uppercase tracking-widest font-semibold mt-2">
+          <p className="text-xs text-cyan-400 uppercase tracking-widest font-semibold mt-2">
             {currentTrack.album} • {currentTrack.genre}
           </p>
         </div>
@@ -126,7 +126,7 @@ export default function FullscreenPlayer() {
           <span className="w-10 text-right tabular-nums">{formatTime(currentTime)}</span>
           <div className="relative flex-1 h-1.5 rounded-full bg-zinc-800 cursor-pointer overflow-hidden">
             <div
-              className="absolute left-0 top-0 bottom-0 bg-emerald-400 rounded-full"
+              className="absolute left-0 top-0 bottom-0 bg-cyan-400 shadow-[0_0_8px_rgba(0,242,254,0.8)] rounded-full"
               style={{ width: `${progressPercent}%` }}
             />
             <input
@@ -149,7 +149,7 @@ export default function FullscreenPlayer() {
           <button
             onClick={toggleShuffle}
             className={`p-2 transition-colors ${
-              isShuffle ? 'text-emerald-400' : 'text-zinc-400 hover:text-white'
+              isShuffle ? 'text-cyan-400' : 'text-zinc-400 hover:text-white'
             }`}
           >
             <Shuffle className="w-5 h-5" />
@@ -164,7 +164,7 @@ export default function FullscreenPlayer() {
 
           <button
             onClick={togglePlay}
-            className="w-16 h-16 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black flex items-center justify-center shadow-2xl shadow-emerald-500/30 hover:scale-105 active:scale-95 transition-all"
+            className="w-16 h-16 rounded-full bg-cyan-400 hover:bg-cyan-300 text-black flex items-center justify-center shadow-2xl shadow-cyan-500/30 hover:scale-105 active:scale-95 transition-all"
           >
             {isPlaying ? (
               <Pause className="w-8 h-8 fill-black" />
@@ -183,7 +183,7 @@ export default function FullscreenPlayer() {
           <button
             onClick={toggleRepeat}
             className={`p-2 transition-colors ${
-              repeatMode !== 'off' ? 'text-emerald-400' : 'text-zinc-400 hover:text-white'
+              repeatMode !== 'off' ? 'text-cyan-400' : 'text-zinc-400 hover:text-white'
             }`}
           >
             {repeatMode === 'one' ? (

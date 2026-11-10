@@ -38,7 +38,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
         </button>
 
         <div className="flex items-center gap-3 mb-5">
-          <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+          <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
             <Music className="w-5 h-5" />
           </div>
           <div>
@@ -58,7 +58,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g. Late Night Coding Vibes"
-              className="w-full bg-[#18181b] border border-[#27272a] rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-500 transition-colors"
+              className="w-full bg-[#18181b] border border-[#27272a] rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-400 transition-colors"
             />
           </div>
 
@@ -71,7 +71,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Give your playlist a mood or bio"
               rows={3}
-              className="w-full bg-[#18181b] border border-[#27272a] rounded-xl px-4 py-2 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-500 transition-colors resize-none"
+              className="w-full bg-[#18181b] border border-[#27272a] rounded-xl px-4 py-2 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-400 transition-colors resize-none"
             />
           </div>
 
@@ -85,7 +85,7 @@ export default function PlaylistModal({ isOpen, onClose }: PlaylistModalProps) {
             </button>
             <button
               type="submit"
-              className="px-5 py-2 rounded-xl text-sm font-bold bg-emerald-500 hover:bg-emerald-400 text-black transition-all hover:scale-105 active:scale-95 shadow-md shadow-emerald-500/20"
+              className="px-5 py-2 rounded-xl text-sm font-bold bg-cyan-400 hover:bg-cyan-300 text-black transition-all hover:scale-105 active:scale-95 shadow-md shadow-cyan-500/25"
             >
               Create Playlist
             </button>

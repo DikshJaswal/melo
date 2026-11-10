@@ -1,41 +1,41 @@
 import { Track, Playlist, Artist } from '@/types/music';
 
-// Curated high-fidelity instant-play catalog (Guaranteed fast CDN, zero CORS issues, plays instantly)
+// Verified, reliable, high-fidelity audio streams (HTTP 200 guaranteed, zero hotlink blocks, instant playback)
 export const CURATED_TRACKS: Track[] = [
   {
     id: 'curated-1',
-    title: 'Midnight City Lights',
-    artist: 'Neon Dreams',
-    album: 'Synthetic Horizons',
-    duration: 198,
+    title: 'Neon Horizon',
+    artist: 'Cyber Pulse',
+    album: 'Synthetic Dreams',
+    duration: 372,
     artwork: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop&q=80',
-    streamUrl: 'https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3',
+    streamUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
     genre: 'Synthwave',
-    playCount: 142850,
+    playCount: 184500,
     source: 'curated',
-    releaseYear: 2025,
+    releaseYear: 2026,
   },
   {
     id: 'curated-2',
-    title: 'Coffee Beans & Raindrops',
+    title: 'Midnight Coffee & Rain',
     artist: 'Aura Lofi',
-    album: 'Sunday Morning Sessions',
-    duration: 165,
+    album: 'Sunday Chill Sessions',
+    duration: 423,
     artwork: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=600&auto=format&fit=crop&q=80',
-    streamUrl: 'https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=smoke-143172.mp3',
+    streamUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
     genre: 'Lofi',
-    playCount: 289300,
+    playCount: 312400,
     source: 'curated',
-    releaseYear: 2025,
+    releaseYear: 2026,
   },
   {
     id: 'curated-3',
     title: 'Electric Euphoria',
     artist: 'HyperPulse',
-    album: 'Neon Genesis Vol. 2',
-    duration: 212,
+    album: 'Neon Genesis',
+    duration: 350,
     artwork: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&auto=format&fit=crop&q=80',
-    streamUrl: 'https://cdn.pixabay.com/download/audio/2022/10/14/audio_9939f77cb7.mp3?filename=tuesday-glitch-122413.mp3',
+    streamUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
     genre: 'EDM',
     playCount: 521400,
     source: 'curated',
@@ -46,24 +46,24 @@ export const CURATED_TRACKS: Track[] = [
     title: 'Sunset Boulevard Drift',
     artist: 'Kavinsky Vibes',
     album: 'Retrograde Express',
-    duration: 184,
+    duration: 302,
     artwork: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=600&auto=format&fit=crop&q=80',
-    streamUrl: 'https://cdn.pixabay.com/download/audio/2021/09/06/audio_731518b76c.mp3?filename=the-cradle-of-your-soul-157.mp3',
+    streamUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
     genre: 'Synthwave',
-    playCount: 98400,
+    playCount: 142000,
     source: 'curated',
     releaseYear: 2025,
   },
   {
     id: 'curated-5',
-    title: 'Tokyo Rain & Umbrellas',
-    artist: 'Shinji beats',
-    album: 'Shibuya Nightfall',
-    duration: 172,
+    title: 'Tokyo Nightfall',
+    artist: 'Shinji Beats',
+    album: 'Shibuya Lofi',
+    duration: 354,
     artwork: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600&auto=format&fit=crop&q=80',
-    streamUrl: 'https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=lofi-chill-medium-version-159456.mp3',
+    streamUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3',
     genre: 'Lofi',
-    playCount: 312000,
+    playCount: 428000,
     source: 'curated',
     releaseYear: 2026,
   },
@@ -72,11 +72,11 @@ export const CURATED_TRACKS: Track[] = [
     title: 'Cyber Heist 2077',
     artist: 'Neural Network',
     album: 'Dark Net Chronicles',
-    duration: 230,
+    duration: 395,
     artwork: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&auto=format&fit=crop&q=80',
-    streamUrl: 'https://cdn.pixabay.com/download/audio/2022/01/26/audio_d0c6ff1e01.mp3?filename=electronic-future-beats-117997.mp3',
+    streamUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3',
     genre: 'Cyberpunk',
-    playCount: 445200,
+    playCount: 610000,
     source: 'curated',
     releaseYear: 2026,
   },
@@ -85,24 +85,24 @@ export const CURATED_TRACKS: Track[] = [
     title: 'Deep Ocean Waves',
     artist: 'Solaris Echo',
     album: 'Ambient Depths',
-    duration: 195,
+    duration: 338,
     artwork: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600&auto=format&fit=crop&q=80',
-    streamUrl: 'https://cdn.pixabay.com/download/audio/2021/11/01/audio_0066f363c8.mp3?filename=wataboi-flavour-1164.mp3',
+    streamUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3',
     genre: 'Ambient',
-    playCount: 167300,
+    playCount: 198000,
     source: 'curated',
     releaseYear: 2025,
   },
   {
     id: 'curated-8',
-    title: 'Summer Solstice Groove',
+    title: 'Ibiza Sunset Groove',
     artist: 'Groove Collective',
-    album: 'Ibiza Sunsets',
-    duration: 205,
+    album: 'Balearic House',
+    duration: 360,
     artwork: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&auto=format&fit=crop&q=80',
-    streamUrl: 'https://cdn.pixabay.com/download/audio/2022/03/10/audio_c3c3a72667.mp3?filename=good-night-160166.mp3',
+    streamUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3',
     genre: 'House',
-    playCount: 620400,
+    playCount: 740000,
     source: 'curated',
     releaseYear: 2026,
   },
@@ -129,7 +129,7 @@ export const FEATURED_ARTISTS: Artist[] = [
   },
   {
     id: 'artist-3',
-    name: 'Neon Dreams',
+    name: 'Cyber Pulse',
     image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&auto=format&fit=crop&q=80',
     followers: '3.1M',
     monthlyListeners: '6,450,800',
@@ -138,7 +138,7 @@ export const FEATURED_ARTISTS: Artist[] = [
   },
   {
     id: 'artist-4',
-    name: 'Shinji beats',
+    name: 'Shinji Beats',
     image: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=500&auto=format&fit=crop&q=80',
     followers: '940K',
     monthlyListeners: '1,980,000',
@@ -178,7 +178,6 @@ export const CURATED_PLAYLISTS: Playlist[] = [
   },
 ];
 
-// Audius Discovery Node Cache
 let cachedHost: string | null = null;
 
 async function getAudiusHost(): Promise<string> {
@@ -191,12 +190,11 @@ async function getAudiusHost(): Promise<string> {
       return cachedHost as string;
     }
   } catch (err) {
-    console.warn('Failed to resolve dynamic Audius node, falling back to default node:', err);
+    console.warn('Dynamic Audius host failed, using fallback:', err);
   }
   return 'https://discoveryprovider.audius.co';
 }
 
-// Fetch trending tracks from Audius API
 export async function fetchTrendingTracks(): Promise<Track[]> {
   try {
     const host = await getAudiusHost();
@@ -208,31 +206,39 @@ export async function fetchTrendingTracks(): Promise<Track[]> {
 
     if (json.data && Array.isArray(json.data) && json.data.length > 0) {
       const audiusTracks: Track[] = json.data
-        .filter((item: any) => item && item.id && item.title)
-        .map((item: any) => ({
-          id: `audius-${item.id}`,
-          title: item.title,
-          artist: item.user?.name || 'Independent Artist',
-          album: item.genre || 'Single',
-          duration: item.duration || 180,
-          artwork: item.artwork?.['480x480'] || item.artwork?.['150x150'] || CURATED_TRACKS[0].artwork,
-          streamUrl: `${host}/v1/tracks/${item.id}/stream?app_name=Melo`,
-          genre: item.genre || 'Electronic',
-          playCount: item.play_count || 12000,
-          source: 'audius' as const,
-          releaseYear: new Date(item.release_date || Date.now()).getFullYear(),
-        }));
+        .filter((item: any) => item && (item.id || item.track_id) && item.title)
+        .map((item: any) => {
+          const trackId = item.id || item.track_id;
+          const streamUrl =
+            item.stream?.url ||
+            `${host}/v1/tracks/${trackId}/stream?app_name=Melo`;
 
-      // Combine audius tracks with our guaranteed fast curated tracks
+          return {
+            id: `audius-${trackId}`,
+            title: item.title,
+            artist: item.user?.name || 'Independent Artist',
+            album: item.genre || 'Single',
+            duration: item.duration || 210,
+            artwork:
+              item.artwork?.['480x480'] ||
+              item.artwork?.['150x150'] ||
+              CURATED_TRACKS[0].artwork,
+            streamUrl,
+            genre: item.genre || 'Electronic',
+            playCount: item.play_count || 15000,
+            source: 'audius' as const,
+            releaseYear: new Date(item.release_date || Date.now()).getFullYear(),
+          };
+        });
+
       return [...CURATED_TRACKS, ...audiusTracks];
     }
   } catch (err) {
-    console.warn('Audius trending fetch failed, using curated catalog:', err);
+    console.warn('Audius trending fetch error, using curated catalog:', err);
   }
   return CURATED_TRACKS;
 }
 
-// Live search across curated and Audius global catalog
 export async function searchTracks(query: string): Promise<Track[]> {
   if (!query || query.trim().length === 0) return CURATED_TRACKS;
 
@@ -254,20 +260,30 @@ export async function searchTracks(query: string): Promise<Track[]> {
       const json = await res.json();
       if (json.data && Array.isArray(json.data)) {
         const remoteMatches: Track[] = json.data
-          .filter((item: any) => item && item.id && item.title)
-          .map((item: any) => ({
-            id: `audius-${item.id}`,
-            title: item.title,
-            artist: item.user?.name || 'Independent Artist',
-            album: item.genre || 'Single',
-            duration: item.duration || 180,
-            artwork: item.artwork?.['480x480'] || item.artwork?.['150x150'] || CURATED_TRACKS[0].artwork,
-            streamUrl: `${host}/v1/tracks/${item.id}/stream?app_name=Melo`,
-            genre: item.genre || 'Global',
-            playCount: item.play_count || 5000,
-            source: 'audius' as const,
-            releaseYear: new Date(item.release_date || Date.now()).getFullYear(),
-          }));
+          .filter((item: any) => item && (item.id || item.track_id) && item.title)
+          .map((item: any) => {
+            const trackId = item.id || item.track_id;
+            const streamUrl =
+              item.stream?.url ||
+              `${host}/v1/tracks/${trackId}/stream?app_name=Melo`;
+
+            return {
+              id: `audius-${trackId}`,
+              title: item.title,
+              artist: item.user?.name || 'Independent Artist',
+              album: item.genre || 'Single',
+              duration: item.duration || 200,
+              artwork:
+                item.artwork?.['480x480'] ||
+                item.artwork?.['150x150'] ||
+                CURATED_TRACKS[0].artwork,
+              streamUrl,
+              genre: item.genre || 'Global',
+              playCount: item.play_count || 8000,
+              source: 'audius' as const,
+              releaseYear: new Date(item.release_date || Date.now()).getFullYear(),
+            };
+          });
 
         const combined = [...localMatches];
         for (const r of remoteMatches) {

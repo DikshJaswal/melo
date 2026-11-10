@@ -1,12 +1,13 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
-import { Track, Playlist } from '@/types/music';
+import { Track, Playlist, User } from '@/types/music';
 import { CURATED_TRACKS, CURATED_PLAYLISTS } from '@/services/musicService';
 
 type RepeatMode = 'off' | 'all' | 'one';
 
 interface PlayerContextType {
+  user: User | null;
   currentTrack: Track | null;
   isPlaying: boolean;
   currentTime: number;
@@ -24,6 +25,8 @@ interface PlayerContextType {
   audioBufferPercent: number;
 
   // Actions
+  login: (name: string, email: string) => void;
+  logout: () => void;
   playTrack: (track: Track, newQueue?: Track[]) => void;
   togglePlay: () => void;
   seek: (seconds: number) => void;
@@ -47,6 +50,7 @@ interface PlayerContextType {
 const PlayerContext = createContext<PlayerContextType | undefined>(undefined);
 
 export function PlayerProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<User | null>(null);
   const [currentTrack, setCurrentTrack] = useState<Track | null>(CURATED_TRACKS[0]);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
@@ -76,10 +80,32 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
 
       const savedVol = localStorage.getItem('melo_volume');
       if (savedVol) setVolumeState(parseFloat(savedVol));
+
+      const savedUser = localStorage.getItem('melo_user');
+      if (savedUser) setUser(JSON.parse(savedUser));
     } catch (e) {
       console.warn('LocalStorage hydration error:', e);
     }
   }, []);
+
+  const login = (name: string, email: string) => {
+    const newUser: User = {
+      name: name.trim() || 'Music Lover',
+      email: email.trim() || 'user@melo.app',
+      avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(name || 'melo')}`,
+    };
+    setUser(newUser);
+    try {
+      localStorage.setItem('melo_user', JSON.stringify(newUser));
+    } catch {}
+  };
+
+  const logout = () => {
+    setUser(null);
+    try {
+      localStorage.removeItem('melo_user');
+    } catch {}
+  };
 
   // Save changes to LocalStorage
   useEffect(() => {
@@ -121,8 +147,22 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     };
 
     const handleError = () => {
-      console.warn('Audio stream error on:', currentTrack?.title, 'Falling back to next track');
-      skipNext();
+      console.warn('Audio stream error on:', currentTrack?.title);
+      if (currentTrack && currentTrack.source === 'audius') {
+        const fallback = CURATED_TRACKS[0];
+        if (audio) {
+          audio.src = fallback.streamUrl;
+          audio
+            .play()
+            .then(() => {
+              setCurrentTrack(fallback);
+              setIsPlaying(true);
+            })
+            .catch(console.warn);
+        }
+      } else {
+        setIsPlaying(false);
+      }
     };
 
     audio.addEventListener('timeupdate', handleTimeUpdate);
@@ -214,11 +254,18 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
       audioRef.current.pause();
       setIsPlaying(false);
     } else {
+      if (
+        !audioRef.current.src ||
+        audioRef.current.src === '' ||
+        !audioRef.current.src.includes(currentTrack.streamUrl)
+      ) {
+        audioRef.current.src = currentTrack.streamUrl;
+      }
       audioRef.current
         .play()
         .then(() => setIsPlaying(true))
         .catch((err) => {
-          console.error('Play error:', err);
+          console.warn('Playback error / user interaction required:', err);
           setIsPlaying(false);
         });
     }
@@ -349,6 +396,9 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
   return (
     <PlayerContext.Provider
       value={{
+        user,
+        login,
+        logout,
         currentTrack,
         isPlaying,
         currentTime,
