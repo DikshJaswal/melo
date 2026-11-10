@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import Image from 'next/image';
+import SafeImage from '@/components/SafeImage';
 import {
   Minimize2,
   Play,
@@ -90,7 +90,7 @@ export default function FullscreenPlayer() {
             isPlaying ? 'scale-105 shadow-sky-500/20' : 'scale-95'
           }`}
         >
-          <Image
+          <SafeImage
             src={currentTrack.artwork}
             alt={currentTrack.title}
             fill

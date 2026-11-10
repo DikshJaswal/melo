@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
+import SafeImage from '@/components/SafeImage';
 import { Play, Pause, Heart } from 'lucide-react';
 import { Track } from '@/types/music';
 import { usePlayer } from '@/context/PlayerContext';
@@ -69,7 +69,7 @@ export default function TrackRow({ track, index, playlistContext }: TrackRowProp
         </div>
 
         <div className="relative w-10 h-10 rounded-md overflow-hidden flex-shrink-0 bg-zinc-900 shadow">
-          <Image src={track.artwork} alt={track.title} fill className="object-cover" />
+          <SafeImage src={track.artwork} alt={track.title} fill className="object-cover" />
         </div>
 
         <div className="truncate flex-1">

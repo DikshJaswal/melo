@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import Image from 'next/image';
+import SafeImage from '@/components/SafeImage';
 import {
   Search,
   X,
@@ -163,7 +163,7 @@ export default function Navbar({
                       >
                         <div className="flex items-center gap-3 truncate">
                           <div className="relative w-10 h-10 rounded-lg overflow-hidden bg-zinc-900 flex-shrink-0">
-                            <Image
+                            <SafeImage
                               src={track.artwork}
                               alt={track.title}
                               fill

@@ -1,6 +1,20 @@
 import https from 'https';
 import CryptoJS from 'crypto-js';
 import { Track } from '@/types/music';
+import verifiedTracks from '@/data/fullTracks.json';
+
+// Build a fast lookup map for verified original movie/artist album covers
+const VERIFIED_ALBUM_MAP = new Map<string, { album: string; artwork: string }>();
+
+(verifiedTracks as Track[]).forEach((t) => {
+  const normTitle = t.title.toLowerCase().replace(/\s*\(.*\)/, '').trim();
+  if (normTitle && !VERIFIED_ALBUM_MAP.has(normTitle)) {
+    VERIFIED_ALBUM_MAP.set(normTitle, {
+      album: t.album,
+      artwork: t.artwork,
+    });
+  }
+});
 
 export function decryptSaavnMediaUrl(encrypted: string): string | null {
   try {
@@ -61,6 +75,62 @@ export function fetchSaavnJson(url: string, timeoutMs = 7000): Promise<any> {
   });
 }
 
+/**
+ * Score JioSaavn search items so authentic original soundtracks / album releases
+ * are ranked above generic compilations ("Best Of", "Trending Love Songs", "Special", etc.)
+ */
+export function scoreSaavnItem(item: any, query: string): number {
+  let score = 0;
+  const song = (item.song || item.title || '').toLowerCase();
+  const album = (item.album || '').toLowerCase();
+  const q = query.toLowerCase().trim();
+
+  // Exact or prefix song title match gets highest priority
+  if (song === q || song.startsWith(q + ' ') || song.startsWith(q + ' (')) {
+    score += 60;
+  } else if (song.includes(q)) {
+    score += 30;
+  }
+
+  // Heavy penalty for cheap compilation/remix/mashup releases
+  const compilationKeywords = [
+    'best of',
+    'collection',
+    'mashup',
+    'remix',
+    'trending',
+    'hits 20',
+    'non stop',
+    'valentines',
+    'love songs',
+    'romantic hits',
+    'top 10',
+    'top 20',
+    'top 50',
+    'special',
+    'world music',
+    'dance dhamaka',
+    'compilation',
+    'dj mix',
+    'heartbeats',
+    'party hits',
+  ];
+
+  if (compilationKeywords.some((kw) => album.includes(kw))) {
+    score -= 40;
+  } else {
+    score += 35; // Authentic original release bonus
+  }
+
+  // Bonus for matching our verified catalog
+  const normTitle = song.replace(/\s*\(.*\)/, '').trim();
+  if (VERIFIED_ALBUM_MAP.has(normTitle)) {
+    score += 25;
+  }
+
+  return score;
+}
+
 export function formatSaavnTrack(item: any): Track | null {
   if (!item || !item.encrypted_media_url) return null;
 
@@ -84,15 +154,23 @@ export function formatSaavnTrack(item: any): Track | null {
     .replace(/&#039;/g, "'")
     .replace(/&amp;/g, '&');
 
-  const cleanAlbum = (item.album || 'Single')
+  let cleanAlbum = (item.album || 'Single')
     .replace(/&quot;/g, '"')
     .replace(/&#039;/g, "'")
     .replace(/&amp;/g, '&');
 
-  const artwork = (item.image || '')
+  let artwork = (item.image || '')
     .replace('150x150', '500x500')
     .replace('50x50', '500x500')
     .replace('http:', 'https:');
+
+  // If this song is in our verified catalog, attach the authentic original movie album art & title
+  const normTitle = cleanTitle.toLowerCase().replace(/\s*\(.*\)/, '').trim();
+  const verified = VERIFIED_ALBUM_MAP.get(normTitle);
+  if (verified) {
+    cleanAlbum = verified.album;
+    artwork = verified.artwork;
+  }
 
   return {
     id: `full-saavn-${item.id}`,

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { fetchSaavnJson, formatSaavnTrack } from '@/lib/saavnClient';
+import { fetchSaavnJson, formatSaavnTrack, scoreSaavnItem } from '@/lib/saavnClient';
 import { Track } from '@/types/music';
 
 export async function GET(request: NextRequest) {
@@ -11,10 +11,16 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const url = `https://www.jiosaavn.com/api.php?__call=search.getResults&_format=json&_marker=0&cc=in&p=1&n=30&q=${encodeURIComponent(query.trim())}`;
+    const trimmedQuery = query.trim();
+    const url = `https://www.jiosaavn.com/api.php?__call=search.getResults&_format=json&_marker=0&cc=in&p=1&n=35&q=${encodeURIComponent(trimmedQuery)}`;
     const data = await fetchSaavnJson(url, 7000);
 
-    const tracks: Track[] = (data.results || [])
+    const rawList = data.results || [];
+
+    // Sort to ensure original movie/album releases appear before compilation albums
+    rawList.sort((a: any, b: any) => scoreSaavnItem(b, trimmedQuery) - scoreSaavnItem(a, trimmedQuery));
+
+    const tracks: Track[] = rawList
       .map(formatSaavnTrack)
       .filter((t: Track | null): t is Track => t !== null);
 

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
+import SafeImage from '@/components/SafeImage';
 import {
   Play,
   Pause,
@@ -84,7 +84,7 @@ export default function PlayerBar({ onToggleQueue, isQueueOpen }: PlayerBarProps
         }}
       >
         <div className="relative w-11 h-11 md:w-14 md:h-14 rounded-lg overflow-hidden flex-shrink-0 bg-zinc-900 shadow-md group">
-          <Image
+          <SafeImage
             src={currentTrack.artwork}
             alt={currentTrack.title}
             fill

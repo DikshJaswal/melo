@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
+import SafeImage from '@/components/SafeImage';
 import { Play, Pause, Heart } from 'lucide-react';
 import { Track } from '@/types/music';
 import { usePlayer } from '@/context/PlayerContext';
@@ -40,7 +40,7 @@ export default function TrackCard({ track, playlistContext }: TrackCardProps) {
       }`}
     >
       <div className="relative aspect-square w-full rounded-lg overflow-hidden mb-3 bg-zinc-900 shadow-md">
-        <Image
+        <SafeImage
           src={track.artwork}
           alt={track.title}
           fill

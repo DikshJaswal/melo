@@ -25,6 +25,7 @@ import FullscreenPlayer from '@/components/FullscreenPlayer';
 import PlaylistModal from '@/components/PlaylistModal';
 import MobileNav from '@/components/MobileNav';
 import AuthModal from '@/components/AuthModal';
+import SafeImage from '@/components/SafeImage';
 
 import { usePlayer } from '@/context/PlayerContext';
 import {
@@ -106,7 +107,7 @@ export default function MeloApp() {
     loadTracks();
   }, [updateTrendingPlaylists]);
 
-  // Handle live search
+  // Handle live search with stable non-fluctuating debounce
   useEffect(() => {
     let active = true;
     async function doSearch() {
@@ -118,7 +119,7 @@ export default function MeloApp() {
       setIsSearching(true);
       try {
         const results = await searchTracks(searchQuery);
-        if (active) {
+        if (active && results && results.length > 0) {
           setSearchResults(results);
         }
       } catch (err) {
@@ -129,7 +130,7 @@ export default function MeloApp() {
         }
       }
     }
-    const debounce = setTimeout(doSearch, 200);
+    const debounce = setTimeout(doSearch, 300);
     return () => {
       active = false;
       clearTimeout(debounce);
@@ -225,7 +226,7 @@ export default function MeloApp() {
                         className="group flex items-center gap-3.5 bg-[#18181b]/70 hover:bg-[#27272a] rounded-lg overflow-hidden cursor-pointer transition-all duration-200 border border-transparent hover:border-zinc-700/50 shadow-sm"
                       >
                         <div className="relative w-16 h-16 flex-shrink-0 bg-zinc-900">
-                          <Image src={track.artwork} alt={track.title} fill className="object-cover" />
+                          <SafeImage src={track.artwork} alt={track.title} fill className="object-cover" />
                         </div>
                         <span className="font-semibold text-sm text-white truncate flex-1 pr-2">
                           {track.title}
@@ -415,14 +416,19 @@ export default function MeloApp() {
                 </div>
               </div>
 
-              {isSearching ? (
-                <div className="bg-[#121214]/60 rounded-xl border border-[#1f1f23] p-12 text-center space-y-3">
-                  <div className="w-8 h-8 border-2 border-sky-400 border-t-transparent rounded-full animate-spin mx-auto" />
-                  <p className="text-sm font-semibold text-white">Searching full-length audio streams...</p>
-                  <p className="text-xs text-zinc-400">Fetching high quality 160kbps streams for &quot;{searchQuery}&quot;</p>
+              {/* Background search progress bar */}
+              {isSearching && (
+                <div className="w-full h-0.5 bg-zinc-800 rounded-full overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-sky-400 via-cyan-300 to-sky-400 animate-pulse w-full" />
                 </div>
-              ) : searchResults.length > 0 ? (
-                <div className="bg-[#121214]/60 rounded-xl border border-[#1f1f23] overflow-hidden">
+              )}
+
+              {searchResults.length > 0 ? (
+                <div
+                  className={`bg-[#121214]/60 rounded-xl border border-[#1f1f23] overflow-hidden transition-opacity duration-200 ${
+                    isSearching ? 'opacity-80' : 'opacity-100'
+                  }`}
+                >
                   <div className="flex items-center justify-between px-4 py-2.5 border-b border-[#1f1f23] text-xs font-semibold text-zinc-400 uppercase tracking-wider">
                     <div className="flex items-center gap-3.5 flex-1 pr-4">
                       <span className="w-5 text-center">#</span>
@@ -444,6 +450,12 @@ export default function MeloApp() {
                       />
                     ))}
                   </div>
+                </div>
+              ) : isSearching ? (
+                <div className="bg-[#121214]/60 rounded-xl border border-[#1f1f23] p-12 text-center space-y-3">
+                  <div className="w-8 h-8 border-2 border-sky-400 border-t-transparent rounded-full animate-spin mx-auto" />
+                  <p className="text-sm font-semibold text-white">Searching full-length audio streams...</p>
+                  <p className="text-xs text-zinc-400">Fetching high quality 160kbps streams for &quot;{searchQuery}&quot;</p>
                 </div>
               ) : (
                 <div className="bg-[#121214]/60 rounded-xl border border-[#1f1f23] p-12 text-center space-y-4">

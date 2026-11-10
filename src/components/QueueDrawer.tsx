@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
+import SafeImage from '@/components/SafeImage';
 import { X, Play, Music } from 'lucide-react';
 import { usePlayer } from '@/context/PlayerContext';
 
@@ -49,7 +49,7 @@ export default function QueueDrawer({ isOpen, onClose }: QueueDrawerProps) {
           </div>
           <div className="flex items-center gap-3 p-2.5 rounded-xl bg-sky-500/10 border border-sky-500/20">
             <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-zinc-900 flex-shrink-0">
-              <Image src={currentTrack.artwork} alt={currentTrack.title} fill className="object-cover" />
+              <SafeImage src={currentTrack.artwork} alt={currentTrack.title} fill className="object-cover" />
             </div>
             <div className="truncate flex-1">
               <p className="text-sm font-bold text-white truncate">{currentTrack.title}</p>
@@ -80,7 +80,7 @@ export default function QueueDrawer({ isOpen, onClose }: QueueDrawerProps) {
                   {i + 1}
                 </span>
                 <div className="relative w-10 h-10 rounded-lg overflow-hidden bg-zinc-900 flex-shrink-0 shadow">
-                  <Image src={track.artwork} alt={track.title} fill className="object-cover" />
+                  <SafeImage src={track.artwork} alt={track.title} fill className="object-cover" />
                   <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                     <Play className="w-3.5 h-3.5 fill-white text-white" />
                   </div>

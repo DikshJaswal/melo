@@ -67,7 +67,7 @@ export const CURATED_PLAYLISTS: Playlist[] = [
     id: 'playlist-hindi-top',
     name: '🔥 Top Global & India Hits 2026',
     description: 'The definitive 2026 chartbusters: Bollywood blockbusters, Punjabi anthems & international sensations in full length.',
-    coverImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&auto=format&fit=crop&q=80',
+    coverImage: CURATED_TRACKS[0]?.artwork || 'https://c.saavncdn.com/871/Brahmastra-Original-Motion-Picture-Soundtrack-Hindi-2022-20221006155213-500x500.jpg',
     tracks: [
       CURATED_TRACKS[0],  // Kesariya
       CURATED_TRACKS[1],  // Apna Bana Le
@@ -100,7 +100,7 @@ export const CURATED_PLAYLISTS: Playlist[] = [
     id: 'playlist-hindi-romance',
     name: '❤️ Bollywood Romance & Melodies',
     description: 'Heartfelt soulful Hindi love songs by Arijit Singh, Shreya Ghoshal, Pritam & A.R. Rahman.',
-    coverImage: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&auto=format&fit=crop&q=80',
+    coverImage: CURATED_TRACKS[3]?.artwork || 'https://c.saavncdn.com/430/Aashiqui-2-Hindi-2013-500x500.jpg',
     tracks: [
       CURATED_TRACKS[0],  // Kesariya
       CURATED_TRACKS[1],  // Apna Bana Le
@@ -119,7 +119,7 @@ export const CURATED_PLAYLISTS: Playlist[] = [
     id: 'playlist-punjabi',
     name: '⚡ Punjabi & Urban Wave Bangers',
     description: 'High-energy beats & anthems from Diljit Dosanjh, Karan Aujla, Shubh and top Punjabi artists.',
-    coverImage: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&auto=format&fit=crop&q=80',
+    coverImage: CURATED_TRACKS[5]?.artwork || 'https://c.saavncdn.com/992/Bad-Newz-Hindi-2024-20250730113701-500x500.jpg',
     tracks: [
       CURATED_TRACKS[5],  // Tauba Tauba
       CURATED_TRACKS[6],  // Winning Speech
@@ -137,12 +137,12 @@ export const CURATED_PLAYLISTS: Playlist[] = [
     id: 'playlist-global',
     name: '🌐 Global Billboard & Viral Hits',
     description: 'Worldwide chart-dominating tracks from Lady Gaga, Bruno Mars, The Weeknd, and Billie Eilish in full length.',
-    coverImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop&q=80',
+    coverImage: CURATED_TRACKS[20]?.artwork || 'https://c.saavncdn.com/835/Starboy-English-2016-500x500.jpg',
     tracks: [
-      CURATED_TRACKS[21], // Starboy
-      CURATED_TRACKS[22], // Blinding Lights
-      CURATED_TRACKS[23], // Die With A Smile
-      CURATED_TRACKS[24], // Birds of a Feather
+      CURATED_TRACKS[20], // Starboy
+      CURATED_TRACKS[21], // Blinding Lights
+      CURATED_TRACKS[22], // Die With A Smile
+      CURATED_TRACKS[23], // Birds of a Feather
     ].filter(Boolean),
   },
 ];
@@ -176,9 +176,18 @@ export async function fetchTrendingTracks(): Promise<Track[]> {
   return CURATED_TRACKS;
 }
 
+let activeSearchController: AbortController | null = null;
+
 // Live search across millions of full-length songs (Hindi, English, Punjabi, all genres)
 export async function searchTracks(query: string): Promise<Track[]> {
   if (!query || query.trim().length === 0) return CURATED_TRACKS;
+
+  // Abort any ongoing search request to prevent out-of-order race conditions
+  if (activeSearchController) {
+    activeSearchController.abort();
+  }
+  const controller = new AbortController();
+  activeSearchController = controller;
 
   const normalized = query.toLowerCase().trim();
   const localMatches = CURATED_TRACKS.filter(
@@ -190,13 +199,9 @@ export async function searchTracks(query: string): Promise<Track[]> {
   );
 
   try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8000);
-
     const res = await fetch(`/api/music/search?q=${encodeURIComponent(query.trim())}`, {
       signal: controller.signal,
     });
-    clearTimeout(timeoutId);
 
     if (res.ok) {
       const json = await res.json();
@@ -204,7 +209,11 @@ export async function searchTracks(query: string): Promise<Track[]> {
         return json.results;
       }
     }
-  } catch (err) {
+  } catch (err: any) {
+    if (err?.name === 'AbortError') {
+      // Newer keystroke search has taken over; return null/local without crashing
+      return [];
+    }
     console.info('Search fallback to local tracks:', err);
   }
 
